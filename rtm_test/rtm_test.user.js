@@ -46,13 +46,53 @@ FixSidebar()
  */
 
 var sections = [
-	{ prefix: '@', type: 'flat', hide: false,
-	  data: { displayname: 'Contexts', color: 'green' } },
-	{ prefix: '-', type: 'hierarchy', hide: false,
-	  data: { depth: 3, separators: '|/+', colors: ['red', 'purple', 'brown'], hidechildren: [] } },
-	{ prefix: '', type: 'flat', hide: false,
-	  data: { displayname: 'Miscellaneous', color: 'gray' } }
+	{ prefix: '@', type: sectionFlat, 
+	               hide: false,
+	               displayname: 'Contexts', 
+	               color: 'green' },
+	
+	{ prefix: '-', type: sectionHierarchy, 
+	               hide: false,
+	               depth: 3, 
+	               separators: '|/+', 
+	               colors: ['red', 'purple', 'brown'], 
+	               hidechildren: [] },
+	
+	{ prefix: '', type: sectionFlat, 
+	              hide: false,
+	              displayname: 'Miscellaneous', 
+	              color: 'gray' }
 ];
+
+/*
+ * Section classes
+ */
+
+function sectionBase(arguments) {
+	this.prefix = arguments.prefix;
+	this.hide = arguments.hide;
+}
+
+sectionBase.prototype.setupDiv = null;
+sectionBase.prototype.addTag = null;
+sectionBase.prototype.assembleDiv = null;
+
+function sectionFlat(arguments) {
+	this.super_constructor = sectionBase;
+	this.super_constructor(arguments);
+	this.displayname = arguments.displayname;
+	this.color = arguments.color;
+}
+
+function sectionHierarchy(arguments) {
+	this.super_constructor = sectionBase;
+	this.super_constructor(arguments);
+	this.depth = arguments.depth;
+	this.separators = arguments.separators;
+	this.colors = arguments.colors;
+	this.hidechildren = arguments.hidechildren;
+}
+
 
 var prefs = {
 	useBordersForCategories: true,
@@ -66,14 +106,30 @@ var prefs = {
 	hiddenTags: ['system', 'inbox', 'sent']
 };
 
+var sectionConstructors = {
+	flat: sectionFlat,
+	hierarchy: sectionHierarchy
+}
 
-var sectionCallbacks = {
-	flat: { setupDiv: setupFlatDiv, 
-			addTag: addTagToFlatSection,
-			assembleDiv: assembleFlatSectionDiv },
-	hierarchy: { setupDiv: setupHierarchyDiv, 
-				 addTag: addTagToHierarchySection,
-				 assembleDiv: assembleHierarchySectionDiv }
+sectionFlat.prototype.setupDiv = setupFlatDiv;
+sectionFlat.prototype.addTag = addTagToFlatSection;
+sectionFlat.prototype.assembleDiv = assembleFlatSectionDiv;
+
+sectionHierarchy.prototype.setupDiv = setupHierarchyDiv;
+sectionHierarchy.prototype.addTag = addTagToHierarchySection;
+sectionHierarchy.prototype.assembleDiv = assembleHierarchySectionDiv;
+
+function constructSections(sectionargumentslist) {
+	
+	sectionobjlist = [];
+	
+	for (var i = 0; i < sectionargumentslist.length; i++ ) {
+		secargs = sectionargumentslist[i];
+		var newsection = new secargs.type(secargs);
+		sectionobjlist.push(newsection);
+	}
+	
+	return sectionobjlist;
 }
 
 String.prototype.trim = function() { return this.replace(/^\s+|\s+$/, ''); };
@@ -147,7 +203,7 @@ function getTagType(tag) {
 }
 
 
-function setupSectionDivs() {
+function setupSectionDivs(sectionlist) {
 	
 	// BEGIN DEBUG
 	extraDebugDiv = document.createElement('div');
@@ -158,13 +214,13 @@ function setupSectionDivs() {
 	// END DEBUG
 	
 	
-	for( var i = 0; i < sections.length; i++ ) {
-		var curSection = sections[i];
+	for( var i = 0; i < sectionlist.length; i++ ) {
+		var curSection = sectionlist[i];
 		
 		// DEBUG
 		// unsafeWindow.console.log("Processing Section %s %s", curSection.prefix, curSection.type);
 		
-		sectionCallbacks[curSection.type].setupDiv(curSection);
+		curSection.setupDiv(curSection);
 		
 		// DEBUG
 		extraDebugDiv.appendChild(curSection.div);
@@ -181,7 +237,7 @@ function setupFlatDiv(section) {
 
 	var headerLink = document.createElement('a');
 	headerSpan.appendChild(headerLink);
-	headerLink.appendChild(document.createTextNode(section.data.displayname));
+	headerLink.appendChild(document.createTextNode(section.displayname));
 	var tagDiv = document.createElement('div');
 	wrapperDiv.appendChild(tagDiv);
 	
@@ -199,22 +255,22 @@ function setupFlatDiv(section) {
 	headerSpan.className = 'tasktag level11 headerdiv';
 	headerSpan.style.display = 'block';
 	headerLink.className = 'tasktag level9';
-	headerLink.style.color = section.data.color;
+	headerLink.style.color = section.color;
 	tagDiv.style.paddingLeft = '10px';
 	
 	// TODO: set up handling for click event on the header
 
 	section.div = wrapperDiv;
-	section.data.headerTag = headerLink;
-	section.data.tagDiv = tagDiv;
-	section.data.searchlist = [];
+	section.headerTag = headerLink;
+	section.tagDiv = tagDiv;
+	section.searchlist = [];
 }
 
 function setupHierarchyDiv(section) {
 	var wrapperDiv = document.createElement('div');
 	section.div = wrapperDiv;
 	
-	section.data.children = [];
+	section.children = [];
 }
 
 function addTagToFlatSection(section, tag) {
@@ -223,10 +279,10 @@ function addTagToFlatSection(section, tag) {
 	// DEBUG
 	// unsafeWindow.console.log("Added '%s' to section '%s'", tagname, section.prefix);
 	
-	section.data.tagDiv.appendChild(tag.parentNode);
-	section.data.tagDiv.appendChild(document.createTextNode(" "));
+	section.tagDiv.appendChild(tag.parentNode);
+	section.tagDiv.appendChild(document.createTextNode(" "));
 
-	tag.style.color = section.data.color;
+	tag.style.color = section.color;
 	
 	if (!prefs.keepSymbolInTags) {
 		tag.innerHTML = tagname.substring(section.prefix.length);
@@ -255,7 +311,7 @@ function addTagToFlatSection(section, tag) {
 		searchstring += tagname;
 	}
 	
-	section.data.searchlist.push(searchstring);
+	section.searchlist.push(searchstring);
 	
 	// deal with sizing (level##) in tag span, maybe
 }
@@ -296,16 +352,16 @@ function addTagToHierarchySection(section, tag) {
 	
 	// split tagpath into tokens
 	
-	var re = new RegExp("[" + section.data.separators + "]+");
+	var re = new RegExp("[" + section.separators + "]+");
 	var pathtokens = tagpath.split(re);
 	
-	if (pathtokens.length >= section.data.depth) {
+	if (pathtokens.length >= section.depth) {
 		// too many tokens, so we need to get the last token
-		var newtokens = pathtokens.slice(0, section.data.depth - 1);
-		re = new RegExp("^[" + section.data.separators + "]+");
+		var newtokens = pathtokens.slice(0, section.depth - 1);
+		re = new RegExp("^[" + section.separators + "]+");
 		var lasttoken = tagpath;
 		
-		for( var i = 0; i < section.data.depth - 1; i++ ) {
+		for( var i = 0; i < section.depth - 1; i++ ) {
 			lasttoken = lasttoken.substring(pathtokens[i].length);
 			lasttoken = lasttoken.replace(re, '');
 		}
@@ -321,7 +377,7 @@ function addTagToHierarchySection(section, tag) {
 	tag.innerHTML = displayname;
 	
 	// package tokens into tree structure in section
-	var currentChildren = section.data.children;
+	var currentChildren = section.children;
 	
 	for ( var i = 0; i < pathtokens.length; i++ ) {
 		
@@ -370,25 +426,25 @@ function assembleFlatSectionDiv(section) {
 	// works for onclick attribute of anchor
 	
 	var onclickstring = "document.getElementById('listFilter').value=";
-	var searchstring = section.data.searchlist.join(' or ');
+	var searchstring = section.searchlist.join(' or ');
 	unsafeWindow.console.log(searchstring);
 	
 	
 	onclickstring += "'" + searchstring + "';";
 	onclickstring += "control.updateListFilter();return false";
 	
-	section.data.headerTag.setAttribute("onclick", onclickstring);
+	section.headerTag.setAttribute("onclick", onclickstring);
 }
 
 function assembleHierarchySectionDiv(section) {
 	var topDiv = section.div;
-	var topChildren = section.data.children;
+	var topChildren = section.children;
 	
 	for (var i = 0; i < topChildren.length; i++) {
 		// pick color for top-level node and its children
-		var topNodeColor = section.data.colors[i % section.data.colors.length];
+		var topNodeColor = section.colors[i % section.colors.length];
 		
-		assembleHierarchyNodeDiv(topChildren[i], section.data.depth - 1, topNodeColor);
+		assembleHierarchyNodeDiv(topChildren[i], section.depth - 1, topNodeColor);
 		var childDiv = topChildren[i].div
 		
 		if (prefs.useBordersForCategories) {
@@ -434,17 +490,17 @@ function assembleHierarchyNodeDiv(node, depth, color) {
 }
 
 
-function matchTagToSection(tag) {
+function matchTagToSection(sectionlist, tag) {
 	// DEBUG
 	// unsafeWindow.console.log("Processing " + tag.getAttribute('origTagName'));
 
-	for (var i = 0; i < sections.length; i++) {
+	for (var i = 0; i < sectionlist.length; i++) {
 
 		// DEBUG
-		// unsafeWindow.console.log("Checking section " + sections[i].prefix);
+		// unsafeWindow.console.log("Checking section " + sectionlist[i].prefix);
 
-		if (tag.getAttribute('origTagName').indexOf(sections[i].prefix) == 0) {
-			return sections[i];
+		if (tag.getAttribute('origTagName').indexOf(sectionlist[i].prefix) == 0) {
+			return sectionlist[i];
 		}
 	}
 	
@@ -456,9 +512,12 @@ function processCloud() {
 	unsafeWindow.console.log("Processing Cloud in RTM Test...")
 	
 	listenForTagChanges(false);
-
+	
+	var sectionlist = constructSections(sections);
+	unsafeWindow.console.log(sectionlist);
+	
 	// set up divs for sections, store in sections' data dictionaries
-	setupSectionDivs();
+	setupSectionDivs(sectionlist);
 	
 	// process all tags in cloud: add to approp section
 	var cloud = document.getElementById('taskcloudcontent');
@@ -494,10 +553,10 @@ function processCloud() {
 				continue;
 			}
 			
-			var matchingSection = matchTagToSection(thisTag);
+			var matchingSection = matchTagToSection(sectionlist, thisTag);
 			
 			if (matchingSection) {
-				sectionCallbacks[matchingSection.type].addTag(matchingSection, thisTag);
+				matchingSection.addTag(matchingSection, thisTag);
 			}
 			else {
 				// remove any tags not falling into our sections
@@ -508,14 +567,14 @@ function processCloud() {
 	}
 	
 	// assemble section divs into #taskcloudcontent
-	for ( var i = 0; i < sections.length; i++) {
-		sectionCallbacks[sections[i].type].assembleDiv(sections[i]);
+	for ( var i = 0; i < sectionlist.length; i++) {
+		sectionlist[i].assembleDiv(sectionlist[i]);
 		
-		if (sections[i].hide == false) {
-			cloud.appendChild(sections[i].div);
+		if (sectionlist[i].hide == false) {
+			cloud.appendChild(sectionlist[i].div);
 		}
 		
-		unsafeWindow.console.log(sections[i]);
+		unsafeWindow.console.log(sectionlist[i]);
 	}
 	
 	// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy
