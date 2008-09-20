@@ -312,39 +312,36 @@ function assembleFlatSectionDiv(section) {
 }
 
 function assembleHierarchySectionDiv(section) {
-	
-}
-/*
-
 	var topDiv = section.data.wrapperDiv;
 	var topChildren = section.data.children;
 	
-	for (int i = 0; i < topChildren.length; i++) {
-		unsafeWindow.console.log("Here")
-		assembleHierarchyNodeDiv(section, topChildren[i], 1);
+	for (var i = 0; i < topChildren.length; i++) {
+		assembleHierarchyNodeDiv(section, topChildren[i], section.data.depth - 1);
 		topDiv.appendChild(topChildren[i].div);
 	}
 }
 
 function assembleHierarchyNodeDiv(section, node, depth) {
-	
+	node.div = document.createElement("div");
+	node.div.appendChild(node.tag.parentNode);
+
+	// adjust style for divs of leaf nodes? need to work this out
+	if (depth == 0) {
+		node.div.style.display = "inline";
+	}
+	else {
+		// create divs for children
+		var childDiv = document.createElement("div");
+		childDiv.style.paddingLeft = "10px";
+		node.div.appendChild(childDiv);
+
+		for (var i = 0; i < node.children.length; i++) {
+			assembleHierarchyNodeDiv(section, node.children[i], depth - 1);
+			childDiv.appendChild(node.children[i].div)
+		}
+	}
 }
 
-/*
-function assembleHierarchyNodeDiv(section, node, depth) {
-	// create new div for node contents
-	node.div = document.createElement("div");
-	node.div.appendChild(tag.parentNode);
-	
-	// create divs for children
-	for (var i = 0; i < node.children.length; i++) {
-		assembleHierarchyNodeDiv(section, node.children[i], depth + 1);
-		node.div.appendChild(node.children[i].div)
-	}
-	
-	// adjust style for divs of leaf nodes? need to work this out
-}
-*/
 
 function matchTagToSection(tag) {
 	// DEBUG
@@ -422,7 +419,10 @@ function processCloud() {
 	// assemble section divs into #taskcloudcontent
 	for ( var i = 0; i < sections.length; i++) {
 		sectionCallbacks[sections[i].type].assembleDiv(sections[i]);
+		cloud.appendChild(sections[i].data.wrapperDiv);
 	}
+	
+	
 	
 	
 	// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy
