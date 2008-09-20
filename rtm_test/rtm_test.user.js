@@ -47,11 +47,11 @@ FixSidebar()
 
 var sections = [
 	{ prefix: '@', type: 'flat', hide: false,
-	  data: { displayname: 'Contexts', color: 'green', searchlist: [] } },
+	  data: { displayname: 'Contexts', color: 'green' } },
 	{ prefix: '-', type: 'hierarchy', hide: false,
 	  data: { depth: 3, separators: '|/+', colors: ['red', 'purple', 'brown'], hidechildren: [] } },
 	{ prefix: '', type: 'flat', hide: false,
-	  data: { displayname: 'Miscellaneous', color: 'gray', searchlist: [] } }
+	  data: { displayname: 'Miscellaneous', color: 'gray' } }
 ];
 
 var prefs = {
@@ -120,10 +120,10 @@ function listenForTagChanges(listen) {
 
 
 function getTagType(tag) {
-	var classname = tag.style.className;
+	var classname = tag.parentNode.className;
 
-	return classname;
-	/*
+	unsafeWindow.console.log(classname);
+
 	var result = classname.match(/\w+tag/);
 	
 	if (result == null) {
@@ -144,7 +144,6 @@ function getTagType(tag) {
 	else {
 		return false;
 	}
-	*/
 }
 
 
@@ -168,7 +167,7 @@ function setupSectionDivs() {
 		sectionCallbacks[curSection.type].setupDiv(curSection);
 		
 		// DEBUG
-		extraDebugDiv.appendChild(curSection.data.wrapperDiv);
+		extraDebugDiv.appendChild(curSection.div);
 	}	
 }
 
@@ -203,13 +202,15 @@ function setupFlatDiv(section) {
 	
 	// TODO: set up handling for click event on the header
 
-	section.data.wrapperDiv = wrapperDiv;
+	section.div = wrapperDiv;
+	section.data.headerTag = headerLink;
 	section.data.tagDiv = tagDiv;
+	section.data.searchlist = [];
 }
 
 function setupHierarchyDiv(section) {
 	var wrapperDiv = document.createElement('div');
-	section.data.wrapperDiv = wrapperDiv;
+	section.div = wrapperDiv;
 	
 	section.data.children = [];
 }
@@ -238,8 +239,7 @@ function addTagToFlatSection(section, tag) {
 	
 	var tagtype;
 	tagtype = getTagType(tag);
-
-	/*
+	
 	if (tagtype) {
 		searchstring = tagtype + ":";
 	}
@@ -250,7 +250,6 @@ function addTagToFlatSection(section, tag) {
 	else {
 		searchstring += tagname;
 	}
-	*/
 	
 	section.data.searchlist.push(searchstring);
 	
@@ -365,10 +364,20 @@ function addTagToHierarchySection(section, tag) {
 function assembleFlatSectionDiv(section) {
 	// this string "document.getElementById('listFilter').value='tag:\'@errand\' or tag:@palo-alto'; control.updateListFilter();return false"
 	// works for onclick attribute of anchor
+	
+	var onclickstring = "document.getElementById('listFilter').value=";
+	var searchstring = section.data.searchlist.join(' or ');
+	unsafeWindow.console.log(searchstring);
+	
+	
+	onclickstring += "'" + searchstring + "';";
+	onclickstring += "control.updateListFilter();return false";
+	
+	section.data.headerTag.setAttribute("onclick", onclickstring);
 }
 
 function assembleHierarchySectionDiv(section) {
-	var topDiv = section.data.wrapperDiv;
+	var topDiv = section.div;
 	var topChildren = section.data.children;
 	
 	for (var i = 0; i < topChildren.length; i++) {
@@ -490,7 +499,7 @@ function processCloud() {
 		sectionCallbacks[sections[i].type].assembleDiv(sections[i]);
 		
 		if (sections[i].hide == false) {
-			cloud.appendChild(sections[i].data.wrapperDiv);
+			cloud.appendChild(sections[i].div);
 		}
 		
 		unsafeWindow.console.log(sections[i]);
@@ -500,6 +509,11 @@ function processCloud() {
 	
 	
 	// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy
+	var copy = document.getElementById("taskcloudcontent_copy");
+	
+	if (copy) {
+		copy.innerHTML = cloud.innerHTML;
+	}
 	
 	// re-hook listenForTagChanges
 	listenForTagChanges(true);
