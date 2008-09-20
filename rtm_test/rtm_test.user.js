@@ -186,7 +186,9 @@ function setupFlatDiv(section) {
 	wrapperDiv.appendChild(tagDiv);
 	
 	if (prefs.useBordersForCategories) {
-		wrapperDiv.style.border = '1px solid';
+		wrapperDiv.style.borderTop = '1px solid';
+		wrapperDiv.style.borderLeft = '1px solid';
+		wrapperDiv.style.borderRight = '1px solid';
 		wrapperDiv.style.borderColor = prefs.borderColor;
 		wrapperDiv.style.paddingLeft = '2px';			
 	}
@@ -240,12 +242,14 @@ function addTagToFlatSection(section, tag) {
 	var tagtype;
 	tagtype = getTagType(tag);
 	
+	// if tagtype found, build into search string
 	if (tagtype) {
 		searchstring = tagtype + ":";
 	}
 	
+	// wrap name in quotes if contains a space
 	if (tagname.match(/\s/)) {
-		searchstring += "\\'" + tagname + "\\'";
+		searchstring += "&quot;" + tagname + "&quot;";
 	}
 	else {
 		searchstring += tagname;
@@ -385,7 +389,16 @@ function assembleHierarchySectionDiv(section) {
 		var topNodeColor = section.data.colors[i % section.data.colors.length];
 		
 		assembleHierarchyNodeDiv(topChildren[i], section.data.depth - 1, topNodeColor);
-		topDiv.appendChild(topChildren[i].div);
+		var childDiv = topChildren[i].div
+		
+		if (prefs.useBordersForCategories) {
+			childDiv.style.borderTop = '1px solid';
+			childDiv.style.borderLeft = '1px solid';
+			childDiv.style.borderRight = '1px solid';
+			childDiv.style.borderColor = prefs.borderColor;
+			childDiv.style.paddingLeft = '2px';			
+		}
+		topDiv.appendChild(childDiv);
 	}
 }
 
@@ -504,9 +517,6 @@ function processCloud() {
 		
 		unsafeWindow.console.log(sections[i]);
 	}
-	
-	
-	
 	
 	// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy
 	var copy = document.getElementById("taskcloudcontent_copy");
