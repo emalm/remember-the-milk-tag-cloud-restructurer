@@ -106,18 +106,249 @@ var prefs = {
 	hiddenTags: ['system', 'inbox', 'sent']
 };
 
+/*
+ * Routines for sectionFlat class
+ */
+
+sectionFlat.prototype.setupDiv = function() {
+
+	var wrapperDiv = document.createElement('div');
+
+	var headerSpan = document.createElement('span');
+	wrapperDiv.appendChild(headerSpan);
+
+	var headerLink = document.createElement('a');
+	headerSpan.appendChild(headerLink);
+	headerLink.appendChild(document.createTextNode(this.displayname));
+	var tagDiv = document.createElement('div');
+	wrapperDiv.appendChild(tagDiv);
+
+	if (prefs.useBordersForCategories) {
+		wrapperDiv.style.borderTop = '1px solid';
+		wrapperDiv.style.borderLeft = '1px solid';
+		wrapperDiv.style.borderRight = '1px solid';
+		wrapperDiv.style.borderColor = prefs.borderColor;
+		wrapperDiv.style.paddingLeft = '2px';			
+	}
+
+	wrapperDiv.style.bottomMargin = '2px';
+
+	// TODO: don't need this style now?
+	headerSpan.className = 'tasktag level11 headerdiv';
+	headerSpan.style.display = 'block';
+	headerLink.className = 'tasktag level9';
+	headerLink.style.color = this.color;
+	tagDiv.style.paddingLeft = '10px';
+
+	// TODO: set up handling for click event on the header
+
+	this.div = wrapperDiv;
+	this.headerTag = headerLink;
+	this.tagDiv = tagDiv;
+	this.searchlist = [];
+}
+
+sectionFlat.prototype.addTag = function(tag) {
+	tagname = tag.getAttribute('origTagName')
+
+	// DEBUG
+	// unsafeWindow.console.log("Added '%s' to section '%s'", tagname, this.prefix);
+	
+	this.tagDiv.appendChild(tag.parentNode);
+	this.tagDiv.appendChild(document.createTextNode(" "));
+
+	tag.style.color = this.color;
+	
+	if (!prefs.keepSymbolInTags) {
+		tag.innerHTML = tagname.substring(this.prefix.length);
+		if (prefs.renameTags) {
+			tag.innerHTML = capitalizeAndSpace(tag.innerHTML);
+		}
+	}
+	
+	// add tag type, name to search string
+	
+	var searchstring = '';
+	
+	var tagtype;
+	tagtype = getTagType(tag);
+	
+	// if tagtype found, build into search string
+	if (tagtype) {
+		searchstring = tagtype + ":";
+	}
+	
+	// wrap name in quotes if contains a space
+	if (tagname.match(/\s/)) {
+		searchstring += "&quot;" + tagname + "&quot;";
+	}
+	else {
+		searchstring += tagname;
+	}
+	
+	this.searchlist.push(searchstring);
+	
+	// deal with sizing (level##) in tag span, maybe
+}
+
+sectionFlat.prototype.assembleDiv = function() {	
+	var onclickstring = "document.getElementById('listFilter').value=";
+	var searchstring = this.searchlist.join(' or ');
+	unsafeWindow.console.log(searchstring);
+	
+	
+	onclickstring += "'" + searchstring + "';";
+	onclickstring += "control.updateListFilter();return false";
+	
+	this.headerTag.setAttribute("onclick", onclickstring);
+}
+
+/*
+ * Routines for sectionHierarchy class
+ */
+
+sectionHierarchy.prototype.setupDiv = function() {
+	var wrapperDiv = document.createElement('div');
+	this.div = wrapperDiv;
+
+	this.children = [];
+}
+
+sectionHierarchy.prototype.addTag = function(tag) {
+	tagname = tag.getAttribute('origTagName')
+
+	// DEBUG
+	// unsafeWindow.console.log("Added '%s' to section '%s'", tagname, this.prefix);
+	
+	// strip off prefix from tagname
+	tagname = tagname.substring(this.prefix.length);
+	
+	// find, store display name if present
+	var displayname = null;
+	var tagpath = null;
+	
+	var result = tagname.match(/\[\[.*\]\]\s*$/);
+	
+	if (result) {
+		
+		displayname = result[0].trim();
+		// DEBUG
+		// unsafeWindow.console.log(displayname);
+		displayname = displayname.substring(2, displayname.length - 2);
+		
+		tagpath = tagname.substring(0, tagname.length - result[0].length);
+		tagpath = tagpath.trim();
+		
+		// DEBUG
+		// unsafeWindow.console.log("Tag '%s' has display name '%s'", tagpath, displayname);
+	}
+	else {
+		// DEBUG
+		// unsafeWindow.console.log("Tag '%s' has no display name", tagname);
+		tagpath = tagname.trim();
+	}
+	
+	// split tagpath into tokens
+	
+	var re = new RegExp("[" + this.separators + "]+");
+	var pathtokens = tagpath.split(re);
+	
+	if (pathtokens.length >= this.depth) {
+		// too many tokens, so we need to get the last token
+		var newtokens = pathtokens.slice(0, this.depth - 1);
+		re = new RegExp("^[" + this.separators + "]+");
+		var lasttoken = tagpath;
+		
+		for( var i = 0; i < this.depth - 1; i++ ) {
+			lasttoken = lasttoken.substring(pathtokens[i].length);
+			lasttoken = lasttoken.replace(re, '');
+		}
+		
+		newtokens.push(lasttoken);
+		pathtokens = newtokens;
+	}
+	
+	if (displayname == null) {
+		displayname = pathtokens[pathtokens.length - 1];
+	}
+	
+	tag.innerHTML = displayname;
+	
+	// package tokens into tree structure in section
+	var currentChildren = this.children;
+	
+	for ( var i = 0; i < pathtokens.length; i++ ) {
+		
+		// DEBUG
+		// unsafeWindow.console.log("Searching for '%s'", pathtokens[i]);
+		// unsafeWindow.console.log("Length of current children: %d", currentChildren.length);
+		
+		// find child node, if there
+		var childIndex = null;
+		
+		for (var j = 0; j < currentChildren.length; j++) {
+			// DEBUG
+			// unsafeWindow.console.log(currentChildren[j].name);
+			if (currentChildren[j].name == pathtokens[i]) {
+				childIndex = j;
+				// DEBUG
+				// unsafeWindow.console.log("Found at index %d", childIndex);
+				break;
+			}
+		}
+		
+		if (childIndex != null) {
+			currentChildren = currentChildren[childIndex].children;
+		}
+		else {
+			// DEBUG
+			// unsafeWindow.console.log("Not found, creating new node");
+
+			// create new child in tree
+			var newchild = { name: pathtokens[i], div: null, tag: null, children: [] };
+			currentChildren.push(newchild);
+			currentChildren = newchild.children;
+			
+			// add tag to new child node's tag if last in token list
+			if (i == pathtokens.length - 1) {
+				newchild.tag = tag;
+			}
+		}
+	}
+	
+	// unsafeWindow.console.log(this)
+}
+
+sectionHierarchy.prototype.assembleDiv = function() {
+	var topDiv = this.div;
+	var topChildren = this.children;
+	
+	for (var i = 0; i < topChildren.length; i++) {
+		// pick color for top-level node and its children
+		var topNodeColor = this.colors[i % this.colors.length];
+		
+		assembleHierarchyNodeDiv(topChildren[i], this.depth - 1, topNodeColor);
+		var childDiv = topChildren[i].div
+		
+		if (prefs.useBordersForCategories) {
+			childDiv.style.borderTop = '1px solid';
+			childDiv.style.borderLeft = '1px solid';
+			childDiv.style.borderRight = '1px solid';
+			childDiv.style.borderColor = prefs.borderColor;
+			childDiv.style.paddingLeft = '2px';			
+		}
+		topDiv.appendChild(childDiv);
+	}
+}
+
+/*
+ * Utility routines
+ */
+
 var sectionConstructors = {
 	flat: sectionFlat,
 	hierarchy: sectionHierarchy
 }
-
-sectionFlat.prototype.setupDiv = setupFlatDiv;
-sectionFlat.prototype.addTag = addTagToFlatSection;
-sectionFlat.prototype.assembleDiv = assembleFlatSectionDiv;
-
-sectionHierarchy.prototype.setupDiv = setupHierarchyDiv;
-sectionHierarchy.prototype.addTag = addTagToHierarchySection;
-sectionHierarchy.prototype.assembleDiv = assembleHierarchySectionDiv;
 
 function constructSections(sectionargumentslist) {
 	
@@ -206,257 +437,24 @@ function getTagType(tag) {
 function setupSectionDivs(sectionlist) {
 	
 	// BEGIN DEBUG
-	extraDebugDiv = document.createElement('div');
-	extraDebugDiv.className = 'taskcloudcontent';
-	overviewboxdiv = document.getElementById('overviewright');
-	// unsafeWindow.console.log(overviewboxdiv);
-	overviewboxdiv.appendChild(extraDebugDiv);
+	// extraDebugDiv = document.createElement('div');
+	// extraDebugDiv.className = 'taskcloudcontent';
+	// overviewboxdiv = document.getElementById('overviewright');
+	// overviewboxdiv.appendChild(extraDebugDiv);
 	// END DEBUG
 	
 	
 	for( var i = 0; i < sectionlist.length; i++ ) {
-		var curSection = sectionlist[i];
-		
 		// DEBUG
 		// unsafeWindow.console.log("Processing Section %s %s", curSection.prefix, curSection.type);
 		
-		curSection.setupDiv(curSection);
+		sectionlist[i].setupDiv();
 		
 		// DEBUG
-		extraDebugDiv.appendChild(curSection.div);
+		// extraDebugDiv.appendChild(sectionlist[i].div);
 	}	
 }
 
-
-function setupFlatDiv(section) {
-	
-	var wrapperDiv = document.createElement('div');
-	
-	var headerSpan = document.createElement('span');
-	wrapperDiv.appendChild(headerSpan);
-
-	var headerLink = document.createElement('a');
-	headerSpan.appendChild(headerLink);
-	headerLink.appendChild(document.createTextNode(section.displayname));
-	var tagDiv = document.createElement('div');
-	wrapperDiv.appendChild(tagDiv);
-	
-	if (prefs.useBordersForCategories) {
-		wrapperDiv.style.borderTop = '1px solid';
-		wrapperDiv.style.borderLeft = '1px solid';
-		wrapperDiv.style.borderRight = '1px solid';
-		wrapperDiv.style.borderColor = prefs.borderColor;
-		wrapperDiv.style.paddingLeft = '2px';			
-	}
-	
-	wrapperDiv.style.bottomMargin = '2px';
-	
-	// TODO: don't need this style now?
-	headerSpan.className = 'tasktag level11 headerdiv';
-	headerSpan.style.display = 'block';
-	headerLink.className = 'tasktag level9';
-	headerLink.style.color = section.color;
-	tagDiv.style.paddingLeft = '10px';
-	
-	// TODO: set up handling for click event on the header
-
-	section.div = wrapperDiv;
-	section.headerTag = headerLink;
-	section.tagDiv = tagDiv;
-	section.searchlist = [];
-}
-
-function setupHierarchyDiv(section) {
-	var wrapperDiv = document.createElement('div');
-	section.div = wrapperDiv;
-	
-	section.children = [];
-}
-
-function addTagToFlatSection(section, tag) {
-	tagname = tag.getAttribute('origTagName')
-
-	// DEBUG
-	// unsafeWindow.console.log("Added '%s' to section '%s'", tagname, section.prefix);
-	
-	section.tagDiv.appendChild(tag.parentNode);
-	section.tagDiv.appendChild(document.createTextNode(" "));
-
-	tag.style.color = section.color;
-	
-	if (!prefs.keepSymbolInTags) {
-		tag.innerHTML = tagname.substring(section.prefix.length);
-		if (prefs.renameTags) {
-			tag.innerHTML = capitalizeAndSpace(tag.innerHTML);
-		}
-	}
-	
-	// add tag type, name to search string
-	
-	var searchstring = '';
-	
-	var tagtype;
-	tagtype = getTagType(tag);
-	
-	// if tagtype found, build into search string
-	if (tagtype) {
-		searchstring = tagtype + ":";
-	}
-	
-	// wrap name in quotes if contains a space
-	if (tagname.match(/\s/)) {
-		searchstring += "&quot;" + tagname + "&quot;";
-	}
-	else {
-		searchstring += tagname;
-	}
-	
-	section.searchlist.push(searchstring);
-	
-	// deal with sizing (level##) in tag span, maybe
-}
-
-function addTagToHierarchySection(section, tag) {
-	tagname = tag.getAttribute('origTagName')
-
-	// DEBUG
-	// unsafeWindow.console.log("Added '%s' to section '%s'", tagname, section.prefix);
-	
-	// strip off prefix from tagname
-	tagname = tagname.substring(section.prefix.length);
-	
-	// find, store display name if present
-	var displayname = null;
-	var tagpath = null;
-	
-	var result = tagname.match(/\[\[.*\]\]\s*$/);
-	
-	if (result) {
-		
-		displayname = result[0].trim();
-		// DEBUG
-		// unsafeWindow.console.log(displayname);
-		displayname = displayname.substring(2, displayname.length - 2);
-		
-		tagpath = tagname.substring(0, tagname.length - result[0].length);
-		tagpath = tagpath.trim();
-		
-		// DEBUG
-		// unsafeWindow.console.log("Tag '%s' has display name '%s'", tagpath, displayname);
-	}
-	else {
-		// DEBUG
-		// unsafeWindow.console.log("Tag '%s' has no display name", tagname);
-		tagpath = tagname.trim();
-	}
-	
-	// split tagpath into tokens
-	
-	var re = new RegExp("[" + section.separators + "]+");
-	var pathtokens = tagpath.split(re);
-	
-	if (pathtokens.length >= section.depth) {
-		// too many tokens, so we need to get the last token
-		var newtokens = pathtokens.slice(0, section.depth - 1);
-		re = new RegExp("^[" + section.separators + "]+");
-		var lasttoken = tagpath;
-		
-		for( var i = 0; i < section.depth - 1; i++ ) {
-			lasttoken = lasttoken.substring(pathtokens[i].length);
-			lasttoken = lasttoken.replace(re, '');
-		}
-		
-		newtokens.push(lasttoken);
-		pathtokens = newtokens;
-	}
-	
-	if (displayname == null) {
-		displayname = pathtokens[pathtokens.length - 1];
-	}
-	
-	tag.innerHTML = displayname;
-	
-	// package tokens into tree structure in section
-	var currentChildren = section.children;
-	
-	for ( var i = 0; i < pathtokens.length; i++ ) {
-		
-		// DEBUG
-		// unsafeWindow.console.log("Searching for '%s'", pathtokens[i]);
-		// unsafeWindow.console.log("Length of current children: %d", currentChildren.length);
-		
-		// find child node, if there
-		var childIndex = null;
-		
-		for (var j = 0; j < currentChildren.length; j++) {
-			// DEBUG
-			// unsafeWindow.console.log(currentChildren[j].name);
-			if (currentChildren[j].name == pathtokens[i]) {
-				childIndex = j;
-				// DEBUG
-				// unsafeWindow.console.log("Found at index %d", childIndex);
-				break;
-			}
-		}
-		
-		if (childIndex != null) {
-			currentChildren = currentChildren[childIndex].children;
-		}
-		else {
-			// DEBUG
-			// unsafeWindow.console.log("Not found, creating new node");
-
-			// create new child in tree
-			var newchild = { name: pathtokens[i], div: null, tag: null, children: [] };
-			currentChildren.push(newchild);
-			currentChildren = newchild.children;
-			
-			// add tag to new child node's tag if last in token list
-			if (i == pathtokens.length - 1) {
-				newchild.tag = tag;
-			}
-		}
-	}
-	
-	// unsafeWindow.console.log(section)
-}
-
-function assembleFlatSectionDiv(section) {
-	// this string "document.getElementById('listFilter').value='tag:\'@errand\' or tag:@palo-alto'; control.updateListFilter();return false"
-	// works for onclick attribute of anchor
-	
-	var onclickstring = "document.getElementById('listFilter').value=";
-	var searchstring = section.searchlist.join(' or ');
-	unsafeWindow.console.log(searchstring);
-	
-	
-	onclickstring += "'" + searchstring + "';";
-	onclickstring += "control.updateListFilter();return false";
-	
-	section.headerTag.setAttribute("onclick", onclickstring);
-}
-
-function assembleHierarchySectionDiv(section) {
-	var topDiv = section.div;
-	var topChildren = section.children;
-	
-	for (var i = 0; i < topChildren.length; i++) {
-		// pick color for top-level node and its children
-		var topNodeColor = section.colors[i % section.colors.length];
-		
-		assembleHierarchyNodeDiv(topChildren[i], section.depth - 1, topNodeColor);
-		var childDiv = topChildren[i].div
-		
-		if (prefs.useBordersForCategories) {
-			childDiv.style.borderTop = '1px solid';
-			childDiv.style.borderLeft = '1px solid';
-			childDiv.style.borderRight = '1px solid';
-			childDiv.style.borderColor = prefs.borderColor;
-			childDiv.style.paddingLeft = '2px';			
-		}
-		topDiv.appendChild(childDiv);
-	}
-}
 
 function assembleHierarchyNodeDiv(node, depth, color) {
 	// make sublevel for 
@@ -556,7 +554,7 @@ function processCloud() {
 			var matchingSection = matchTagToSection(sectionlist, thisTag);
 			
 			if (matchingSection) {
-				matchingSection.addTag(matchingSection, thisTag);
+				matchingSection.addTag(thisTag);
 			}
 			else {
 				// remove any tags not falling into our sections
@@ -568,7 +566,7 @@ function processCloud() {
 	
 	// assemble section divs into #taskcloudcontent
 	for ( var i = 0; i < sectionlist.length; i++) {
-		sectionlist[i].assembleDiv(sectionlist[i]);
+		sectionlist[i].assembleDiv();
 		
 		if (sectionlist[i].hide == false) {
 			cloud.appendChild(sectionlist[i].div);
