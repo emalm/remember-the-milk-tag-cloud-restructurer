@@ -66,6 +66,7 @@ var sections = [
 	{ prefix: '-', type: sectionHierarchy, 
 	               hide: false,
 	               depth: 3, 
+	               sizes: ['6', '3', '1'],
 	               separators: '|/+', 
 	               colors: ['red', 'purple', 'brown'], 
 	               hidechildren: [] },
@@ -95,6 +96,7 @@ function sectionFlat(arguments) {
 	this.super_constructor(arguments);
 	this.displayname = arguments.displayname;
 	this.color = arguments.color;
+	this.setupDiv();
 }
 
 function sectionHierarchy(arguments) {
@@ -104,6 +106,7 @@ function sectionHierarchy(arguments) {
 	this.separators = arguments.separators;
 	this.colors = arguments.colors;
 	this.hidechildren = arguments.hidechildren;
+	this.setupDiv();
 }
 
 /*
@@ -148,7 +151,7 @@ sectionFlat.prototype.addTag = function(tag) {
 	tagname = tag.getAttribute('origTagName')
 
 	this.tagDiv.appendChild(tag.parentNode);
-	this.tagDiv.appendChild(document.createTextNode(" "));
+	this.tagDiv.appendChild(document.createTextNode(' | '));
 
 	tag.style.color = this.color;
 	
@@ -301,7 +304,7 @@ sectionHierarchy.prototype.assembleDiv = function() {
 		// pick color for top-level node and its children
 		var topNodeColor = this.colors[i % this.colors.length];
 		
-		assembleHierarchyNodeDiv(topChildren[i], this.depth - 1, topNodeColor);
+		assembleHierarchyNodeDiv(topChildren[i], 1, topNodeColor);
 		var childDiv = topChildren[i].div
 		
 		if (prefs.useBordersForCategories) {
@@ -322,10 +325,11 @@ function assembleHierarchyNodeDiv(node, depth, color) {
 	
 	// set color for tag anchor, insert containing span into node's div
 	node.tag.style.color = color;
+	//resizeTag(node.tag, this.sizes[depth - 1]);
 	node.div.appendChild(node.tag.parentNode);
 
 	// adjust style for divs of leaf nodes? need to work this out
-	if (depth == 0) {
+	if (depth == this.depth) {
 		// at the lowest depth in hierarchy
 		// so display tags inline
 		node.div.style.display = "inline";
@@ -341,7 +345,7 @@ function assembleHierarchyNodeDiv(node, depth, color) {
 
 		// create divs for children
 		for (var i = 0; i < node.children.length; i++) {
-			assembleHierarchyNodeDiv(node.children[i], depth - 1, color);
+			assembleHierarchyNodeDiv(node.children[i], depth + 1, color);
 			childDiv.appendChild(node.children[i].div)
 		}
 	}
@@ -450,6 +454,13 @@ function getTagType(tag) {
 	}
 }
 
+function resizeTag(tag, newsize) {
+	var classname = tag.parentNode.className;
+	var newlevelclass = "level" + newsize;
+
+	tag.parentNode.className = classname.replace(/level\d+/, newlevelclass);
+}
+
 function setupSectionDivs(sectionlist) {
 	
 	// BEGIN DEBUG
@@ -530,7 +541,7 @@ function processCloud() {
 	var sectionlist = constructSections(sections);
 	
 	// set up divs for sections, store in sections' data dictionaries
-	setupSectionDivs(sectionlist);
+	//setupSectionDivs(sectionlist);
 	
 	var cloud = document.getElementById('taskcloudcontent');
 		
