@@ -45,6 +45,18 @@ FixSidebar()
  ************************************************
  */
 
+var prefs = {
+	useBordersForCategories: true,
+	borderColor: 'lightGrey',
+	useSymbolInHeader: true,
+	keepSymbolInTags: false,
+	renameTags: false,
+	indentChildTags: true,
+	overrideHeaderLinks: true,
+	EMPTY_QUERY_STR: 'tag:youdonthaveanytasksinthissection',
+	hiddenTags: ['system', 'sent']
+};
+
 var sections = [
 	{ prefix: '@', type: sectionFlat, 
 	               hide: false,
@@ -76,6 +88,7 @@ function sectionBase(arguments) {
 sectionBase.prototype.setupDiv = null;
 sectionBase.prototype.addTag = null;
 sectionBase.prototype.assembleDiv = null;
+sectionBase.prototype.styleFinalBlock = null;
 
 function sectionFlat(arguments) {
 	this.super_constructor = sectionBase;
@@ -92,19 +105,6 @@ function sectionHierarchy(arguments) {
 	this.colors = arguments.colors;
 	this.hidechildren = arguments.hidechildren;
 }
-
-
-var prefs = {
-	useBordersForCategories: true,
-	borderColor: 'lightGrey',
-	useSymbolInHeader: true,
-	keepSymbolInTags: false,
-	renameTags: false,
-	indentChildTags: true,
-	overrideHeaderLinks: true,
-	EMPTY_QUERY_STR: 'tag:youdonthaveanytasksinthissection',
-	hiddenTags: ['system', 'inbox', 'sent']
-};
 
 /*
  * Routines for sectionFlat class
@@ -133,14 +133,10 @@ sectionFlat.prototype.setupDiv = function() {
 
 	wrapperDiv.style.bottomMargin = '2px';
 
-	// TODO: don't need this style now?
-	headerSpan.className = 'tasktag level11 headerdiv';
+	headerSpan.className = 'tasktag level7';
 	headerSpan.style.display = 'block';
-	headerLink.className = 'tasktag level9';
 	headerLink.style.color = this.color;
 	tagDiv.style.paddingLeft = '10px';
-
-	// TODO: set up handling for click event on the header
 
 	this.div = wrapperDiv;
 	this.headerTag = headerLink;
@@ -151,9 +147,6 @@ sectionFlat.prototype.setupDiv = function() {
 sectionFlat.prototype.addTag = function(tag) {
 	tagname = tag.getAttribute('origTagName')
 
-	// DEBUG
-	// unsafeWindow.console.log("Added '%s' to section '%s'", tagname, this.prefix);
-	
 	this.tagDiv.appendChild(tag.parentNode);
 	this.tagDiv.appendChild(document.createTextNode(" "));
 
@@ -194,13 +187,18 @@ sectionFlat.prototype.addTag = function(tag) {
 sectionFlat.prototype.assembleDiv = function() {	
 	var onclickstring = "document.getElementById('listFilter').value=";
 	var searchstring = this.searchlist.join(' or ');
-	unsafeWindow.console.log(searchstring);
-	
 	
 	onclickstring += "'" + searchstring + "';";
 	onclickstring += "control.updateListFilter();return false";
 	
 	this.headerTag.setAttribute("onclick", onclickstring);
+}
+
+sectionFlat.prototype.styleFinalBlock = function() {
+	if (prefs.useBordersForCategories) {
+		this.div.style.borderBottom = '1px solid';
+		this.div.style.borderColor = prefs.borderColor;
+	}
 }
 
 /*
@@ -217,9 +215,6 @@ sectionHierarchy.prototype.setupDiv = function() {
 sectionHierarchy.prototype.addTag = function(tag) {
 	tagname = tag.getAttribute('origTagName')
 
-	// DEBUG
-	// unsafeWindow.console.log("Added '%s' to section '%s'", tagname, this.prefix);
-	
 	// strip off prefix from tagname
 	tagname = tagname.substring(this.prefix.length);
 	
@@ -230,21 +225,13 @@ sectionHierarchy.prototype.addTag = function(tag) {
 	var result = tagname.match(/\[\[.*\]\]\s*$/);
 	
 	if (result) {
-		
 		displayname = result[0].trim();
-		// DEBUG
-		// unsafeWindow.console.log(displayname);
 		displayname = displayname.substring(2, displayname.length - 2);
 		
 		tagpath = tagname.substring(0, tagname.length - result[0].length);
 		tagpath = tagpath.trim();
-		
-		// DEBUG
-		// unsafeWindow.console.log("Tag '%s' has display name '%s'", tagpath, displayname);
 	}
 	else {
-		// DEBUG
-		// unsafeWindow.console.log("Tag '%s' has no display name", tagname);
 		tagpath = tagname.trim();
 	}
 	
@@ -279,20 +266,12 @@ sectionHierarchy.prototype.addTag = function(tag) {
 	
 	for ( var i = 0; i < pathtokens.length; i++ ) {
 		
-		// DEBUG
-		// unsafeWindow.console.log("Searching for '%s'", pathtokens[i]);
-		// unsafeWindow.console.log("Length of current children: %d", currentChildren.length);
-		
 		// find child node, if there
 		var childIndex = null;
 		
 		for (var j = 0; j < currentChildren.length; j++) {
-			// DEBUG
-			// unsafeWindow.console.log(currentChildren[j].name);
 			if (currentChildren[j].name == pathtokens[i]) {
 				childIndex = j;
-				// DEBUG
-				// unsafeWindow.console.log("Found at index %d", childIndex);
 				break;
 			}
 		}
@@ -301,9 +280,6 @@ sectionHierarchy.prototype.addTag = function(tag) {
 			currentChildren = currentChildren[childIndex].children;
 		}
 		else {
-			// DEBUG
-			// unsafeWindow.console.log("Not found, creating new node");
-
 			// create new child in tree
 			var newchild = { name: pathtokens[i], div: null, tag: null, children: [] };
 			currentChildren.push(newchild);
@@ -315,8 +291,6 @@ sectionHierarchy.prototype.addTag = function(tag) {
 			}
 		}
 	}
-	
-	// unsafeWindow.console.log(this)
 }
 
 sectionHierarchy.prototype.assembleDiv = function() {
@@ -338,6 +312,52 @@ sectionHierarchy.prototype.assembleDiv = function() {
 			childDiv.style.paddingLeft = '2px';			
 		}
 		topDiv.appendChild(childDiv);
+	}
+}
+
+// helper routine for hierarchy node traversal
+function assembleHierarchyNodeDiv(node, depth, color) {
+	// make sublevel for 
+	node.div = document.createElement("div");
+	
+	// set color for tag anchor, insert containing span into node's div
+	node.tag.style.color = color;
+	node.div.appendChild(node.tag.parentNode);
+
+	// adjust style for divs of leaf nodes? need to work this out
+	if (depth == 0) {
+		// at the lowest depth in hierarchy
+		// so display tags inline
+		node.div.style.display = "inline";
+		
+		// no children to process
+	}
+	else {
+		// container for children's divs
+		// TODO: set indent in hierarchy?
+		var childDiv = document.createElement("div");
+		childDiv.style.paddingLeft = "10px";
+		node.div.appendChild(childDiv);
+
+		// create divs for children
+		for (var i = 0; i < node.children.length; i++) {
+			assembleHierarchyNodeDiv(node.children[i], depth - 1, color);
+			childDiv.appendChild(node.children[i].div)
+		}
+	}
+}
+
+sectionHierarchy.prototype.styleFinalBlock = function() {
+	if (prefs.useBordersForCategories) {
+		if (this.children.length > 0) {
+			var lastChild = this.children[this.children.length - 1];
+			lastChild.div.style.borderBottom = '1px solid';
+			lastChild.div.style.borderColor = prefs.borderColor;
+		}
+		else {
+			this.div.style.borderBottom = '1px solid';
+			this.div.style.borderColor = prefs.borderColor;
+		}
 	}
 }
 
@@ -405,11 +425,8 @@ function listenForTagChanges(listen) {
 	}
 }
 
-
 function getTagType(tag) {
 	var classname = tag.parentNode.className;
-
-	unsafeWindow.console.log(classname);
 
 	var result = classname.match(/\w+tag/);
 	
@@ -433,7 +450,6 @@ function getTagType(tag) {
 	}
 }
 
-
 function setupSectionDivs(sectionlist) {
 	
 	// BEGIN DEBUG
@@ -445,9 +461,6 @@ function setupSectionDivs(sectionlist) {
 	
 	
 	for( var i = 0; i < sectionlist.length; i++ ) {
-		// DEBUG
-		// unsafeWindow.console.log("Processing Section %s %s", curSection.prefix, curSection.type);
-		
 		sectionlist[i].setupDiv();
 		
 		// DEBUG
@@ -455,49 +468,52 @@ function setupSectionDivs(sectionlist) {
 	}	
 }
 
-
-function assembleHierarchyNodeDiv(node, depth, color) {
-	// make sublevel for 
-	node.div = document.createElement("div");
-	
-	// set color for tag anchor, insert containing span into node's div
-	node.tag.style.color = color;
-	node.div.appendChild(node.tag.parentNode);
-
-	// adjust style for divs of leaf nodes? need to work this out
-	if (depth == 0) {
-		// at the lowest depth in hierarchy
-		// so display tags inline
-		node.div.style.display = "inline";
+function collectAndMatchTags(cloud, sectionlist) {
+	// cloud as context, collect all anchors inside spans
+	var xpathStr = "./span/a"; 
+	allTags = document.evaluate(xpathStr, cloud, null,
+		XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 		
-		// no children to process
-	}
-	else {
-		// container for children's divs
-		// TODO: set indent in hierarchy?
-		var childDiv = document.createElement("div");
-		childDiv.style.paddingLeft = "10px";
-		node.div.appendChild(childDiv);
+	for (var tagIndex = 0; tagIndex < allTags.snapshotLength; tagIndex++) {
+	
+		thisTag = allTags.snapshotItem(tagIndex);
+		thisTagName = thisTag.innerHTML;
+		
+		// tell tag to remember its original name
+		// because we might change the HTML representation later
 
-		// create divs for children
-		for (var i = 0; i < node.children.length; i++) {
-			assembleHierarchyNodeDiv(node.children[i], depth - 1, color);
-			childDiv.appendChild(node.children[i].div)
+		if (thisTag.getAttribute('origTagName')) {
+			thisTagName = thisTag.getAttribute('origTagName');
+		} else {
+			thisTag.setAttribute('origTagName', thisTagName);
+		}
+		
+		
+		if (prefs.hiddenTags.contains(thisTagName)) {
+			thisTag.parentNode.parentNode.removeChild(thisTag.parentNode);
+			continue;
+		}
+		
+		var matchingSection = matchTagToSection(sectionlist, thisTag);
+		
+		if (matchingSection) {
+			matchingSection.addTag(thisTag);
+		}
+		else {
+			// remove any tags not falling into our sections
+			// should happen only if no section defined with empty prefix
+			thisTag.parentNode.parentNode.removeChild(thisTag.parentNode);
 		}
 	}
 }
 
 
+
 function matchTagToSection(sectionlist, tag) {
-	// DEBUG
-	// unsafeWindow.console.log("Processing " + tag.getAttribute('origTagName'));
-
 	for (var i = 0; i < sectionlist.length; i++) {
-
-		// DEBUG
-		// unsafeWindow.console.log("Checking section " + sectionlist[i].prefix);
-
-		if (tag.getAttribute('origTagName').indexOf(sectionlist[i].prefix) == 0) {
+		var tagname = tag.getAttribute('origTagName');
+		var sectionPrefix = sectionlist[i].prefix;
+		if (tagname.indexOf(sectionPrefix) == 0) {
 			return sectionlist[i];
 		}
 	}
@@ -507,79 +523,45 @@ function matchTagToSection(sectionlist, tag) {
 
 function processCloud() {
 	// DEBUG
-	unsafeWindow.console.log("Processing Cloud in RTM Test...")
+	// unsafeWindow.console.log("Processing Cloud in RTM Test...")
 	
 	listenForTagChanges(false);
 	
 	var sectionlist = constructSections(sections);
-	unsafeWindow.console.log(sectionlist);
 	
 	// set up divs for sections, store in sections' data dictionaries
 	setupSectionDivs(sectionlist);
 	
-	// process all tags in cloud: add to approp section
 	var cloud = document.getElementById('taskcloudcontent');
 		
 	if (cloud) {
-		// cloud as context, collect all anchors inside spans
-		var xpathStr = "./span/a"; 
-		allTags = document.evaluate(xpathStr, cloud, null,
-			XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-			
-		for (var tagIndex = 0; tagIndex < allTags.snapshotLength; tagIndex++) {
-		
-			thisTag = allTags.snapshotItem(tagIndex);
-			thisTagName = thisTag.innerHTML;
-			
-			// DEBUG
-			// unsafeWindow.console.log(thisTagName);
-			
-			// tell tag to remember its original name
-			// because we might change the HTML representation later
-	
-			if (thisTag.getAttribute('origTagName')) {
-				thisTagName = thisTag.getAttribute('origTagName');
-			} else {
-				thisTag.setAttribute('origTagName', thisTagName);
-			}
-			
-			
-			if (prefs.hiddenTags.contains(thisTagName)) {
-				// DEBUG
-				// unsafeWindow.console.log("Removing " + thisTagName);
-				thisTag.parentNode.parentNode.removeChild(thisTag.parentNode);
-				continue;
-			}
-			
-			var matchingSection = matchTagToSection(sectionlist, thisTag);
-			
-			if (matchingSection) {
-				matchingSection.addTag(thisTag);
-			}
-			else {
-				// remove any tags not falling into our sections
-				// should happen only if no section defined with empty prefix
-				thisTag.parentNode.parentNode.removeChild(thisTag.parentNode);
+		// process all tags in cloud: add to approp section
+		collectAndMatchTags(cloud, sectionlist);
+		// assemble section divs into #taskcloudcontent	
+		var displayedSections = [];
+
+		for ( var i = 0; i < sectionlist.length; i++) {
+			sectionlist[i].assembleDiv();
+
+			if (sectionlist[i].hide == false) {
+				displayedSections.push(sectionlist[i]);
 			}
 		}
-	}
-	
-	// assemble section divs into #taskcloudcontent
-	for ( var i = 0; i < sectionlist.length; i++) {
-		sectionlist[i].assembleDiv();
-		
-		if (sectionlist[i].hide == false) {
-			cloud.appendChild(sectionlist[i].div);
+
+		for (var i = 0; i < displayedSections.length; i++ ) {
+			cloud.appendChild(displayedSections[i].div);
+
+			if (i == displayedSections.length - 1) {
+				displayedSections[i].styleFinalBlock();
+			}
 		}
-		
-		unsafeWindow.console.log(sectionlist[i]);
-	}
-	
-	// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy
-	var copy = document.getElementById("taskcloudcontent_copy");
-	
-	if (copy) {
-		copy.innerHTML = cloud.innerHTML;
+
+		// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy
+		var copy = document.getElementById("taskcloudcontent_copy");
+
+		if (copy) {
+			copy.innerHTML = cloud.innerHTML;
+		}
 	}
 	
 	// re-hook listenForTagChanges
@@ -590,14 +572,3 @@ processCloud();
 
 window.addEventListener('unload', 
 					    function() { listenForTagChanges(false); }, false);
-
-
-
-
-
-
-
-
-
-
-
