@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           RTM test
+// @name           RTM: Tag Cloud Restructurer
 // @namespace      rtm_test
 // @include        http://www.rememberthemilk.com/*
 // @include        https://www.rememberthemilk.com/*
@@ -103,6 +103,7 @@ function sectionHierarchy(arguments) {
 	this.super_constructor = sectionBase;
 	this.super_constructor(arguments);
 	this.depth = arguments.depth;
+	this.sizes = arguments.sizes;
 	this.separators = arguments.separators;
 	this.colors = arguments.colors;
 	this.hidechildren = arguments.hidechildren;
@@ -136,7 +137,7 @@ sectionFlat.prototype.setupDiv = function() {
 
 	wrapperDiv.style.bottomMargin = '2px';
 
-	headerSpan.className = 'tasktag level7';
+	headerSpan.className = 'tasktag level6';
 	headerSpan.style.display = 'block';
 	headerLink.style.color = this.color;
 	tagDiv.style.paddingLeft = '10px';
@@ -151,7 +152,7 @@ sectionFlat.prototype.addTag = function(tag) {
 	tagname = tag.getAttribute('origTagName')
 
 	this.tagDiv.appendChild(tag.parentNode);
-	this.tagDiv.appendChild(document.createTextNode(' | '));
+	this.tagDiv.appendChild(document.createTextNode(' '));
 
 	tag.style.color = this.color;
 	
@@ -163,28 +164,18 @@ sectionFlat.prototype.addTag = function(tag) {
 	}
 	
 	// add tag type, name to search string
-	
-	var searchstring = '';
-	
-	var tagtype;
-	tagtype = getTagType(tag);
-	
-	// if tagtype found, build into search string
-	if (tagtype) {
-		searchstring = tagtype + ":";
+	var searchstring = getTagSearchString(tag);
+
+	if (searchstring) {
+		this.searchlist.push(searchstring);
 	}
-	
-	// wrap name in quotes if contains a space
-	if (tagname.match(/\s/)) {
-		searchstring += "&quot;" + tagname + "&quot;";
-	}
-	else {
-		searchstring += tagname;
-	}
-	
-	this.searchlist.push(searchstring);
 	
 	// deal with sizing (level##) in tag span, maybe
+	// unsafeWindow.console.log("Tag '%s' is level '%d'", tagname, getTagSize(tag));
+	
+	if (getTagSize(tag) > 4) {
+		setTagSize(tag, 4);
+	}
 }
 
 sectionFlat.prototype.assembleDiv = function() {	
@@ -304,7 +295,7 @@ sectionHierarchy.prototype.assembleDiv = function() {
 		// pick color for top-level node and its children
 		var topNodeColor = this.colors[i % this.colors.length];
 		
-		assembleHierarchyNodeDiv(topChildren[i], 1, topNodeColor);
+		this.assembleNodeDiv(topChildren[i], 1, topNodeColor);
 		var childDiv = topChildren[i].div
 		
 		if (prefs.useBordersForCategories) {
@@ -319,14 +310,17 @@ sectionHierarchy.prototype.assembleDiv = function() {
 }
 
 // helper routine for hierarchy node traversal
-function assembleHierarchyNodeDiv(node, depth, color) {
-	// make sublevel for 
+sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
+	// make sublevel for node
 	node.div = document.createElement("div");
 	
-	// set color for tag anchor, insert containing span into node's div
-	node.tag.style.color = color;
-	//resizeTag(node.tag, this.sizes[depth - 1]);
-	node.div.appendChild(node.tag.parentNode);
+	if (node.tag != null) {
+		// set color for tag anchor, insert containing span into node's div
+		node.tag.style.color = color;
+		setTagSize(node.tag, this.sizes[depth - 1]);
+		node.div.appendChild(node.tag.parentNode);
+	}
+	// TODO: produce tag if null; search for all children?
 
 	// adjust style for divs of leaf nodes? need to work this out
 	if (depth == this.depth) {
@@ -345,7 +339,7 @@ function assembleHierarchyNodeDiv(node, depth, color) {
 
 		// create divs for children
 		for (var i = 0; i < node.children.length; i++) {
-			assembleHierarchyNodeDiv(node.children[i], depth + 1, color);
+			this.assembleNodeDiv(node.children[i], depth + 1, color);
 			childDiv.appendChild(node.children[i].div)
 		}
 	}
@@ -368,11 +362,6 @@ sectionHierarchy.prototype.styleFinalBlock = function() {
 /*
  * Utility routines
  */
-
-var sectionConstructors = {
-	flat: sectionFlat,
-	hierarchy: sectionHierarchy
-}
 
 function constructSections(sectionargumentslist) {
 	
@@ -454,11 +443,49 @@ function getTagType(tag) {
 	}
 }
 
-function resizeTag(tag, newsize) {
+
+function getTagSize(tag) {
+	var classname = tag.parentNode.className;
+	var re = /level(\d+)/;
+
+	var result = classname.match(re);
+	
+	if (result == null) {
+		return false;
+	}
+	
+	return parseInt(result[1]);
+}
+
+function setTagSize(tag, newsize) {
 	var classname = tag.parentNode.className;
 	var newlevelclass = "level" + newsize;
+	
+	// unsafeWindow.console.log("Resizing '%s' to '%s'", classname, newlevelclass);
+	// unsafeWindow.console.log(classname.replace(/level\d+/, newlevelclass));
 
 	tag.parentNode.className = classname.replace(/level\d+/, newlevelclass);
+}
+
+function getTagSearchString(tag) {
+	var searchstring = '';
+	
+	var tagtype = getTagType(tag);
+	
+	// if tagtype found, build into search string
+	if (tagtype) {
+		searchstring = tagtype + ":";
+	}
+	
+	// wrap name in quotes if contains a space
+	if (tagname.match(/\s/)) {
+		searchstring += "&quot;" + tagname + "&quot;";
+	}
+	else {
+		searchstring += tagname;
+	}
+	
+	return searchstring;
 }
 
 function setupSectionDivs(sectionlist) {
