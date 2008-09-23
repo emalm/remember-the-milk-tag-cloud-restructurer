@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           RTM: Tag Cloud Restructurer
-// @namespace      rtm_test
+// @namespace      rtm_tag_cloud_restructurer
 // @include        http://www.rememberthemilk.com/*
 // @include        https://www.rememberthemilk.com/*
 // @include        http://*.www.rememberthemilk.com/*
@@ -58,19 +58,34 @@ var prefs = {
 };
 
 var sections = [
+	{ prefix: 'inbox', type: sectionRename, 
+           	   		hide: false,
+           	   		displayname: 'Unsorted', 
+               		color: 'orange' },
+
+	{ prefix: 'next', type: sectionRename, 
+               	   hide: false,
+               	   displayname: 'Next Actions', 
+                   color: 'red' },
+
 	{ prefix: '@', type: sectionFlat, 
 	               hide: false,
 	               displayname: 'Contexts', 
-	               color: 'green' },
+	               color: 'blue' },
 	
 	{ prefix: '-', type: sectionHierarchy, 
 	               hide: false,
 	               depth: 3, 
 	               sizes: ['6', '3', '1'],
 	               separators: '|/+', 
-	               colors: ['red', 'purple', 'brown'], 
+	               colors: ['green', 'purple', 'brown'], 
 	               hidechildren: [] },
 	
+	{ prefix: 'maybe', type: sectionRename, 
+               	   hide: false,
+               	   displayname: 'Someday/Maybe', 
+                   color: 'black' },
+
 	{ prefix: '', type: sectionFlat, 
 	              hide: false,
 	              displayname: 'Miscellaneous', 
@@ -87,6 +102,7 @@ function sectionBase(arguments) {
 }
 
 sectionBase.prototype.setupDiv = null;
+sectionBase.prototype.includeTag = null;
 sectionBase.prototype.addTag = null;
 sectionBase.prototype.assembleDiv = null;
 sectionBase.prototype.styleFinalBlock = null;
@@ -110,42 +126,50 @@ function sectionHierarchy(arguments) {
 	this.setupDiv();
 }
 
+function sectionRename(arguments) {
+	this.super_constructor = sectionBase;
+	this.super_constructor(arguments);
+	this.displayname = arguments.displayname;
+	this.color = arguments.color;
+	this.setupDiv();
+}
+
 /*
  * Routines for sectionFlat class
  */
 
 sectionFlat.prototype.setupDiv = function() {
-
-	var wrapperDiv = document.createElement('div');
+	this.div = document.createElement('div');
 
 	var headerSpan = document.createElement('span');
-	wrapperDiv.appendChild(headerSpan);
+	this.div.appendChild(headerSpan);
 
-	var headerLink = document.createElement('a');
-	headerSpan.appendChild(headerLink);
-	headerLink.appendChild(document.createTextNode(this.displayname));
-	var tagDiv = document.createElement('div');
-	wrapperDiv.appendChild(tagDiv);
+	this.headerTag = document.createElement('a');
+	headerSpan.appendChild(this.headerTag);
+	this.headerTag.appendChild(document.createTextNode(this.displayname));
+	this.tagDiv = document.createElement('div');
+	this.div.appendChild(this.tagDiv);
 
 	if (prefs.useBordersForCategories) {
-		wrapperDiv.style.borderTop = '1px solid';
-		wrapperDiv.style.borderLeft = '1px solid';
-		wrapperDiv.style.borderRight = '1px solid';
-		wrapperDiv.style.borderColor = prefs.borderColor;
-		wrapperDiv.style.paddingLeft = '2px';			
+		this.div.style.borderTop = '1px solid';
+		this.div.style.borderLeft = '1px solid';
+		this.div.style.borderRight = '1px solid';
+		this.div.style.borderColor = prefs.borderColor;
+		this.div.style.paddingLeft = '2px';			
 	}
 
-	wrapperDiv.style.bottomMargin = '2px';
+	this.div.style.bottomMargin = '2px';
 
 	headerSpan.className = 'tasktag level6';
 	headerSpan.style.display = 'block';
-	headerLink.style.color = this.color;
-	tagDiv.style.paddingLeft = '10px';
+	this.headerTag.style.color = this.color;
+	this.tagDiv.style.paddingLeft = '10px';
 
-	this.div = wrapperDiv;
-	this.headerTag = headerLink;
-	this.tagDiv = tagDiv;
 	this.searchlist = [];
+}
+
+sectionBase.prototype.includeTag = function(tag) {
+	
 }
 
 sectionFlat.prototype.addTag = function(tag) {
@@ -207,7 +231,7 @@ sectionHierarchy.prototype.setupDiv = function() {
 }
 
 sectionHierarchy.prototype.addTag = function(tag) {
-	tagname = tag.getAttribute('origTagName')
+	var tagname = tag.getAttribute('origTagName')
 
 	// strip off prefix from tagname
 	tagname = tagname.substring(this.prefix.length);
@@ -320,7 +344,17 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 		setTagSize(node.tag, this.sizes[depth - 1]);
 		node.div.appendChild(node.tag.parentNode);
 	}
-	// TODO: produce tag if null; search for all children?
+	else {
+		var tagspan = document.createElement('span');
+		node.tag = document.createElement('a');
+		node.tag.style.color = color;
+		tagspan.appendChild(node.tag);
+		node.tag.appendChild(document.createTextNode(node.name));
+		node.div.appendChild(tagspan);
+
+
+		// TODO: on click, search for all child nodes?
+	}
 
 	// adjust style for divs of leaf nodes? need to work this out
 	if (depth == this.depth) {
@@ -358,6 +392,49 @@ sectionHierarchy.prototype.styleFinalBlock = function() {
 		}
 	}
 }
+
+/*
+ * Routines for sectionRename class
+ */
+
+sectionRename.prototype.setupDiv = function() {
+	this.div = document.createElement('div');
+
+	if (prefs.useBordersForCategories) {
+		this.div.style.borderTop = '1px solid';
+		this.div.style.borderLeft = '1px solid';
+		this.div.style.borderRight = '1px solid';
+		this.div.style.borderColor = prefs.borderColor;
+		this.div.style.paddingLeft = '2px';			
+	}
+
+	this.div.style.bottomMargin = '2px';
+}
+
+sectionRename.prototype.addTag = function(tag) {
+	var tagname = tag.getAttribute('origTagName');
+	if (tagname == this.prefix) {
+		this.tag = tag;
+		this.tag.innerHTML = this.displayname;
+		this.tag.style.color = this.color;
+		setTagSize(this.tag, 6);
+		this.div.appendChild(this.tag.parentNode);
+	}
+}
+
+sectionRename.prototype.assembleDiv = function() {
+	
+}
+
+sectionRename.prototype.styleFinalBlock = function() {
+	if (prefs.useBordersForCategories) {
+		this.div.style.borderBottom = '1px solid';
+		this.div.style.borderColor = prefs.borderColor;
+	}
+}
+
+
+
 
 /*
  * Utility routines
@@ -548,8 +625,9 @@ function collectAndMatchTags(cloud, sectionlist) {
 
 
 function matchTagToSection(sectionlist, tag) {
+	var tagname = tag.getAttribute('origTagName');
+
 	for (var i = 0; i < sectionlist.length; i++) {
-		var tagname = tag.getAttribute('origTagName');
 		var sectionPrefix = sectionlist[i].prefix;
 		if (tagname.indexOf(sectionPrefix) == 0) {
 			return sectionlist[i];
