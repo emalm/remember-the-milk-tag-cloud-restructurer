@@ -41,6 +41,64 @@ FixSidebar()
 
 /*
  ************************************************
+ Ordinary List Hiding
+ ************************************************
+ */
+
+// TODO: credit RTM Enhanced appropriately
+// TODO: reimplement; XPath?
+
+var doNotRemoveLists = new Array("Inbox","Sent");
+
+RemoveListHandler = function() {
+	var listtabs = document.getElementById("listtabs");
+	var ul = listtabs.childNodes[0];
+
+	for( var i = 0; i < ul.childNodes.length; i++ ) {
+		var tab = ul.childNodes[i];
+		var txt = tab.childNodes[0].innerHTML;
+		if (tab.className.indexOf("xtab_smartlist") == -1 &&
+		 	tab.className.indexOf("xtab_selectted") == -1 && 
+			!doNotRemoveLists.contains(txt))
+		{
+			//tab.setAttribute('class','xtab_smartlist');
+			tab.style.display = "none";
+		}
+	}
+	
+	ListenForListTabChanges(true);
+}
+
+ListenForListTabChanges = function(listen)
+{
+	var listtabs = document.getElementById("listtabs");
+	
+	if (listtabs) {
+		if (listen) {
+			listtabs.addEventListener("DOMNodeInserted", RemoveListHandler, false);
+			listtabs.addEventListener("DOMNodeRemoved", RemoveListHandler, false);
+		} else {
+			listtabs.removeEventListener("DOMNodeInserted", RemoveListHandler, false);
+			listtabs.removeEventListener("DOMNodeRemoved", RemoveListHandler, false);
+		}
+	}
+}
+
+RemoveLists = function() {
+	//addGlobalStyle('#listtabs ul li { display:none;}');
+	//addGlobalStyle('#listtabs ul li.xtab_smartlist,#listtabs ul li.xtab_exclude,#listtabs ul li.xtab_selected { display:block;}');
+	ListenForListTabChanges(true);
+}
+
+RemoveLists()
+
+window.addEventListener('unload', function() {
+	ListenForListTabChanges(false);
+}, false);
+
+
+/*
+ ************************************************
  Task Cloud Restructuring
  ************************************************
  */
@@ -68,6 +126,16 @@ var sections = [
                	   displayname: 'Next Actions', 
                    color: 'red' },
 
+	{ prefix: 'goal', type: sectionRename, 
+               	   hide: false,
+               	   displayname: 'Goals', 
+                   color: 'black' },
+
+	{ prefix: '_', type: sectionFlat, 
+	               hide: false,
+	               displayname: 'Responsibilities', 
+	               color: '#444444' },
+
 	{ prefix: '@', type: sectionFlat, 
 	               hide: false,
 	               displayname: 'Contexts', 
@@ -84,7 +152,7 @@ var sections = [
 	{ prefix: 'maybe', type: sectionRename, 
                	   hide: false,
                	   displayname: 'Someday/Maybe', 
-                   color: 'black' },
+                   color: 'CornflowerBlue' },
 
 	{ prefix: '', type: sectionFlat, 
 	              hide: false,
@@ -347,10 +415,10 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 	if (node.tag != null) {
 		// set color for tag anchor, insert containing span into node's div
 		node.tag.style.color = color;
-		setTagSize(node.tag, this.sizes[depth - 1]);
 		node.div.appendChild(node.tag.parentNode);
 	}
 	else {
+		// create new tag for this sublevel
 		var tagspan = document.createElement('span');
 		node.tag = document.createElement('a');
 		node.tag.style.color = color;
@@ -358,9 +426,10 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 		node.tag.appendChild(document.createTextNode(node.name));
 		node.div.appendChild(tagspan);
 
-
 		// TODO: on click, search for all child nodes?
 	}
+
+	setTagSize(node.tag, this.sizes[depth - 1]);
 
 	// adjust style for divs of leaf nodes? need to work this out
 	if (depth == this.depth) {
