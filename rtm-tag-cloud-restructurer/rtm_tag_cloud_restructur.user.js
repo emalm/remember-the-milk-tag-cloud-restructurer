@@ -168,8 +168,9 @@ sectionFlat.prototype.setupDiv = function() {
 	this.searchlist = [];
 }
 
-sectionBase.prototype.includeTag = function(tag) {
-	
+sectionFlat.prototype.includeTag = function(tag) {
+	var tagname = tag.getAttribute('origTagName');
+	return (tagname.indexOf(this.prefix) == 0);
 }
 
 sectionFlat.prototype.addTag = function(tag) {
@@ -228,6 +229,11 @@ sectionHierarchy.prototype.setupDiv = function() {
 	this.div = wrapperDiv;
 
 	this.children = [];
+}
+
+sectionHierarchy.prototype.includeTag = function(tag) {
+	var tagname = tag.getAttribute('origTagName');
+	return (tagname.indexOf(this.prefix) == 0);
 }
 
 sectionHierarchy.prototype.addTag = function(tag) {
@@ -411,6 +417,10 @@ sectionRename.prototype.setupDiv = function() {
 	this.div.style.bottomMargin = '2px';
 }
 
+sectionRename.prototype.includeTag = function(tag) {
+	return (tag.getAttribute('origTagName') == this.prefix);
+}
+
 sectionRename.prototype.addTag = function(tag) {
 	var tagname = tag.getAttribute('origTagName');
 	if (tagname == this.prefix) {
@@ -537,10 +547,6 @@ function getTagSize(tag) {
 function setTagSize(tag, newsize) {
 	var classname = tag.parentNode.className;
 	var newlevelclass = "level" + newsize;
-	
-	// unsafeWindow.console.log("Resizing '%s' to '%s'", classname, newlevelclass);
-	// unsafeWindow.console.log(classname.replace(/level\d+/, newlevelclass));
-
 	tag.parentNode.className = classname.replace(/level\d+/, newlevelclass);
 }
 
@@ -563,24 +569,6 @@ function getTagSearchString(tag) {
 	}
 	
 	return searchstring;
-}
-
-function setupSectionDivs(sectionlist) {
-	
-	// BEGIN DEBUG
-	// extraDebugDiv = document.createElement('div');
-	// extraDebugDiv.className = 'taskcloudcontent';
-	// overviewboxdiv = document.getElementById('overviewright');
-	// overviewboxdiv.appendChild(extraDebugDiv);
-	// END DEBUG
-	
-	
-	for( var i = 0; i < sectionlist.length; i++ ) {
-		sectionlist[i].setupDiv();
-		
-		// DEBUG
-		// extraDebugDiv.appendChild(sectionlist[i].div);
-	}	
 }
 
 function collectAndMatchTags(cloud, sectionlist) {
@@ -625,11 +613,8 @@ function collectAndMatchTags(cloud, sectionlist) {
 
 
 function matchTagToSection(sectionlist, tag) {
-	var tagname = tag.getAttribute('origTagName');
-
 	for (var i = 0; i < sectionlist.length; i++) {
-		var sectionPrefix = sectionlist[i].prefix;
-		if (tagname.indexOf(sectionPrefix) == 0) {
+		if (sectionlist[i].includeTag(tag)) {
 			return sectionlist[i];
 		}
 	}
@@ -644,10 +629,6 @@ function processCloud() {
 	listenForTagChanges(false);
 	
 	var sectionlist = constructSections(sections);
-	
-	// set up divs for sections, store in sections' data dictionaries
-	//setupSectionDivs(sectionlist);
-	
 	var cloud = document.getElementById('taskcloudcontent');
 		
 	if (cloud) {
