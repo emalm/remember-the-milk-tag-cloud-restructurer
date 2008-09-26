@@ -144,7 +144,7 @@ var sections = [
 	{ prefix: '-', type: sectionHierarchy, 
 	               hide: false,
 	               depth: 3, 
-	               sizes: ['6', '3', '1'],
+	               sizes: ['6', '4', '1'],
 	               separators: '|/+', 
 	               colors: ['green', 'purple', 'brown'], 
 	               hidechildren: [] },
@@ -245,7 +245,10 @@ sectionFlat.prototype.addTag = function(tag) {
 	tagname = tag.getAttribute('origTagName')
 
 	this.tagDiv.appendChild(tag.parentNode);
-	this.tagDiv.appendChild(document.createTextNode(' '));
+	
+	// insert space so that tag spans break across lines
+	// consider thin space? \u2009
+	this.tagDiv.appendChild(document.createTextNode('\u2009'));
 
 	tag.style.color = this.color;
 	
@@ -429,6 +432,11 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 		// TODO: on click, search for all child nodes?
 	}
 
+	// adjust style of tag anchor and span
+	// set padding around each tag to 0
+	// RTM sets right padding on each tag anchor to 5px as a separator
+	node.tag.style.paddingRight = "0px";
+	node.tag.parentNode.style.paddingRight = "2px";
 	setTagSize(node.tag, this.sizes[depth - 1]);
 
 	// adjust style for divs of leaf nodes? need to work this out
@@ -439,17 +447,40 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 		
 		// no children to process
 	}
+	else if (depth == this.depth - 1) {
+		// in end stages of hierarchy
+		// so assemble children as (this tag): (child tag) (child tag) ...
+		// so that (this tag) has a hanging indent
+		if (node.children.length > 0) {
+			node.tag.appendChild(document.createTextNode(":"));
+			node.tag.parentNode.style.paddingRight = "5px";
+			node.div.style.paddingLeft = "10px";
+			node.div.style.textIndent = "-10px";
+			node.div.style.color = color;
+			
+			for (var i = 0; i < node.children.length; i++) {
+				this.assembleNodeDiv(node.children[i], depth + 1, color);
+				var childtag = node.children[i].tag;
+				childtag.parentNode.style.paddingRight = "0px";
+				
+				if (i > 0) {
+					var sepnode = document.createTextNode("\u2009\xb7\u2009");
+					node.div.appendChild(sepnode);
+				}
+				
+				node.div.appendChild(childtag.parentNode);
+			}
+		}		
+	}
 	else {
+		// above 
 		// container for children's divs
 		// TODO: set indent in hierarchy?
-		var childDiv = document.createElement("div");
-		childDiv.style.paddingLeft = "10px";
-		node.div.appendChild(childDiv);
-
 		// create divs for children
 		for (var i = 0; i < node.children.length; i++) {
 			this.assembleNodeDiv(node.children[i], depth + 1, color);
-			childDiv.appendChild(node.children[i].div)
+			node.children[i].div.style.marginLeft = "10px";
+			node.div.appendChild(node.children[i].div)
 		}
 	}
 }
@@ -511,9 +542,6 @@ sectionRename.prototype.styleFinalBlock = function() {
 		this.div.style.borderColor = prefs.borderColor;
 	}
 }
-
-
-
 
 /*
  * Utility routines
@@ -616,7 +644,12 @@ function getTagSize(tag) {
 function setTagSize(tag, newsize) {
 	var classname = tag.parentNode.className;
 	var newlevelclass = "level" + newsize;
-	tag.parentNode.className = classname.replace(/level\d+/, newlevelclass);
+	if (classname.match(/level\d+/)) {
+		tag.parentNode.className = classname.replace(/level\d+/, newlevelclass);
+	}
+	else { 
+		tag.parentNode.className = classname + " " + newlevelclass;
+	}
 }
 
 function getTagSearchString(tag) {
@@ -660,7 +693,6 @@ function collectAndMatchTags(cloud, sectionlist) {
 			thisTag.setAttribute('origTagName', thisTagName);
 		}
 		
-		
 		if (prefs.hiddenTags.contains(thisTagName)) {
 			thisTag.parentNode.parentNode.removeChild(thisTag.parentNode);
 			continue;
@@ -678,8 +710,6 @@ function collectAndMatchTags(cloud, sectionlist) {
 		}
 	}
 }
-
-
 
 function matchTagToSection(sectionlist, tag) {
 	for (var i = 0; i < sectionlist.length; i++) {
