@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name           RTM: Tag Cloud Restructurer
-// @namespace      rtm_tag_cloud_restructurer
-// @include        http://www.rememberthemilk.com/*
-// @include        https://www.rememberthemilk.com/*
-// @include        http://*.www.rememberthemilk.com/*
-// @include        https://*.www.rememberthemilk.com/*
+// @name           RTM: Tag Cloud Restructurer (emalminator)
+// @namespace      http://www.rememberthemilk.com/home/emalminator/*
+// @include        http://www.rememberthemilk.com/home/emalminator/*
+// @include        https://www.rememberthemilk.com/home/emalminator/*
+// @include        http://*.www.rememberthemilk.com/home/emalminator/*
+// @include        https://*.www.rememberthemilk.com/home/emalminator/*
 // ==/UserScript==
 
 /*
@@ -115,7 +115,7 @@ var prefs = {
 	hiddenTags: ['system', 'sent']
 };
 
-var sections = [
+var emalminator_sections = [
 	{ prefix: 'inbox', type: sectionRename, 
            	   		hide: false,
            	   		displayname: 'Unsorted', 
@@ -159,6 +159,8 @@ var sections = [
 	              displayname: 'Miscellaneous', 
 	              color: 'gray' }
 ];
+
+var sections = emalminator_sections;
 
 /*
  * Section classes
@@ -586,7 +588,7 @@ function handleChange() {
 	if (waitingTask) {
 		window.clearTimeout(waitingTask);
 	}
-	waitingTask = window.setTimeout(processCloud, 100);
+	waitingTask = window.setTimeout(processCloud, 100, sections);
 }
 
 function listenForTagChanges(listen) {
@@ -721,11 +723,16 @@ function matchTagToSection(sectionlist, tag) {
 	return false;
 }
 
-function processCloud() {
+function processCloud(sectionlistconfig) {
 	// DEBUG
 	// unsafeWindow.console.log("Processing Cloud in RTM Test...")
 	
 	listenForTagChanges(false);
+	
+	//unsafeWindow.console.log("Config");	
+	//unsafeWindow.console.log(sectionlistconfig);
+	//unsafeWindow.console.log("Global");	
+	//unsafeWindow.console.log(sections);
 	
 	var sectionlist = constructSections(sections);
 	var cloud = document.getElementById('taskcloudcontent');
@@ -764,7 +771,7 @@ function processCloud() {
 	listenForTagChanges(true);
 }
 
-processCloud();
+processCloud(sections);
 
 window.addEventListener('unload', 
 					    function() { listenForTagChanges(false); }, false);
