@@ -27,6 +27,13 @@ function FixSidebar() {
 	unsafeWindow.document.getElementById("detailsbox").style.position = "static"
 }
 
+/*
+  Hides cow graphic and adjusts status box position
+
+  Adapted from the RememberTheMilkEnhanced script:
+  http://userscripts.org/scripts/show/26057
+*/
+
 function HideRTMCowGraphic() {
 	// Hide cow graphic
 	document.getElementById("appheaderlogo").style.display = "none";
@@ -36,7 +43,7 @@ function HideRTMCowGraphic() {
 }
 
 HideRTMCowGraphic()
-//DisableSidebarAnimation()
+// DisableSidebarAnimation()
 FixSidebar()
 
 /*
@@ -45,8 +52,13 @@ FixSidebar()
  ************************************************
  */
 
-// TODO: credit RTM Enhanced appropriately
-// TODO: reimplement; XPath?
+
+/*
+  Much of this code copied or adapted from the RememberTheMilkEnhanced script:
+  http://userscripts.org/scripts/show/26057
+*/
+
+// TODO: reimplement using XPath?
 
 var doNotRemoveLists = new Array("Inbox","Sent");
 
@@ -106,60 +118,71 @@ window.addEventListener('unload', function() {
 var prefs = {
 	useBordersForCategories: true,
 	borderColor: 'lightGrey',
-	useSymbolInHeader: true,
-	keepSymbolInTags: false,
-	renameTags: false,
-	indentChildTags: true,
-	overrideHeaderLinks: true,
-	EMPTY_QUERY_STR: 'tag:youdonthaveanytasksinthissection',
 	hiddenTags: ['system', 'sent']
 };
 
+// default preferences for each type of section
+// some preferences should have no default
+
+var sectionprefs = {
+	sectionBase: {
+		displayOrder: 0,
+		hide: false
+	},
+	sectionRename: {
+		displayOriginalName: false
+	},
+	sectionFlat: {
+		useSymbolInHeader: false,
+		keepSymbolInTags: false,
+		renameTags: false
+	},
+	sectionHierarchy: {
+		depth: 3,
+        sizes: ['6', '4', '1'],
+        separators: '|/+', 
+		hidechildren: [],
+		indentChildTags: true
+	}
+};
+
+// section definitions
+
 var emalminator_sections = [
 	{ prefix: 'inbox', type: sectionRename, 
-           	   		hide: false,
            	   		displayname: 'Unsorted', 
                		color: 'orange' },
 
 	{ prefix: 'next', type: sectionRename, 
-               	   hide: false,
                	   displayname: 'Next Actions', 
                    color: 'red' },
 
 	{ prefix: 'goal', type: sectionRename, 
-               	   hide: false,
                	   displayname: 'Goals', 
                    color: 'black' },
 
 	{ prefix: '_', type: sectionFlat, 
-	               hide: false,
 	               displayname: 'Responsibilities', 
 	               color: '#444444' },
 
 	{ prefix: '@', type: sectionFlat, 
-	               hide: false,
 	               displayname: 'Contexts', 
 	               color: 'blue' },
 	
 	{ prefix: '-', type: sectionHierarchy, 
-	               hide: false,
-	               depth: 3, 
-	               sizes: ['6', '4', '1'],
-	               separators: '|/+', 
-	               colors: ['green', 'purple', 'brown'], 
-	               hidechildren: [] },
+	               colors: ['green', 'purple', 'brown'] },
 	
 	{ prefix: 'maybe', type: sectionRename, 
-               	   hide: false,
                	   displayname: 'Someday/Maybe', 
                    color: 'CornflowerBlue' },
 
+    // catch-all section for unprocessed lists and tags
 	{ prefix: '', type: sectionFlat, 
-	              hide: false,
 	              displayname: 'Miscellaneous', 
 	              color: 'gray' }
 ];
 
+// pick the above section list as sections to process
 var sections = emalminator_sections;
 
 /*
@@ -167,40 +190,94 @@ var sections = emalminator_sections;
  */
 
 function sectionBase(arguments) {
+	// copy or overwrite default preferences
+	for (key in sectionprefs.sectionBase) {
+		if (key in arguments) {
+			this[key] = arguments[key];
+		}
+		else {
+			this[key] = sectionprefs.sectionBase[key];
+		}
+	}
+	
+	// set required data
 	this.prefix = arguments.prefix;
-	this.hide = arguments.hide;
 }
 
+// void base-class member functions
 sectionBase.prototype.setupDiv = null;
 sectionBase.prototype.includeTag = null;
 sectionBase.prototype.addTag = null;
 sectionBase.prototype.assembleDiv = null;
 sectionBase.prototype.styleFinalBlock = null;
 
+// constructors for section subclasses
+
 function sectionFlat(arguments) {
+	// call sectionBase base class constructor
 	this.super_constructor = sectionBase;
 	this.super_constructor(arguments);
+	
+	// copy or overwrite default preferences
+	for (key in sectionprefs.sectionFlat) {
+		if (key in arguments) {
+			this[key] = arguments[key];
+		}
+		else {
+			this[key] = sectionprefs.sectionFlat[key];
+		}
+	}
+	
+	// set no-default required data
 	this.displayname = arguments.displayname;
 	this.color = arguments.color;
+	
+	// construct html div containing section
 	this.setupDiv();
 }
 
 function sectionHierarchy(arguments) {
+	// call sectionBase base class constructor
 	this.super_constructor = sectionBase;
 	this.super_constructor(arguments);
-	this.depth = arguments.depth;
-	this.sizes = arguments.sizes;
-	this.separators = arguments.separators;
+	
+	// copy or overwrite default preferences
+	for (key in sectionprefs.sectionHierarchy) {
+		if (key in arguments) {
+			this[key] = arguments[key];
+		}
+		else {
+			this[key] = sectionprefs.sectionHierarchy[key];
+		}
+	}
+	
+	// set no-default required data
 	this.colors = arguments.colors;
-	this.hidechildren = arguments.hidechildren;
+	
+	// construct html div containing section
 	this.setupDiv();
 }
 
 function sectionRename(arguments) {
+	// call sectionBase base class constructor
 	this.super_constructor = sectionBase;
 	this.super_constructor(arguments);
+
+	// copy or overwrite default preferences
+	for (key in sectionprefs.sectionRename) {
+		if (key in arguments) {
+			this[key] = arguments[key];
+		}
+		else {
+			this[key] = sectionprefs.sectionRename[key];
+		}
+	}
+	
+	// set no-default required data
 	this.displayname = arguments.displayname;
 	this.color = arguments.color;
+	
+	// construct html div containing section
 	this.setupDiv();
 }
 
@@ -217,6 +294,11 @@ sectionFlat.prototype.setupDiv = function() {
 	this.headerTag = document.createElement('a');
 	headerSpan.appendChild(this.headerTag);
 	this.headerTag.appendChild(document.createTextNode(this.displayname));
+	
+	if (this.useSymbolInHeader) {
+		this.headerTag.appendChild(document.createTextNode(" (" + this.prefix + ")"));
+	}
+	
 	this.tagDiv = document.createElement('div');
 	this.div.appendChild(this.tagDiv);
 
@@ -254,9 +336,9 @@ sectionFlat.prototype.addTag = function(tag) {
 
 	tag.style.color = this.color;
 	
-	if (!prefs.keepSymbolInTags) {
+	if (this.keepSymbolInTags == false) {
 		tag.innerHTML = tagname.substring(this.prefix.length);
-		if (prefs.renameTags) {
+		if (this.renameTags) {
 			tag.innerHTML = capitalizeAndSpace(tag.innerHTML);
 		}
 	}
@@ -528,6 +610,9 @@ sectionRename.prototype.addTag = function(tag) {
 	if (tagname == this.prefix) {
 		this.tag = tag;
 		this.tag.innerHTML = this.displayname;
+		if (this.displayOriginalName) {
+			this.tag.innerHTML += " (" + this.prefix + ")";
+		}
 		this.tag.style.color = this.color;
 		setTagSize(this.tag, 6);
 		this.div.appendChild(this.tag.parentNode);
@@ -723,6 +808,16 @@ function matchTagToSection(sectionlist, tag) {
 	return false;
 }
 
+// function to sort sections by decreasing displayorder
+
+function sortSection(a, b) {
+	if (a.displayOrder < b.displayOrder)
+		return 1;
+	if (a.displayOrder > b.displayOrder)
+		return -1;
+	return 0;
+}
+
 function processCloud(sectionlistconfig) {
 	// DEBUG
 	// unsafeWindow.console.log("Processing Cloud in RTM Test...")
@@ -740,9 +835,11 @@ function processCloud(sectionlistconfig) {
 	if (cloud) {
 		// process all tags in cloud: add to approp section
 		collectAndMatchTags(cloud, sectionlist);
+
 		// assemble section divs into #taskcloudcontent	
 		var displayedSections = [];
 
+		// build each section, push those to be displayed onto list
 		for ( var i = 0; i < sectionlist.length; i++) {
 			sectionlist[i].assembleDiv();
 
@@ -750,6 +847,9 @@ function processCloud(sectionlistconfig) {
 				displayedSections.push(sectionlist[i]);
 			}
 		}
+		
+		// sort sections by decreasing displayorder
+		displayedSections.sort(sortSection);
 
 		for (var i = 0; i < displayedSections.length; i++ ) {
 			cloud.appendChild(displayedSections[i].div);
