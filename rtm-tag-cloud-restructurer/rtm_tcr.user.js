@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name           RTM: Tag Cloud Restructurer (emalminator)
-// @namespace      http://www.rememberthemilk.com/home/emalminator/*
-// @include        http://www.rememberthemilk.com/home/emalminator/*
-// @include        https://www.rememberthemilk.com/home/emalminator/*
-// @include        http://*.www.rememberthemilk.com/home/emalminator/*
-// @include        https://*.www.rememberthemilk.com/home/emalminator/*
+// @name           RTM: Tag Cloud Restructurer
+// @namespace      http://www.rememberthemilk.com/home/*
+// @include        http://www.rememberthemilk.com/home/*
+// @include        https://www.rememberthemilk.com/home/*
+// @include        http://*.www.rememberthemilk.com/home/*
+// @include        https://*.www.rememberthemilk.com/home/*
 // ==/UserScript==
 
 /*
@@ -209,7 +209,7 @@ var sectionprefs = {
 // - ex: if '@' before '@_', '@' will grab all tags starting with '@'
 // overwrite per-section preferences here, too;
 
-var emalminator_sections = [
+var my_sections = [
 	{ prefix: 'inbox', type: sectionRename, 
            	   		displayname: 'Unsorted', 
                		color: 'orange' },
@@ -244,7 +244,7 @@ var emalminator_sections = [
 ];
 
 // pick the above section list as sections to process
-var sections = emalminator_sections;
+var sections = my_sections;
 
 /*
  * End of configuration section
