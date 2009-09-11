@@ -8,114 +8,13 @@
 // ==/UserScript==
 
 /*
- ************************************************
- Miscellaneous Display Changes
- ************************************************
+ * Note: code to hide lists and to tweak the cow graphic and sidebar position
+ * is at the end of the script, past all of the Task Cloud Restructurer code.
  */
 
-// stop sidebar animation
-// adapted from http://userscripts.org/scripts/show/7825
-
-function DisableSidebarAnimation() {
-	var L = unsafeWindow.document.getElementById("detailsbox");
-	L.moveDiv = function () {
-		var L = unsafeWindow.document.getElementById("detailsbox");
-		L.style.top = window.pageYOffset+"px";
-		unsafeWindow.Autocomplete.handleWindowResize();
-	};
-}
-
-// fixes sidebar position
-
-function FixSidebar() {
-	unsafeWindow.document.getElementById("detailsbox").style.position = "static"
-}
-
-/*
-  Hides cow graphic and adjusts status box position
-
-  Adapted from the RememberTheMilkEnhanced script:
-  http://userscripts.org/scripts/show/26057
-*/
-
-function HideRTMCowGraphic() {
-	// Hide cow graphic
-	document.getElementById("appheaderlogo").style.display = "none";
-	
-	// Reduce padding on status bar div so left edge aligns with list box
-	document.getElementById("statusbox").style.paddingLeft = "9px";	
-}
-
-HideRTMCowGraphic()
-// DisableSidebarAnimation()
-FixSidebar()
-
 /*
  ************************************************
- Ordinary List Hiding
- ************************************************
- */
-
-
-/*
-  Much of this code copied or adapted from the RememberTheMilkEnhanced script:
-  http://userscripts.org/scripts/show/26057
-*/
-
-// TODO: reimplement using XPath?
-
-var doNotRemoveLists = new Array("Inbox","Sent");
-
-RemoveListHandler = function() {
-	var listtabs = document.getElementById("listtabs");
-	var ul = listtabs.childNodes[0];
-
-	for( var i = 0; i < ul.childNodes.length; i++ ) {
-		var tab = ul.childNodes[i];
-		var txt = tab.childNodes[0].innerHTML;
-		if (tab.className.indexOf("xtab_smartlist") == -1 &&
-		 	tab.className.indexOf("xtab_selectted") == -1 && 
-			!doNotRemoveLists.contains(txt))
-		{
-			//tab.setAttribute('class','xtab_smartlist');
-			tab.style.display = "none";
-		}
-	}
-	
-	ListenForListTabChanges(true);
-}
-
-ListenForListTabChanges = function(listen)
-{
-	var listtabs = document.getElementById("listtabs");
-	
-	if (listtabs) {
-		if (listen) {
-			listtabs.addEventListener("DOMNodeInserted", RemoveListHandler, false);
-			listtabs.addEventListener("DOMNodeRemoved", RemoveListHandler, false);
-		} else {
-			listtabs.removeEventListener("DOMNodeInserted", RemoveListHandler, false);
-			listtabs.removeEventListener("DOMNodeRemoved", RemoveListHandler, false);
-		}
-	}
-}
-
-RemoveLists = function() {
-	//addGlobalStyle('#listtabs ul li { display:none;}');
-	//addGlobalStyle('#listtabs ul li.xtab_smartlist,#listtabs ul li.xtab_exclude,#listtabs ul li.xtab_selected { display:block;}');
-	ListenForListTabChanges(true);
-}
-
-RemoveLists()
-
-window.addEventListener('unload', function() {
-	ListenForListTabChanges(false);
-}, false);
-
-
-/*
- ************************************************
- Task Cloud Restructuring
+ Tag Cloud Restructuring
  ************************************************
  */
 
@@ -197,8 +96,8 @@ var sectionprefs = {
 	
 	sectionHierarchy: {
 		depth: 3,
-        sizes: ['6', '4', '1'],
-        separators: '|/+', 
+		sizes: ['6', '4', '1'],
+      	separators: '|/+', 
 		hidechildren: []
 		// indentChildTags: true
 	}
@@ -211,16 +110,16 @@ var sectionprefs = {
 
 var my_sections = [
 	{ prefix: 'inbox', type: sectionRename, 
-           	   		displayname: 'Unsorted', 
-               		color: 'orange' },
+	                   displayname: 'Unsorted', 
+	                   color: 'orange' },
 
 	{ prefix: 'next', type: sectionRename, 
-               	   displayname: 'Next Actions', 
-                   color: 'red' },
+	                  displayname: 'Next Actions', 
+	                  color: 'red' },
 
 	{ prefix: 'goal', type: sectionRename, 
-               	   displayname: 'Goals', 
-                   color: 'black' },
+	                  displayname: 'Goals', 
+	                  color: 'black' },
 
 	{ prefix: '_', type: sectionFlat, 
 	               displayname: 'Responsibilities', 
@@ -234,8 +133,8 @@ var my_sections = [
 	               colors: ['green', 'purple', 'brown'] },
 	
 	{ prefix: 'maybe', type: sectionRename, 
-               	   displayname: 'Someday/Maybe', 
-                   color: 'CornflowerBlue' },
+	                   displayname: 'Someday/Maybe', 
+	                   color: 'CornflowerBlue' },
 
     // catch-all section for unprocessed lists and tags
 	{ prefix: '', type: sectionFlat, 
@@ -1078,4 +977,110 @@ processCloud(sections);
 
 // de-hook handler when we unload the page
 window.addEventListener('unload', 
-					    function() { listenForTagChanges(false); }, false);
+                        function() { listenForTagChanges(false); }, false);
+
+/*
+ ************************************************
+ Miscellaneous Display Changes
+ ************************************************
+ */
+
+// stop sidebar animation
+// adapted from http://userscripts.org/scripts/show/7825
+
+function DisableSidebarAnimation() {
+	var L = unsafeWindow.document.getElementById("detailsbox");
+	L.moveDiv = function () {
+		var L = unsafeWindow.document.getElementById("detailsbox");
+		L.style.top = window.pageYOffset+"px";
+		unsafeWindow.Autocomplete.handleWindowResize();
+	};
+}
+
+// fixes sidebar position
+
+function FixSidebar() {
+	unsafeWindow.document.getElementById("detailsbox").style.position = "static"
+}
+
+/*
+  Hides cow graphic and adjusts status box position
+
+  Adapted from the RememberTheMilkEnhanced script:
+  http://userscripts.org/scripts/show/26057
+*/
+
+function HideRTMCowGraphic() {
+	// Hide cow graphic
+	document.getElementById("appheaderlogo").style.display = "none";
+	
+	// Reduce padding on status bar div so left edge aligns with list box
+	document.getElementById("statusbox").style.paddingLeft = "9px";	
+}
+
+HideRTMCowGraphic()
+// DisableSidebarAnimation()
+FixSidebar()
+
+/*
+ ************************************************
+ Ordinary List Hiding
+ ************************************************
+ */
+
+
+/*
+  Much of this code copied or adapted from the RememberTheMilkEnhanced script:
+  http://userscripts.org/scripts/show/26057
+*/
+
+// TODO: reimplement using XPath?
+
+var doNotRemoveLists = new Array("Inbox","Sent");
+
+RemoveListHandler = function() {
+	var listtabs = document.getElementById("listtabs");
+	var ul = listtabs.childNodes[0];
+
+	for( var i = 0; i < ul.childNodes.length; i++ ) {
+		var tab = ul.childNodes[i];
+		var txt = tab.childNodes[0].innerHTML;
+		if (tab.className.indexOf("xtab_smartlist") == -1 &&
+		 	tab.className.indexOf("xtab_selectted") == -1 && 
+			!doNotRemoveLists.contains(txt))
+		{
+			//tab.setAttribute('class','xtab_smartlist');
+			tab.style.display = "none";
+		}
+	}
+	
+	ListenForListTabChanges(true);
+}
+
+ListenForListTabChanges = function(listen)
+{
+	var listtabs = document.getElementById("listtabs");
+	
+	if (listtabs) {
+		if (listen) {
+			listtabs.addEventListener("DOMNodeInserted", RemoveListHandler, false);
+			listtabs.addEventListener("DOMNodeRemoved", RemoveListHandler, false);
+		} else {
+			listtabs.removeEventListener("DOMNodeInserted", RemoveListHandler, false);
+			listtabs.removeEventListener("DOMNodeRemoved", RemoveListHandler, false);
+		}
+	}
+}
+
+RemoveLists = function() {
+	//addGlobalStyle('#listtabs ul li { display:none;}');
+	//addGlobalStyle('#listtabs ul li.xtab_smartlist,#listtabs ul li.xtab_exclude,#listtabs ul li.xtab_selected { display:block;}');
+	ListenForListTabChanges(true);
+}
+
+RemoveLists()
+
+window.addEventListener('unload', function() {
+	ListenForListTabChanges(false);
+}, false);
+

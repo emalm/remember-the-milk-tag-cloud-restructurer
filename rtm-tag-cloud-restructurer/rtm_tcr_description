@@ -1,0 +1,120 @@
+Summary:
+A script to restructure the tag cloud in Remember the Milk. Based off of masnare's Tag Cloud Colorizer script, jgallen23's RememberTheMilkEnhanced script, and ideas in the Tag Cloud post in the RTM forums.
+
+
+Description:
+Based on masnare's Tag Cloud Colorizer script  (<a href = "http://userscripts.org/scripts/show/25046">http://userscripts.org/scripts/show/25046</a>) and jgallen23's RememberTheMilkEnhanced (<a href="http://userscripts.org/scripts/show/26057">http://userscripts.org/scripts/show/26057</a>), as well as ideas from the Tag Cloud post in the Remember the Milk forums (<a href="http://www.rememberthemilk.com/forums/tips/2943/">http://www.rememberthemilk.com/forums/tips/2943/</a>).
+
+This script provides a fairly general framework for restructuring the tag cloud in Remember the Milk. Specifically, one can:
+<ul>
+  <li>Group related lists, locations, and tags by prefix</li>
+  <li>Rename individual tags</li>
+  <li>Generate a hierarchy of tags dynamically, to arbitrary depth</li>
+  <li>Rename individual tags in the hierarchy (ex: P to Personal)</li>
+  <li>Recolor tag sections</li>
+  <li>Reorder sections after processing</li>
+  <li>Hide ordinary list tabs</li>
+</ul>
+The script also includes some stylistic tweaks, such as removing the cow graphic from the RTM page and fixing the sidebar at the top of the page (which becomes crucial if the tag cloud is long). These can easily be commented out if they are not desired.
+
+The hierarchy-style section in particular makes it fairly easy to have projects with subprojects, as these can be stored in their own individual lists. This also reduces the tagging and list redundancy, as long as the user is willing to partition their tasks between project lists.
+
+The default configuration is based on one for my personal use, and it is likely that other users will need to adjust the configuration for their own needs. Greasemonkey in Firefox  Changes should be made to the Configuration section in the script, at the top of the Tag Cloud Restructurer section.
+
+If users are familiar with masnare's script, this script differs from it in several ways:
+<ul>
+  <li>masnare's sections are now the sectionFlat objects.</li>
+  <li>No additional "system" tags (such as @__context) are needed, as the header tags are created by the script itself.</li>
+  <li>There is now a dictionary-based system for global and per-section preferences.</li>
+</ul>
+Please note I have tested this script only under Firefox 3.5.* + Greasemonkey, and I would appreciate feedback and testing under Opera and other versions of Firefox. Also, any feature requests or suggestions more generally are appreciated, although I am not by any means an experienced JavaScript programmer.
+
+As an extended example, here is my tag cloud, circa Sep 2009: 
+
+<a href="http://tinypic.com" target="_blank"><img src="http://i32.tinypic.com/10xy6p4.jpg" alt="Image and video hosting by TinyPic"></a>
+
+And here are the active lists, locations, and tags that generate it:
+
+Ordinary Lists:
+<ul>
+  <li>Inbox</li>
+  <li>-A [[&#x41;cademic]]</li>
+  <li>-A/CS</li>
+  <li>-A/CS/CS106B</li>
+  <li>-A/CS/CS107</li>
+  <li>-A/Math</li>
+  <li>-A/Math/Alg Top</li>
+  <li>-A/Math/NW-TFT</li>
+  <li>-A/Math/Old</li>
+  <li>-A/Math/Seminars</li>
+  <li>-A/Math/SRC</li>
+  <li>-A/Research</li>
+  <li>-A/Research/Editing</li>
+  <li>-A/Research/Reading</li>
+  <li>-A/Research/Talks</li>
+  <li>-A/Research/Writing</li>
+  <li>-A/Teaching</li>
+  <li>-A/Teaching/[redacted]</li>
+  <li>-P [[&#x50;ersonal]]</li>
+  <li>-P/Apartment</li>
+  <li>-P/Apartment/Cleaning</li>
+  <li>-P/Computer</li>
+  <li>-P/Computer/[redacted]</li>
+  <li>-P/Computer/OSX</li>
+  <li>-P/Computer/RTM Tag Cloud</li>
+  <li>-P/Computer/TeX</li>
+  <li>-P/Cooking</li>
+  <li>-P/Cooking/Meals</li>
+  <li>-P/Gardening</li>
+  <li>-P/Gardening/Worm Bin</li>
+  <li>-P/Maintenance</li>
+  <li>-P/Maintenance/Health</li>
+  <li>-P/Maintenance/Vehicles</li>
+  <li>-P/Recreation</li>
+  <li>-P/Recreation/[redacted]</li>
+  <li>-P/Recreation/Music</li>
+  <li>-P/Recreation/Reading</li>
+  <li>-P/Recreation/Wii</li>
+  <li>-PR [[&#x50;rofessional]]</li>
+  <li>-PR/[redacted]</li>
+  <li>-PR/Tutoring</li>
+  <li>Lent/Borrowed</li>
+  <li>Sent</li>
+</ul>
+
+Tags (each of which is associated to at least one active task, so that it is displayed in the cloud):
+<ul>
+  <li>@email</li> 
+  <li>@errand</li>
+  <li>@garden</li>
+  <li>@online</li>
+  <li>@phone</li>
+  <li>@reading</li>
+  <li>@weekend</li>
+  <li>@work</li>
+  <li>_admin</li> 
+  <li>_brainstorm</li>
+  <li>_chores</li>
+  <li>_eco</li>
+  <li>_website</li>
+  <li>design</li>
+  <li>financial</li> 
+  <li>gifts</li>
+  <li>goal</li>
+  <li>maybe</li>
+  <li>next</li>
+  <li>purchases</li>
+  <li>software</li>
+  <li>wait</li>
+</ul>
+
+Locations (as with tags, associated to at least one active task):
+<ul>
+  <li>@apt</li>
+  <li>@cal-ave</li>
+  <li>@dept</li>
+</ul>
+
+
+The section configuration in the script is the same as that used to generate the tag cloud above.
+

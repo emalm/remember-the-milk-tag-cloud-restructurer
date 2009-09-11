@@ -1,0 +1,25 @@
+I've been using my own variation on masnare's <a href="http://userscripts.org/scripts/show/25046">Tag Cloud Colorizer script</a> since mid-2008, and I've finally gotten around to cleaning it up and posting it at <a href="http://userscripts.org/scripts/show/57544">http://userscripts.org/scripts/show/57544</a>. It's called Remember the Milk: Tag Cloud Restructurer, and here's my tag cloud when running it:
+
+<a href="http://tinypic.com" target="_blank"><img src="http://i32.tinypic.com/10xy6p4.jpg" alt="Image and video hosting by TinyPic"></a>
+
+The list, location, and tag names that generate it are located in the description on the <a href="http://userscripts.org/scripts/show/57544">userscripts.org page</a>, so for the sake of brevity I won't duplicate them here.
+
+The major ideas behind the restructuring are the same as in masnare's script, but the script now includes some additional functionality, as well as some administrative differences. Specifically, one can:
+* Group related lists, locations, and tags by prefix (as in the original script)
+* Rename individual tags
+* Generate a hierarchy of tags dynamically, to arbitrary depth
+* Rename individual tags in the hierarchy (ex: P to Personal)
+* Recolor tag sections
+* Reorder sections after processing
+* Hide ordinary list tabs (since they're already in the tag cloud anyway)
+I've also included code adapted from the <a href="http://userscripts.org/scripts/show/26057">RememberTheMilkEnhanced script</a> to hide the cow, to adjust the status bar position accordingly. The code to hide the ordinary list tabs is also from that script.
+
+If you're used to masnare's script, the key differences are as follows:
+* The original sections are now the sectionFlat objects.
+* No additional "system" tags (such as @__context) are needed, as the header tags are created by the script itself.
+* There is now a dictionary-based system for global and per-section preferences.
+These changes should help eliminate some of the redundancies I encountered when first using the original script, since there's no longer a need for special organizational tags for the flat-section headers, nor special system tasks to host the tags. The presentation options in the original script are still mostly there, although they have largely been renamed and reorganized.
+
+This is my first real experience with JavaScript, so I'd definitely appreciate any feedback, including bug reports, suggestions, and feature requests. I've also tested this only on Firefox 3.5.* with Greasemonkey, so if it breaks under older Firefoxes or under Opera (or even under others' installations of Firefox 3.5.*), that would be good for me to know.
+
+@masnare: Thanks very much for your original script! It's been a genuine pleasure to work with it.

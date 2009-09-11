@@ -1,0 +1,22 @@
+2,7c2,7
+< // @name           RTM: Tag Cloud Restructurer (emalminator)
+< // @namespace      http://www.rememberthemilk.com/home/emalminator/*
+< // @include        http://www.rememberthemilk.com/home/emalminator/*
+< // @include        https://www.rememberthemilk.com/home/emalminator/*
+< // @include        http://*.www.rememberthemilk.com/home/emalminator/*
+< // @include        https://*.www.rememberthemilk.com/home/emalminator/*
+---
+> // @name           RTM: Tag Cloud Restructurer
+> // @namespace      http://www.rememberthemilk.com/home/*
+> // @include        http://www.rememberthemilk.com/home/*
+> // @include        https://www.rememberthemilk.com/home/*
+> // @include        http://*.www.rememberthemilk.com/home/*
+> // @include        https://*.www.rememberthemilk.com/home/*
+111c111
+< var emalminator_sections = [
+---
+> var my_sections = [
+146c146
+< var sections = emalminator_sections;
+---
+> var sections = my_sections;
