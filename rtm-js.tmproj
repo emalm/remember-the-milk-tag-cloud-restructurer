@@ -53,14 +53,14 @@
 				<dict>
 					<key>filename</key>
 					<string>rtm-tag-cloud-restructurer/rtm_tcr_em_to_general.diff</string>
-					<key>selected</key>
-					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
 					<key>lastUsed</key>
-					<date>2009-09-11T21:10:27Z</date>
+					<date>2010-02-08T21:18:11Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
