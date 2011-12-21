@@ -325,7 +325,7 @@ sectionFlat.prototype.addTag = function(tag) {
 	
 	// insert thin space (\u2009) so that tag spans break across lines
 	// thin space may not work with Firefox 2
-	this.tagDiv.appendChild(document.createTextNode('\u2009'));
+	this.tagDiv.appendChild(document.createTextNode('\u200B\u2009'));
 
 	// set tag color
 	tag.style.color = this.color;
@@ -586,7 +586,7 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 				
 				if (i > 0) {
 					// add central dot to separate leaf nodes
-					var sepnode = document.createTextNode("\u2009\xb7\u2009");
+					var sepnode = document.createTextNode("\u200B\u2009\xb7\u200B\u2009");
 					node.div.appendChild(sepnode);
 				}
 				

@@ -6,76 +6,6 @@
 	<array>
 		<dict>
 			<key>children</key>
-			<array/>
-			<key>expanded</key>
-			<true/>
-			<key>name</key>
-			<string>in-firefox-gm</string>
-		</dict>
-		<dict>
-			<key>children</key>
-			<array>
-				<dict>
-					<key>filename</key>
-					<string>rtm.2.28-mod.js</string>
-					<key>lastUsed</key>
-					<date>2008-09-19T06:20:26Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>remember_the_milk_-_tag_/remember_the_milk_-_tag_.user.js</string>
-					<key>lastUsed</key>
-					<date>2009-09-11T21:10:28Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm_projects/rtm_projects.user.js</string>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rememberthemilkenhanced/rememberthemilkenhanced.user.js</string>
-				</dict>
-			</array>
-			<key>expanded</key>
-			<true/>
-			<key>name</key>
-			<string>projects/rtm-js</string>
-		</dict>
-		<dict>
-			<key>children</key>
-			<array>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
-					<key>lastUsed</key>
-					<date>2009-09-11T21:10:24Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_em_to_general.diff</string>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
-					<key>lastUsed</key>
-					<date>2010-02-08T21:18:11Z</date>
-					<key>selected</key>
-					<true/>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.recipes.user.js</string>
-					<key>lastUsed</key>
-					<date>2009-09-11T18:49:52Z</date>
-				</dict>
-			</array>
-			<key>expanded</key>
-			<true/>
-			<key>name</key>
-			<string>projects/code</string>
-		</dict>
-		<dict>
-			<key>children</key>
 			<array>
 				<dict>
 					<key>filename</key>
@@ -101,14 +31,119 @@
 			<key>name</key>
 			<string>docs</string>
 		</dict>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>expanded</key>
+			<true/>
+			<key>name</key>
+			<string>in-firefox-gm</string>
+		</dict>
+		<dict>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
+					<key>lastUsed</key>
+					<date>2011-12-21T21:38:53Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_em_to_general.diff</string>
+					<key>lastUsed</key>
+					<date>2011-12-21T21:20:41Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.recipes.user.js</string>
+					<key>lastUsed</key>
+					<date>2009-09-11T18:49:52Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
+					<key>lastUsed</key>
+					<date>2011-12-21T21:39:02Z</date>
+					<key>selected</key>
+					<true/>
+				</dict>
+			</array>
+			<key>expanded</key>
+			<true/>
+			<key>name</key>
+			<string>projects/code</string>
+		</dict>
+		<dict>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>filename</key>
+					<string>remember_the_milk_-_tag_/remember_the_milk_-_tag_.user.js</string>
+					<key>lastUsed</key>
+					<date>2009-09-11T21:10:28Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rememberthemilkenhanced/rememberthemilkenhanced.user.js</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm.2.28-mod.js</string>
+					<key>lastUsed</key>
+					<date>2008-09-19T06:20:26Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm_projects/rtm_projects.user.js</string>
+				</dict>
+			</array>
+			<key>expanded</key>
+			<true/>
+			<key>name</key>
+			<string>projects/rtm-js</string>
+		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict/>
 	<key>showFileHierarchyDrawer</key>
+	<false/>
+	<key>showFileHierarchyPanel</key>
 	<true/>
+	<key>treeState</key>
+	<dict>
+		<key>docs</key>
+		<dict>
+			<key>isExpanded</key>
+			<true/>
+			<key>subItems</key>
+			<dict/>
+		</dict>
+		<key>in-firefox-gm</key>
+		<dict>
+			<key>isExpanded</key>
+			<true/>
+			<key>subItems</key>
+			<dict/>
+		</dict>
+		<key>projects/code</key>
+		<dict>
+			<key>isExpanded</key>
+			<true/>
+			<key>subItems</key>
+			<dict/>
+		</dict>
+		<key>projects/rtm-js</key>
+		<dict>
+			<key>isExpanded</key>
+			<true/>
+			<key>subItems</key>
+			<dict/>
+		</dict>
+	</dict>
 	<key>windowFrame</key>
-	<string>{{0, 4}, {534, 874}}</string>
+	<string>{{0, 4}, {743, 874}}</string>
 </dict>
 </plist>
