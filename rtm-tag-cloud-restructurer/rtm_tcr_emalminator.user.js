@@ -1046,7 +1046,7 @@ RemoveListHandler = function() {
 		var tab = ul.childNodes[i];
 		var txt = tab.childNodes[0].innerHTML;
 		if (tab.className.indexOf("xtab_smartlist") == -1 &&
-		 	tab.className.indexOf("xtab_selectted") == -1 && 
+		 	//tab.className.indexOf("xtab_selectted") == -1 && 
 			!doNotRemoveLists.contains(txt))
 		{
 			//tab.setAttribute('class','xtab_smartlist');
