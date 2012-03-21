@@ -1,0 +1,19 @@
+--- rtm_tcr_unittest.user.js	2012-03-21 12:03:36.000000000 -0400
++++ rtm_tcr.user.js	2012-01-18 16:02:46.000000000 -0500
+@@ -1,10 +1,10 @@
+ // ==UserScript==
+-// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
+-// @namespace      http://www.rememberthemilk.com/home/rtm.tcr.unittest/*
+-// @include        http://www.rememberthemilk.com/home/rtm.tcr.unittest/*
+-// @include        https://www.rememberthemilk.com/home/rtm.tcr.unittest/*
+-// @include        http://*.www.rememberthemilk.com/home/rtm.tcr.unittest/*
+-// @include        https://*.www.rememberthemilk.com/home/rtm.tcr.unittest/*
++// @name           RTM: Tag Cloud Restructurer
++// @namespace      http://www.rememberthemilk.com/home/*
++// @include        http://www.rememberthemilk.com/home/*
++// @include        https://www.rememberthemilk.com/home/*
++// @include        http://*.www.rememberthemilk.com/home/*
++// @include        https://*.www.rememberthemilk.com/home/*
+ // ==/UserScript==
+ 
+ /*

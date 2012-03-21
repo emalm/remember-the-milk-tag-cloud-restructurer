@@ -1,22 +1,37 @@
-2,7c2,7
-< // @name           RTM: Tag Cloud Restructurer (emalminator)
-< // @namespace      http://www.rememberthemilk.com/home/emalminator/*
-< // @include        http://www.rememberthemilk.com/home/emalminator/*
-< // @include        https://www.rememberthemilk.com/home/emalminator/*
-< // @include        http://*.www.rememberthemilk.com/home/emalminator/*
-< // @include        https://*.www.rememberthemilk.com/home/emalminator/*
----
-> // @name           RTM: Tag Cloud Restructurer
-> // @namespace      http://www.rememberthemilk.com/home/*
-> // @include        http://www.rememberthemilk.com/home/*
-> // @include        https://www.rememberthemilk.com/home/*
-> // @include        http://*.www.rememberthemilk.com/home/*
-> // @include        https://*.www.rememberthemilk.com/home/*
-111c111
-< var emalminator_sections = [
----
-> var my_sections = [
-146c146
-< var sections = emalminator_sections;
----
-> var sections = my_sections;
+--- rtm_tcr_emalminator.user.js	2012-01-18 16:02:38.000000000 -0500
++++ rtm_tcr.user.js	2012-01-18 16:02:46.000000000 -0500
+@@ -1,10 +1,10 @@
+ // ==UserScript==
+-// @name           RTM: Tag Cloud Restructurer (emalminator)
+-// @namespace      http://www.rememberthemilk.com/home/emalminator/*
+-// @include        http://www.rememberthemilk.com/home/emalminator/*
+-// @include        https://www.rememberthemilk.com/home/emalminator/*
+-// @include        http://*.www.rememberthemilk.com/home/emalminator/*
+-// @include        https://*.www.rememberthemilk.com/home/emalminator/*
++// @name           RTM: Tag Cloud Restructurer
++// @namespace      http://www.rememberthemilk.com/home/*
++// @include        http://www.rememberthemilk.com/home/*
++// @include        https://www.rememberthemilk.com/home/*
++// @include        http://*.www.rememberthemilk.com/home/*
++// @include        https://*.www.rememberthemilk.com/home/*
+ // ==/UserScript==
+ 
+ /*
+@@ -108,7 +108,7 @@
+ // - ex: if '@' before '@_', '@' will grab all tags starting with '@'
+ // overwrite per-section preferences here, too;
+ 
+-var emalminator_sections = [
++var my_sections = [
+ 	{ prefix: 'inbox', type: sectionRename, 
+ 	                   displayname: 'Unsorted', 
+ 	                   color: 'orange' },
+@@ -143,7 +143,7 @@
+ ];
+ 
+ // pick the above section list as sections to process
+-var sections = emalminator_sections;
++var sections = my_sections;
+ 
+ /*
+  * End of configuration section

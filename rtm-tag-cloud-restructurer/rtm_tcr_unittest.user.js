@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name           RTM: Tag Cloud Restructurer
-// @namespace      http://www.rememberthemilk.com/home/*
-// @include        http://www.rememberthemilk.com/home/*
-// @include        https://www.rememberthemilk.com/home/*
-// @include        http://*.www.rememberthemilk.com/home/*
-// @include        https://*.www.rememberthemilk.com/home/*
+// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
+// @namespace      http://www.rememberthemilk.com/home/rtm.tcr.unittest/*
+// @include        http://www.rememberthemilk.com/home/rtm.tcr.unittest/*
+// @include        https://www.rememberthemilk.com/home/rtm.tcr.unittest/*
+// @include        http://*.www.rememberthemilk.com/home/rtm.tcr.unittest/*
+// @include        https://*.www.rememberthemilk.com/home/rtm.tcr.unittest/*
 // ==/UserScript==
 
 /*
@@ -109,37 +109,57 @@ var sectionprefs = {
 // overwrite per-section preferences here, too;
 
 var my_sections = [
-	{ prefix: 'inbox', type: sectionRename, 
-	                   displayname: 'Unsorted', 
-	                   color: 'orange' },
+	{ prefix: 'inbox',  type: sectionRename, 
+	                    displayname: 'Unsorted', 
+	                    color: 'orange' 
+	},
 
-	{ prefix: 'next', type: sectionRename, 
-	                  displayname: 'Next Actions', 
-	                  color: 'red' },
+	{ prefix: 'next',   type: sectionRename, 
+	                    displayname: 'Next Actions', 
+	                    color: 'red' 
+	},
 
-	{ prefix: 'goal', type: sectionRename, 
-	                  displayname: 'Goals', 
-	                  color: 'black' },
+	{ prefix: 'goal',   type: sectionRename, 
+	                    displayname: 'Goals', 
+	                    color: 'black' 
+	},
 
-	{ prefix: '_', type: sectionFlat, 
-	               displayname: 'Responsibilities', 
-	               color: '#444444' },
+	{ prefix: '_',      type: sectionFlat, 
+	                    displayname: 'Responsibilities', 
+	                    color: '#444444' 
+	},
 
-	{ prefix: '@', type: sectionFlat, 
-	               displayname: 'Contexts', 
-	               color: 'blue' },
+	{ prefix: '@',      type: sectionFlat, 
+	                    displayname: 'Contexts', 
+	                    color: 'blue' 
+	},
 	
-	{ prefix: '-', type: sectionHierarchy, 
-	               colors: ['green', 'purple', 'brown'] },
+	// 2-level hierarchy
+	{ prefix: '--',     type: sectionHierarchy, 
+	                    depth: 2,
+	                    sizes: ['6', '4'],
+	                    colors: ['green', 'purple', 'brown'] 
+	},
 	
-	{ prefix: 'maybe', type: sectionRename, 
-	                   displayname: 'Someday/Maybe', 
-	                   color: 'CornflowerBlue' },
+	// 3-level hierarchy
+	{ prefix: '-',      type: sectionHierarchy, 
+	                    colors: ['green', 'purple', 'brown'] 
+	},
+	
+	// 4-level hierarchy
+	{ prefix: '+',      type: sectionHierarchy, 
+	                    depth: 4,
+	                    sizes: ['6', '4', '3', '1'],
+	                    colors: ['green', 'purple', 'brown'] },
+
+	{ prefix: 'maybe',  type: sectionRename, 
+	                    displayname: 'Someday/Maybe', 
+	                    color: 'CornflowerBlue' },
 
     // catch-all section for unprocessed lists and tags
-	{ prefix: '', type: sectionFlat, 
-	              displayname: 'Miscellaneous', 
-	              color: 'gray' }
+	{ prefix: '',       type: sectionFlat, 
+	                    displayname: 'Miscellaneous', 
+	                    color: 'gray' }
 ];
 
 // pick the above section list as sections to process
@@ -516,15 +536,24 @@ sectionHierarchy.prototype.assembleDiv = function() {
 		
 		// draw borders around each top-level section
 		if (globalprefs.drawSectionBorders) {
-			childDiv.style.borderTop = '1px solid';
-			childDiv.style.borderLeft = '1px solid';
-			childDiv.style.borderRight = '1px solid';
-			childDiv.style.borderColor = globalprefs.borderColor;
-			childDiv.style.paddingLeft = '2px';			
+			// make a div just for the border
+			var borderDiv = document.createElement('div');
+			borderDiv.style.borderTop = '1px solid';
+			borderDiv.style.borderLeft = '1px solid';
+			borderDiv.style.borderRight = '1px solid';
+			borderDiv.style.borderColor = globalprefs.borderColor;
+			borderDiv.style.paddingLeft = '2px';
+			
+			// add the top-level node's div to the border div
+			borderDiv.appendChild(childDiv);
+			
+			// add the border div to the hierarchy section div
+			topDiv.appendChild(borderDiv);		
 		}
-		
-		// add the top-level section
-		topDiv.appendChild(childDiv);
+		else {
+			// just add the top-level node's div to the hierarchy div
+			topDiv.appendChild(childDiv);
+		}
 	}
 }
 
@@ -560,6 +589,7 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 	setTagSize(node.tag, this.sizes[depth - 1]);
 
 	// TODO: adjust style for divs of leaf nodes?
+	// TODO: this might not be doing anything
 	if (depth == this.depth) {
 		// at the lowest depth in hierarchy
 		// so display tags inline
