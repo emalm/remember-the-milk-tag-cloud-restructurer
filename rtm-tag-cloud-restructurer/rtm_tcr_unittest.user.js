@@ -133,19 +133,19 @@ var my_sections = [
 	                    displayname: 'Contexts', 
 	                    color: 'blue' 
 	},
-	
+
 	// 2-level hierarchy
 	{ prefix: '--',     type: sectionHierarchy, 
 	                    depth: 2,
 	                    sizes: ['6', '4'],
 	                    colors: ['green', 'purple', 'brown'] 
 	},
-	
+
 	// 3-level hierarchy
 	{ prefix: '-',      type: sectionHierarchy, 
 	                    colors: ['green', 'purple', 'brown'] 
 	},
-	
+
 	// 4-level hierarchy
 	{ prefix: '+',      type: sectionHierarchy, 
 	                    depth: 4,
@@ -157,7 +157,7 @@ var my_sections = [
 	                    color: 'CornflowerBlue' 
 	},
 
-    // catch-all section for unprocessed lists and tags
+	// catch-all section for unprocessed lists and tags
 	{ prefix: '',       type: sectionFlat, 
 	                    displayname: 'Miscellaneous', 
 	                    color: 'gray' 

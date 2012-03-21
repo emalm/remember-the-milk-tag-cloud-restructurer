@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-03-21 14:23:05.000000000 -0400
-+++ rtm_tcr.user.js	2012-03-21 14:22:46.000000000 -0400
+--- rtm_tcr_unittest.user.js	2012-03-21 14:52:29.000000000 -0400
++++ rtm_tcr.user.js	2012-03-21 14:50:21.000000000 -0400
 @@ -1,10 +1,10 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -20,19 +20,19 @@
 @@ -134,24 +134,10 @@
  	                    color: 'blue' 
  	},
- 	
+ 
 -	// 2-level hierarchy
 -	{ prefix: '--',     type: sectionHierarchy, 
 -	                    depth: 2,
 -	                    sizes: ['6', '4'],
 -	                    colors: ['green', 'purple', 'brown'] 
 -	},
--	
+-
 -	// 3-level hierarchy
  	{ prefix: '-',      type: sectionHierarchy, 
  	                    colors: ['green', 'purple', 'brown'] 
  	},
- 	
+ 
 -	// 4-level hierarchy
 -	{ prefix: '+',      type: sectionHierarchy, 
 -	                    depth: 4,
