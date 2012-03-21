@@ -109,37 +109,45 @@ var sectionprefs = {
 // overwrite per-section preferences here, too;
 
 var my_sections = [
-	{ prefix: 'inbox', type: sectionRename, 
-	                   displayname: 'Unsorted', 
-	                   color: 'orange' },
+	{ prefix: 'inbox',  type: sectionRename, 
+	                    displayname: 'Unsorted', 
+	                    color: 'orange' 
+	},
 
-	{ prefix: 'next', type: sectionRename, 
-	                  displayname: 'Next Actions', 
-	                  color: 'red' },
+	{ prefix: 'next',   type: sectionRename, 
+	                    displayname: 'Next Actions', 
+	                    color: 'red' 
+	},
 
-	{ prefix: 'goal', type: sectionRename, 
-	                  displayname: 'Goals', 
-	                  color: 'black' },
+	{ prefix: 'goal',   type: sectionRename, 
+	                    displayname: 'Goals', 
+	                    color: 'black' 
+	},
 
-	{ prefix: '_', type: sectionFlat, 
-	               displayname: 'Responsibilities', 
-	               color: '#444444' },
+	{ prefix: '_',      type: sectionFlat, 
+	                    displayname: 'Responsibilities', 
+	                    color: '#444444' 
+	},
 
-	{ prefix: '@', type: sectionFlat, 
-	               displayname: 'Contexts', 
-	               color: 'blue' },
+	{ prefix: '@',      type: sectionFlat, 
+	                    displayname: 'Contexts', 
+	                    color: 'blue' 
+	},
 	
-	{ prefix: '-', type: sectionHierarchy, 
-	               colors: ['green', 'purple', 'brown'] },
+	{ prefix: '-',      type: sectionHierarchy, 
+	                    colors: ['green', 'purple', 'brown'] 
+	},
 	
-	{ prefix: 'maybe', type: sectionRename, 
-	                   displayname: 'Someday/Maybe', 
-	                   color: 'CornflowerBlue' },
+	{ prefix: 'maybe',  type: sectionRename, 
+	                    displayname: 'Someday/Maybe', 
+	                    color: 'CornflowerBlue' 
+	},
 
     // catch-all section for unprocessed lists and tags
-	{ prefix: '', type: sectionFlat, 
-	              displayname: 'Miscellaneous', 
-	              color: 'gray' }
+	{ prefix: '',       type: sectionFlat, 
+	                    displayname: 'Miscellaneous', 
+	                    color: 'gray' 
+	}
 ];
 
 // pick the above section list as sections to process

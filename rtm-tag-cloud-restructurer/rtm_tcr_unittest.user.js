@@ -154,12 +154,14 @@ var my_sections = [
 
 	{ prefix: 'maybe',  type: sectionRename, 
 	                    displayname: 'Someday/Maybe', 
-	                    color: 'CornflowerBlue' },
+	                    color: 'CornflowerBlue' 
+	},
 
     // catch-all section for unprocessed lists and tags
 	{ prefix: '',       type: sectionFlat, 
 	                    displayname: 'Miscellaneous', 
-	                    color: 'gray' }
+	                    color: 'gray' 
+	}
 ];
 
 // pick the above section list as sections to process
