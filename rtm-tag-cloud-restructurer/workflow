@@ -15,13 +15,13 @@ Safari:
 
 * Diff rtm_tcr_unittest.user.js to rtm_tcr.user.js
 diff command: diff -u rtm_tcr_unittest.user.js rtm_tcr.user.js > rtm_tcr_unittest_to_general.diff
-patch command: patch -u -i rtm_tcr_unittest_to_general.diff rtm_tcr_unittest.user.js -o rtm_tcr.user.js
-
  - modify diff so changes only Greasemonkey context, section dictionary
+
+patch command: patch -u -i rtm_tcr_unittest_to_general.diff -o rtm_tcr.user.js
 
 * Diff rtm_tcr.user.js to rtm_tcr_emalminator.user.js
 diff command: diff -u rtm_tcr.user.js rtm_tcr_emalminator.user.js > rtm_tcr_general_to_em.diff
-patch command: patch -u -i rtm_tcr_general_to_em.diff rtm_tcr.user.js -o rtm_tcr_emalminator.user.js
  - maintain diff so changes only Greasemonkey context, section dictionary (if necessary)
- - test on personal account
 
+patch command: patch -u -i rtm_tcr_general_to_em.diff -o rtm_tcr_emalminator.user.js
+- once emalminator script patched, test on personal account
