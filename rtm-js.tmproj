@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
+	<string>rtm-tag-cloud-restructurer/notes</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,7 +13,7 @@
 					<key>filename</key>
 					<string>rtm-tag-cloud-restructurer/rtm_tcr_description</string>
 					<key>lastUsed</key>
-					<date>2012-01-13T16:13:35Z</date>
+					<date>2012-03-26T14:53:20Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -48,31 +48,7 @@
 					<key>filename</key>
 					<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-21T20:23:00Z</date>
-					<key>selected</key>
-					<true/>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest_to_general.diff</string>
-					<key>lastUsed</key>
-					<date>2012-03-21T19:03:54Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-03-21T18:54:18Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-03-21T18:54:58Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_general_to_em.diff</string>
+					<date>2012-03-26T14:52:57Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -82,9 +58,51 @@
 				</dict>
 				<dict>
 					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/iphone-keyboard-characters</string>
+					<key>lastUsed</key>
+					<date>2012-03-27T05:56:48Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/mac-keyboard-characters</string>
+					<key>lastUsed</key>
+					<date>2012-03-27T05:29:25Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/notes</string>
+					<key>lastUsed</key>
+					<date>2012-03-27T05:56:48Z</date>
+					<key>selected</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
+					<key>lastUsed</key>
+					<date>2012-03-26T20:42:55Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_general_to_em.diff</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest.user.js</string>
+					<key>lastUsed</key>
+					<date>2012-03-27T05:35:41Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest_to_general.diff</string>
+					<key>lastUsed</key>
+					<date>2012-03-21T19:03:54Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
 					<string>rtm-tag-cloud-restructurer/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-03-21T20:23:00Z</date>
+					<date>2012-03-26T20:42:54Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -126,6 +144,48 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
+		<key>rtm-tag-cloud-restructurer/iphone-keyboard-characters</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>1</integer>
+				<key>line</key>
+				<integer>21</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>rtm-tag-cloud-restructurer/mac-keyboard-characters</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>-1</integer>
+		</dict>
+		<key>rtm-tag-cloud-restructurer/notes</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>23</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>rtm-tag-cloud-restructurer/rtm_tcr.user.js</key>
 		<dict>
 			<key>caret</key>
@@ -140,6 +200,20 @@
 			<key>firstVisibleLine</key>
 			<integer>465</integer>
 		</dict>
+		<key>rtm-tag-cloud-restructurer/rtm_tcr_description</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>66</integer>
+		</dict>
 		<key>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</key>
 		<dict>
 			<key>caret</key>
@@ -152,21 +226,21 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>493</integer>
+			<integer>122</integer>
 		</dict>
 		<key>rtm-tag-cloud-restructurer/rtm_tcr_unittest.user.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>159</integer>
+				<integer>126</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>113</integer>
+			<integer>109</integer>
 		</dict>
 		<key>rtm-tag-cloud-restructurer/rtm_tcr_unittest_to_general.diff</key>
 		<dict>
@@ -182,13 +256,32 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>rtm-tag-cloud-restructurer/workflow</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>3</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest.user.js</string>
+		<string>rtm-tag-cloud-restructurer/workflow</string>
 		<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest_to_general.diff</string>
 		<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
+		<string>rtm-tag-cloud-restructurer/rtm_tcr_description</string>
 		<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
+		<string>rtm-tag-cloud-restructurer/notes</string>
+		<string>rtm-tag-cloud-restructurer/iphone-keyboard-characters</string>
+		<string>rtm-tag-cloud-restructurer/mac-keyboard-characters</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
