@@ -21,4 +21,3 @@ Testing:
  - works with ¶ (U+00B6 -> UTF-8 C2 B6)
  - works with ざ (U+3056 -> UTF-8 E3 81 96)
 
-* catalog all the characters
