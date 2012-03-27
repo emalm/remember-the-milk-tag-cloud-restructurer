@@ -1,0 +1,24 @@
+Allowed special characters in tags:
+@-_+.
+
+Not allowed:
+!#$%^&*()=[]{}|\:;/?'",<>`~
+
+Special characters (Mac):
+valid: 
+- optn: ¡™£¢∞§¶•ªº–≠ œ∑®†¥øπ“‘« åß∂ƒ©˙∆˚¬…æ Ω≈ç√∫µ≤≥
+notes: Ω lowercased to ω
+- optn+shift: ⁄€‹›ﬁﬂ‡°·‚—± Œ„´‰ˇÁ¨ˆØ∏”’» ÅÍÎÏ˝ÓÔÒÚÆ ¸˛Ç◊ı˜Â¯˘¿
+notes: ÁØÅÍÎÏÓÔÒÚÆÇÂ all lowercased
+
+invalid: 
+- optn-shift: ` (same as ordinary `)
+
+
+Testing:
+- looks like tag special characters stored as UTF-8 internally
+- specifying strings as UTF-8 in JS seems to match
+ - works with ¶ (U+00B6 -> UTF-8 C2 B6)
+ - works with ざ (U+3056 -> UTF-8 E3 81 96)
+
+* catalog all the characters
