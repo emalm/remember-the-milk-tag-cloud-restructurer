@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>rtm-tag-cloud-restructurer/notes</string>
+	<string>rtm-tag-cloud-restructurer/iphone-keyboard-characters</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -46,21 +46,11 @@
 			<array>
 				<dict>
 					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-03-26T14:52:57Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.recipes.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-01-13T16:12:21Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
 					<string>rtm-tag-cloud-restructurer/iphone-keyboard-characters</string>
 					<key>lastUsed</key>
-					<date>2012-03-27T05:56:48Z</date>
+					<date>2012-03-27T18:55:17Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -72,9 +62,19 @@
 					<key>filename</key>
 					<string>rtm-tag-cloud-restructurer/notes</string>
 					<key>lastUsed</key>
-					<date>2012-03-27T05:56:48Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2012-03-27T18:55:17Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
+					<key>lastUsed</key>
+					<date>2012-03-26T14:52:57Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.recipes.user.js</string>
+					<key>lastUsed</key>
+					<date>2012-01-13T16:12:21Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -151,12 +151,28 @@
 				<key>column</key>
 				<integer>1</integer>
 				<key>line</key>
-				<integer>21</integer>
+				<integer>14</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>79</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>14</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>1</integer>
+				<key>line</key>
+				<integer>14</integer>
+			</dict>
 		</dict>
 		<key>rtm-tag-cloud-restructurer/mac-keyboard-characters</key>
 		<dict>
