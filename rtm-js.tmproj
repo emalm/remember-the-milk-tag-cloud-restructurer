@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>notes/workflow</string>
+	<string>notes/iphone-keyboard-characters</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -34,27 +34,27 @@
 					<key>filename</key>
 					<string>notes/char-notes</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T02:50:56Z</date>
+					<date>2012-03-28T17:16:45Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>notes/iphone-keyboard-characters</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T03:16:47Z</date>
+					<date>2012-03-28T17:16:45Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>notes/mac-keyboard-characters</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T02:47:50Z</date>
+					<date>2012-03-28T16:10:24Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T03:18:35Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2012-03-28T03:28:37Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -115,19 +115,19 @@
 					<key>filename</key>
 					<string>scripts/rtm_tcr_emalminator.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T03:18:35Z</date>
+					<date>2012-03-28T15:48:35Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_example.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T02:51:03Z</date>
+					<date>2012-03-28T15:48:33Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_unittest.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T02:39:47Z</date>
+					<date>2012-03-28T15:48:39Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -145,9 +145,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>66</integer>
+				<integer>8</integer>
 				<key>line</key>
-				<integer>25</integer>
+				<integer>11</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -173,14 +173,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>39</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>281</integer>
 			</dict>
+			<key>columnSelection</key>
+			<true/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>227</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>15</integer>
+				<key>line</key>
+				<integer>265</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>39</integer>
+				<key>line</key>
+				<integer>281</integer>
+			</dict>
 		</dict>
 		<key>notes/workflow</key>
 		<dict>
@@ -212,74 +228,12 @@
 				<integer>26</integer>
 			</dict>
 		</dict>
-		<key>scripts/rtm_tcr_emalminator.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>36</integer>
-				<key>line</key>
-				<integer>133</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>108</integer>
-		</dict>
-		<key>scripts/rtm_tcr_example.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>49</integer>
-				<key>line</key>
-				<integer>17</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>scripts/rtm_tcr_unittest.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>71</integer>
-				<key>line</key>
-				<integer>2</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>55</integer>
-				<key>line</key>
-				<integer>2</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>71</integer>
-				<key>line</key>
-				<integer>2</integer>
-			</dict>
-		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>notes/mac-keyboard-characters</string>
 		<string>notes/iphone-keyboard-characters</string>
-		<string>scripts/rtm_tcr_emalminator.user.js</string>
 		<string>notes/char-notes</string>
-		<string>scripts/rtm_tcr_example.user.js</string>
-		<string>notes/workflow</string>
-		<string>scripts/rtm_tcr_unittest.user.js</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
