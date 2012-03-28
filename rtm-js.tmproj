@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>currentDocument</key>
-	<string>notes/iphone-keyboard-characters</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -34,21 +32,21 @@
 					<key>filename</key>
 					<string>notes/char-notes</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T17:16:45Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>notes/iphone-keyboard-characters</string>
-					<key>lastUsed</key>
-					<date>2012-03-28T17:16:45Z</date>
+					<date>2012-03-28T20:22:54Z</date>
 					<key>selected</key>
 					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
+					<string>notes/iphone-keyboard-characters</string>
+					<key>lastUsed</key>
+					<date>2012-03-28T20:22:49Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
 					<string>notes/mac-keyboard-characters</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T16:10:24Z</date>
+					<date>2012-03-28T20:22:51Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -140,64 +138,6 @@
 	<integer>253</integer>
 	<key>metaData</key>
 	<dict>
-		<key>notes/char-notes</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>8</integer>
-				<key>line</key>
-				<integer>11</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>notes/iphone-keyboard-characters</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>2</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>notes/mac-keyboard-characters</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>39</integer>
-				<key>line</key>
-				<integer>281</integer>
-			</dict>
-			<key>columnSelection</key>
-			<true/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>227</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>15</integer>
-				<key>line</key>
-				<integer>265</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>39</integer>
-				<key>line</key>
-				<integer>281</integer>
-			</dict>
-		</dict>
 		<key>notes/workflow</key>
 		<dict>
 			<key>caret</key>
@@ -229,12 +169,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>openDocuments</key>
-	<array>
-		<string>notes/mac-keyboard-characters</string>
-		<string>notes/iphone-keyboard-characters</string>
-		<string>notes/char-notes</string>
-	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
 	<key>showFileHierarchyPanel</key>
