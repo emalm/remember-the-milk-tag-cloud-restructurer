@@ -20,4 +20,7 @@ Testing:
 - specifying strings as UTF-8 in JS seems to match
  - works with ¶ (U+00B6 -> UTF-8 C2 B6)
  - works with ざ (U+3056 -> UTF-8 E3 81 96)
-
+- byte sequences: tests with code for '¡'
+ - specifying '\xc2\xa1' utf-8 sequence does not match tag '¡tag'
+ - specifying '\u00a1' code point does match
+ - specifying '¡', encoded in file as utf-8 (\xc2\xa1), does match

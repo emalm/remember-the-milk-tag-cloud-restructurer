@@ -1,5 +1,5 @@
---- rtm_tcr.user.js	2012-03-21 14:50:21.000000000 -0400
-+++ rtm_tcr_emalminator.user.js	2012-03-21 14:49:12.000000000 -0400
+--- rtm_tcr.user.js	2012-03-27 22:22:40.000000000 -0400
++++ rtm_tcr_emalminator.user.js	2012-03-27 23:18:25.000000000 -0400
 @@ -1,10 +1,10 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer
@@ -26,7 +26,19 @@
  	{ prefix: 'inbox',  type: sectionRename, 
  	                    displayname: 'Unsorted', 
  	                    color: 'orange' 
-@@ -151,7 +151,7 @@
+@@ -129,6 +129,11 @@
+ 	                    color: '#444444' 
+ 	},
+ 
++	{ prefix: '¡',      type: sectionFlat, 
++	                    displayname: 'Warnings', 
++	                    color: 'fuchsia' 
++	},
++
+ 	{ prefix: '@',      type: sectionFlat, 
+ 	                    displayname: 'Contexts', 
+ 	                    color: 'blue' 
+@@ -151,7 +156,7 @@
  ];
  
  // pick the above section list as sections to process
