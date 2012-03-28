@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>rtm-tag-cloud-restructurer/iphone-keyboard-characters</string>
+	<string>notes/mac-keyboard-characters</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -11,21 +11,38 @@
 			<array>
 				<dict>
 					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_description</string>
-					<key>lastUsed</key>
-					<date>2012-03-26T14:53:20Z</date>
+					<string>prior/remember_the_milk_-_tag_/remember_the_milk_-_tag_.user.js</string>
 				</dict>
 				<dict>
 					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_list_loc_tag_list</string>
-					<key>lastUsed</key>
-					<date>2012-03-21T15:47:40Z</date>
+					<string>prior/rememberthemilkenhanced/rememberthemilkenhanced.user.js</string>
 				</dict>
 				<dict>
 					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_rtm_forum_post</string>
-					<key>lastUsed</key>
-					<date>2012-01-13T16:13:33Z</date>
+					<string>prior/rtm_projects/rtm_projects.user.js</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>prior/rtm-site/rtm.2.28.js</string>
+				</dict>
+			</array>
+			<key>name</key>
+			<string>prior</string>
+		</dict>
+		<dict>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>filename</key>
+					<string>docs/rtm_tcr_description</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>docs/rtm_tcr_list_loc_tag_list</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>docs/rtm_tcr_rtm_forum_post</string>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -35,146 +52,83 @@
 		</dict>
 		<dict>
 			<key>children</key>
-			<array/>
-			<key>expanded</key>
-			<true/>
-			<key>name</key>
-			<string>in-firefox-gm</string>
-		</dict>
-		<dict>
-			<key>children</key>
 			<array>
 				<dict>
 					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/iphone-keyboard-characters</string>
+					<string>notes/char-notes</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>notes/iphone-keyboard-characters</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>notes/mac-keyboard-characters</string>
 					<key>lastUsed</key>
-					<date>2012-03-27T18:55:17Z</date>
+					<date>2012-03-28T02:28:04Z</date>
 					<key>selected</key>
 					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/mac-keyboard-characters</string>
-					<key>lastUsed</key>
-					<date>2012-03-27T05:29:25Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/notes</string>
-					<key>lastUsed</key>
-					<date>2012-03-27T18:55:17Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-03-26T14:52:57Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.recipes.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-01-13T16:12:21Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-03-26T20:42:55Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_general_to_em.diff</string>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest.user.js</string>
-					<key>lastUsed</key>
-					<date>2012-03-27T05:35:41Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest_to_general.diff</string>
-					<key>lastUsed</key>
-					<date>2012-03-21T19:03:54Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>rtm-tag-cloud-restructurer/workflow</string>
-					<key>lastUsed</key>
-					<date>2012-03-26T20:42:54Z</date>
+					<string>notes/workflow</string>
 				</dict>
 			</array>
 			<key>expanded</key>
 			<true/>
 			<key>name</key>
-			<string>projects/code</string>
+			<string>notes</string>
 		</dict>
 		<dict>
 			<key>children</key>
 			<array>
 				<dict>
 					<key>filename</key>
-					<string>remember_the_milk_-_tag_/remember_the_milk_-_tag_.user.js</string>
-					<key>lastUsed</key>
-					<date>2009-09-11T21:10:28Z</date>
+					<string>scripts/rtm_tcr_emalminator.recipes.user.js</string>
 				</dict>
 				<dict>
 					<key>filename</key>
-					<string>rememberthemilkenhanced/rememberthemilkenhanced.user.js</string>
+					<string>scripts/rtm_tcr_emalminator.user.js</string>
 				</dict>
 				<dict>
 					<key>filename</key>
-					<string>rtm.2.28-mod.js</string>
-					<key>lastUsed</key>
-					<date>2008-09-19T06:20:26Z</date>
+					<string>scripts/rtm_tcr_unittest.user.js</string>
 				</dict>
 				<dict>
 					<key>filename</key>
-					<string>rtm_projects/rtm_projects.user.js</string>
+					<string>scripts/rtm_tcr.user.js</string>
+				</dict>
+				<dict>
+					<key>children</key>
+					<array>
+						<dict>
+							<key>filename</key>
+							<string>scripts/rtm_tcr_general_to_em.diff</string>
+							<key>lastUsed</key>
+							<date>2012-03-28T02:28:02Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>scripts/rtm_tcr_unittest_to_general.diff</string>
+						</dict>
+					</array>
+					<key>expanded</key>
+					<true/>
+					<key>name</key>
+					<string>diffs</string>
 				</dict>
 			</array>
 			<key>expanded</key>
 			<true/>
 			<key>name</key>
-			<string>projects/rtm-js</string>
+			<string>scripts</string>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
-	<integer>200</integer>
+	<integer>253</integer>
 	<key>metaData</key>
 	<dict>
-		<key>rtm-tag-cloud-restructurer/iphone-keyboard-characters</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>14</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>79</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>14</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>14</integer>
-			</dict>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/mac-keyboard-characters</key>
+		<key>notes/mac-keyboard-characters</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -182,104 +136,6 @@
 				<integer>0</integer>
 				<key>line</key>
 				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>-1</integer>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/notes</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>23</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/rtm_tcr.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>145</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>465</integer>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/rtm_tcr_description</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>66</integer>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>115</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>122</integer>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/rtm_tcr_unittest.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>126</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>109</integer>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/rtm_tcr_unittest_to_general.diff</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>rtm-tag-cloud-restructurer/workflow</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>3</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -289,15 +145,7 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest.user.js</string>
-		<string>rtm-tag-cloud-restructurer/workflow</string>
-		<string>rtm-tag-cloud-restructurer/rtm_tcr_unittest_to_general.diff</string>
-		<string>rtm-tag-cloud-restructurer/rtm_tcr.user.js</string>
-		<string>rtm-tag-cloud-restructurer/rtm_tcr_description</string>
-		<string>rtm-tag-cloud-restructurer/rtm_tcr_emalminator.user.js</string>
-		<string>rtm-tag-cloud-restructurer/notes</string>
-		<string>rtm-tag-cloud-restructurer/iphone-keyboard-characters</string>
-		<string>rtm-tag-cloud-restructurer/mac-keyboard-characters</string>
+		<string>notes/mac-keyboard-characters</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
@@ -312,29 +160,30 @@
 			<key>subItems</key>
 			<dict/>
 		</dict>
-		<key>in-firefox-gm</key>
+		<key>notes</key>
 		<dict>
 			<key>isExpanded</key>
 			<true/>
 			<key>subItems</key>
 			<dict/>
 		</dict>
-		<key>projects/code</key>
+		<key>scripts</key>
 		<dict>
 			<key>isExpanded</key>
 			<true/>
 			<key>subItems</key>
-			<dict/>
-		</dict>
-		<key>projects/rtm-js</key>
-		<dict>
-			<key>isExpanded</key>
-			<true/>
-			<key>subItems</key>
-			<dict/>
+			<dict>
+				<key>diffs</key>
+				<dict>
+					<key>isExpanded</key>
+					<true/>
+					<key>subItems</key>
+					<dict/>
+				</dict>
+			</dict>
 		</dict>
 	</dict>
 	<key>windowFrame</key>
-	<string>{{0, 4}, {743, 874}}</string>
+	<string>{{0, 9}, {795, 869}}</string>
 </dict>
 </plist>
