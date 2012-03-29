@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>currentDocument</key>
+	<string>notes/workflow</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -32,9 +34,7 @@
 					<key>filename</key>
 					<string>notes/char-notes</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T20:22:54Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2012-03-29T02:11:28Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -52,7 +52,9 @@
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T03:28:37Z</date>
+					<date>2012-03-29T03:28:06Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -93,11 +95,19 @@
 							<key>filename</key>
 							<string>scripts/rtm_tcr_general_to_em.diff</string>
 							<key>lastUsed</key>
-							<date>2012-03-28T02:28:02Z</date>
+							<date>2012-03-29T03:05:19Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>scripts/rtm_tcr_general_to_example.diff</string>
+							<key>lastUsed</key>
+							<date>2012-03-29T03:27:37Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
 							<string>scripts/rtm_tcr_unittest_to_general.diff</string>
+							<key>lastUsed</key>
+							<date>2012-03-29T03:18:30Z</date>
 						</dict>
 					</array>
 					<key>expanded</key>
@@ -119,13 +129,13 @@
 					<key>filename</key>
 					<string>scripts/rtm_tcr_example.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T15:48:33Z</date>
+					<date>2012-03-29T03:28:06Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_unittest.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-28T15:48:39Z</date>
+					<date>2012-03-29T02:25:41Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -138,37 +148,85 @@
 	<integer>253</integer>
 	<key>metaData</key>
 	<dict>
+		<key>notes/char-notes</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>73</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>20</integer>
+		</dict>
 		<key>notes/workflow</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>84</integer>
+				<integer>33</integer>
 				<key>line</key>
-				<integer>26</integer>
+				<integer>16</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>6</integer>
-			<key>selectFrom</key>
+		</dict>
+		<key>scripts/rtm_tcr_general_to_em.diff</key>
+		<dict>
+			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>15</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>26</integer>
+				<integer>0</integer>
 			</dict>
-			<key>selectTo</key>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>scripts/rtm_tcr_unittest.user.js</key>
+		<dict>
+			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>84</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>26</integer>
+				<integer>356</integer>
 			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>353</integer>
+		</dict>
+		<key>scripts/rtm_tcr_unittest_to_general.diff</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
+	<key>openDocuments</key>
+	<array>
+		<string>notes/workflow</string>
+		<string>scripts/rtm_tcr_unittest_to_general.diff</string>
+		<string>scripts/rtm_tcr_general_to_em.diff</string>
+		<string>notes/char-notes</string>
+		<string>scripts/rtm_tcr_unittest.user.js</string>
+	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
 	<key>showFileHierarchyPanel</key>

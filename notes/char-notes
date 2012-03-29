@@ -24,3 +24,55 @@ Testing:
  - specifying '\xc2\xa1' utf-8 sequence does not match tag '¡tag'
  - specifying '\u00a1' code point does match
  - specifying '¡', encoded in file as utf-8 (\xc2\xa1), does match
+
+
+Special characters available on Mac Keyboard + iOS:
+Ordinary (ASCII)
+-
+.
+@
+_
++
+
+3 taps:
+•
+£
+¥
+€
+
+2 taps, hold, distinct:
+… D1
+¡ D1
+¿ D1
+§ D1
+¢ D1
+° D1
+
+2 taps, hold, semi-distinct:
+» D4
+« D5
+— D2
+„ D3
+
+2 taps, hold, semi-distinct:
+–
+’
+‘
+”
+“
+
+3 taps, hold, distinct
+‰ D1
+
+
+Analysis:
+
+Extending beyond ASCII:
+- • £ ¥ € best
+- … ¡ ¿ § ¢ ° also good, visually distinct, fast to access
+
+
+
+
+
+
