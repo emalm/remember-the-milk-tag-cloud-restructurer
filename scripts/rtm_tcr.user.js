@@ -45,7 +45,9 @@
 var globalprefs = {
 	drawSectionBorders: true,
 	borderColor: 'lightGrey',
-	hiddenTags: ['system', 'sent']
+	hiddenTags: ['system', 'sent'],
+	renameTags: {
+	}
 };
 
 // default preferences for each type of section

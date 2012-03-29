@@ -45,7 +45,12 @@
 var globalprefs = {
 	drawSectionBorders: true,
 	borderColor: 'lightGrey',
-	hiddenTags: ['system', 'sent']
+	hiddenTags: ['system', 'sent'],
+	renameTags: {
+		'_rename-flat': 'Renamed flat tag',
+		'+h44/a1/b3': 'Renamed hierarchy tag',
+		'rename-rename': 'Renamed rename tag'
+	}
 };
 
 // default preferences for each type of section
@@ -115,8 +120,9 @@ var my_sections = [
 	},
 
 	{ prefix: 'next',   type: sectionRename, 
-	                    displayname: 'Next Actions', 
-	                    color: 'red' 
+	                    displayname: 'Next Actions (at top)', 
+	                    color: 'red',
+	                    displayOrder: 1
 	},
 
 	{ prefix: 'goal',   type: sectionRename, 
@@ -124,9 +130,20 @@ var my_sections = [
 	                    color: 'black' 
 	},
 
+	{ prefix: 'rename-rename',   type: sectionRename, 
+	                    displayname: 'Should get overridden', 
+	                    color: 'black'
+	},
+
 	{ prefix: '_',      type: sectionFlat, 
 	                    displayname: 'Responsibilities', 
 	                    color: '#444444' 
+	},
+
+	{ prefix: '+_',      type: sectionFlat, 
+	                    displayname: 'Bottom List', 
+	                    color: '#444444',
+						displayOrder: -1
 	},
 
 	{ prefix: '@',      type: sectionFlat, 
@@ -367,6 +384,11 @@ sectionFlat.prototype.addTag = function(tag) {
 	if (this.renameTags) {
 		tag.innerHTML = capitalizeAndSpace(tag.innerHTML);
 	}
+	
+	// check for a rename_text attribute
+	if (tag.getAttribute('rename_text')) {
+		tag.innerHTML = tag.getAttribute('rename_text')
+	}
 
 	// add tag type, name to search string
 	var searchstring = getTagSearchString(tag);
@@ -444,20 +466,24 @@ sectionHierarchy.prototype.addTag = function(tag) {
 	
 	// find, store display name if present
 	var displayname = null;
-	var tagpath = null;
+	var tagpath = tagname;
 	
+	// check for a rename_text attribute
+	if (tag.getAttribute('rename_text')) {
+		displayname = tag.getAttribute('rename_text')
+	}
+	
+	// check for a [[...]] rename block at end of name
 	var result = tagname.match(/\[\[.*\]\]\s*$/);
 	
 	if (result) {
 		displayname = result[0].trim();
 		displayname = displayname.substring(2, displayname.length - 2);
 		
-		tagpath = tagname.substring(0, tagname.length - result[0].length);
-		tagpath = tagpath.trim();
+		tagpath = tagpath.substring(0, tagname.length - result[0].length);
 	}
-	else {
-		tagpath = tagname.trim();
-	}
+	
+	tagpath = tagname.trim();
 	
 	// split tagpath into tokens
 	
@@ -479,7 +505,7 @@ sectionHierarchy.prototype.addTag = function(tag) {
 			// chop
 			lasttoken = lasttoken.substring(pathtokens[i].length);
 			
-			// separator chararacters now at front, kill them
+			// separator characters now at front, kill them
 			lasttoken = lasttoken.replace(re, '');
 		}
 		
@@ -707,6 +733,12 @@ sectionRename.prototype.addTag = function(tag) {
 		this.tag.innerHTML += " (" + this.prefix + ")";
 	}
 	
+	// check for a rename_text attribute
+	// will override rename settings
+	if (tag.getAttribute('rename_text')) {
+		this.tag.innerHTML = tag.getAttribute('rename_text')
+	}
+	
 	// set tag style
 	this.tag.style.color = this.color;
 	setTagSize(this.tag, this.headerSize);
@@ -907,6 +939,10 @@ function collectAndMatchTags(cloud, sectionlist) {
 			continue;
 		}
 		
+		if (globalprefs.renameTags[thisTagName]) {
+			thisTag.setAttribute('rename_text', globalprefs.renameTags[thisTagName]);
+		}
+		
 		// try to match tag to a section
 		var matchingSection = matchTagToSection(sectionlist, thisTag);
 		
@@ -973,8 +1009,10 @@ function processCloud(sectionlistconfig) {
 		// assemble section divs into #taskcloudcontent	
 		var displayedSections = [];
 
+
 		// build each section, push those to be displayed onto list
 		for ( var i = 0; i < sectionlist.length; i++) {
+			
 			// build the section
 			sectionlist[i].assembleDiv();
 
@@ -984,9 +1022,30 @@ function processCloud(sectionlistconfig) {
 			}
 		}
 		
+		// DEBUG
+		// unsafeWindow.console.log('Before section sort:');
+		
 		// sort sections by decreasing displayorder
-		displayedSections.sort(sortSection);
+		for ( var i = 0; i < displayedSections.length; i++) {
+			
+			// tweak display order values 
+			// since sort apparently does not always preserve ordering
+			// - expand out by length of list
+			// - subtract position in list (sections sorted high to low values)
+			displayedSections[i].displayOrder *= displayedSections.length;
+			displayedSections[i].displayOrder -= i;
 
+			// DEBUG
+			// unsafeWindow.console.log(
+			// 	displayedSections[i].prefix + 
+			// 	': ' + displayedSections[i].displayOrder.toString());
+		}
+		
+		displayedSections.sort(sortSection);
+		
+		// DEBUG
+		// unsafeWindow.console.log('After section sort:');
+		
 		// add the sections to be displayed to the cloud
 		for (var i = 0; i < displayedSections.length; i++ ) {
 			cloud.appendChild(displayedSections[i].div);
@@ -995,6 +1054,11 @@ function processCloud(sectionlistconfig) {
 			if (i == displayedSections.length - 1) {
 				displayedSections[i].styleFinalBlock();
 			}
+			
+			// DEBUG
+			// unsafeWindow.console.log(
+			// 	displayedSections[i].prefix + 
+			// 	': ' + displayedSections[i].displayOrder.toString());
 		}
 
 		// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy

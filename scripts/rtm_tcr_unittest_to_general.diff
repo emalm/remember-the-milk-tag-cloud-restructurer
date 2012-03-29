@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-03-21 14:52:29.000000000 -0400
-+++ rtm_tcr.user.js	2012-03-21 14:50:21.000000000 -0400
+--- rtm_tcr_unittest.user.js	2012-03-29 01:32:13.000000000 -0400
++++ rtm_tcr.user.js	2012-03-29 01:31:52.000000000 -0400
 @@ -1,10 +1,10 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -17,7 +17,50 @@
  // ==/UserScript==
  
  /*
-@@ -134,24 +134,10 @@
+@@ -47,9 +47,6 @@
+ 	borderColor: 'lightGrey',
+ 	hiddenTags: ['system', 'sent'],
+ 	renameTags: {
+-		'_rename-flat': 'Renamed flat tag',
+-		'+h44/a1/b3': 'Renamed hierarchy tag',
+-		'rename-rename': 'Renamed rename tag'
+ 	}
+ };
+ 
+@@ -120,9 +117,8 @@
+ 	},
+ 
+ 	{ prefix: 'next',   type: sectionRename, 
+-	                    displayname: 'Next Actions (at top)', 
+-	                    color: 'red',
+-	                    displayOrder: 1
++	                    displayname: 'Next Actions', 
++	                    color: 'red' 
+ 	},
+ 
+ 	{ prefix: 'goal',   type: sectionRename, 
+@@ -130,45 +126,20 @@
+ 	                    color: 'black' 
+ 	},
+ 
+-	{ prefix: 'rename-rename',   type: sectionRename, 
+-	                    displayname: 'Should get overridden', 
+-	                    color: 'black'
+-	},
+-
+ 	{ prefix: '_',      type: sectionFlat, 
+ 	                    displayname: 'Responsibilities', 
+ 	                    color: '#444444' 
+ 	},
+ 
+-	{ prefix: '+_',      type: sectionFlat, 
+-	                    displayname: 'Bottom List', 
+-	                    color: '#444444',
+-						displayOrder: -1
+-	},
+-
+ 	{ prefix: '@',      type: sectionFlat, 
+ 	                    displayname: 'Contexts', 
  	                    color: 'blue' 
  	},
  
