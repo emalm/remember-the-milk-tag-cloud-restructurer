@@ -351,7 +351,7 @@ sectionFlat.prototype.setupDiv = function() {
 // returns true if section should contain tag
 
 sectionFlat.prototype.includeTag = function(tag) {
-	var tagname = tag.getAttribute('origTagName');
+	var tagname = tag.getAttribute('tagname');
 	
 	// check that tag starts with prefix
 	return (tagname.indexOf(this.prefix) == 0);
@@ -362,7 +362,7 @@ sectionFlat.prototype.includeTag = function(tag) {
 
 sectionFlat.prototype.addTag = function(tag) {
 	// save original tag name
-	tagname = tag.getAttribute('origTagName')
+	var tagname = tag.getAttribute('tagname')
 
 	// add tag to child-tag div
 	this.tagDiv.appendChild(tag.parentNode);
@@ -449,7 +449,7 @@ sectionHierarchy.prototype.setupDiv = function() {
 // returns true if section should contain tag
 
 sectionHierarchy.prototype.includeTag = function(tag) {
-	var tagname = tag.getAttribute('origTagName');
+	var tagname = tag.getAttribute('tagname');
 	
 	// check that tag starts with prefix
 	return (tagname.indexOf(this.prefix) == 0);
@@ -459,7 +459,7 @@ sectionHierarchy.prototype.includeTag = function(tag) {
 // add given tag to this section
 
 sectionHierarchy.prototype.addTag = function(tag) {
-	var tagname = tag.getAttribute('origTagName')
+	var tagname = tag.getAttribute('tagname')
 
 	// strip prefix off of tagname to get tagpath
 	var tagpath = tagname.substring(this.prefix.length);
@@ -471,18 +471,6 @@ sectionHierarchy.prototype.addTag = function(tag) {
 	if (tag.getAttribute('rename_text')) {
 		displayname = tag.getAttribute('rename_text')
 	}
-	
-	// check for a [[...]] rename block at end of name
-	var result = tagpath.match(/\[\[.*\]\]\s*$/);
-	
-	if (result) {
-		displayname = result[0].trim();
-		displayname = displayname.substring(2, displayname.length - 2);
-		
-		tagpath = tagpath.substring(0, tagpath.length - result[0].length);
-	}
-	
-	tagpath = tagpath.trim();
 	
 	// split tagpath into tokens
 	
@@ -716,7 +704,7 @@ sectionRename.prototype.setupDiv = function() {
 
 sectionRename.prototype.includeTag = function(tag) {
 	// check that tag is exactly the prefix
-	return (tag.getAttribute('origTagName') == this.prefix);
+	return (tag.getAttribute('tagname') == this.prefix);
 }
 
 // addTag(tag)
@@ -734,8 +722,8 @@ sectionRename.prototype.addTag = function(tag) {
 	
 	// check for a rename_text attribute
 	// will override rename settings
-	if (tag.getAttribute('rename_text')) {
-		this.tag.innerHTML = tag.getAttribute('rename_text')
+	if (this.tag.getAttribute('rename_text')) {
+		this.tag.innerHTML = this.tag.getAttribute('rename_text')
 	}
 	
 	// set tag style
@@ -893,6 +881,7 @@ function getTagSearchString(tag) {
 	var searchstring = '';
 	
 	var tagtype = getTagType(tag);
+	var tagname = tag.getAttribute('orig_tagname');
 	
 	// if tagtype found, build into search string
 	if (tagtype) {
@@ -901,7 +890,7 @@ function getTagSearchString(tag) {
 	
 	// wrap name in quotes if contains a space
 	if (tagname.match(/\s/)) {
-		searchstring += "&quot;" + tagname + "&quot;";
+		searchstring += "\\\"" + tagname + "\\\"";
 	}
 	else {
 		searchstring += tagname;
@@ -920,39 +909,40 @@ function collectAndMatchTags(cloud, sectionlist) {
 		
 	for (var tagIndex = 0; tagIndex < allTags.snapshotLength; tagIndex++) {
 	
-		thisTag = allTags.snapshotItem(tagIndex);
-		thisTagName = thisTag.innerHTML;
+		var tag = allTags.snapshotItem(tagIndex);
+		var orig_tagname = null;
 		
-		// store original name in tag
+		// store original name in tag or retrieve from tag
 		// because we might change the HTML representation later
 
-		if (thisTag.getAttribute('origTagName')) {
-			thisTagName = thisTag.getAttribute('origTagName');
-		} else {
-			thisTag.setAttribute('origTagName', thisTagName);
+		if (tag.getAttribute('orig_tagname')) {
+			orig_tagname = tag.getAttribute('orig_tagname');
+		} 
+		else {
+			orig_tagname = tag.innerHTML
+			tag.setAttribute('orig_tagname', orig_tagname);
 		}
 		
 		// remove any tags we decided to hide
-		if (globalprefs.hiddenTags.contains(thisTagName)) {
-			thisTag.parentNode.parentNode.removeChild(thisTag.parentNode);
+		if (globalprefs.hiddenTags.contains(orig_tagname)) {
+			tag.parentNode.parentNode.removeChild(tag.parentNode);
 			continue;
 		}
 		
-		if (globalprefs.renameTags[thisTagName]) {
-			thisTag.setAttribute('rename_text', globalprefs.renameTags[thisTagName]);
-		}
+		// check for rename info
+		addRenameInfoToTag(tag);
 		
 		// try to match tag to a section
-		var matchingSection = matchTagToSection(sectionlist, thisTag);
+		var matchingSection = matchTagToSection(sectionlist, tag);
 		
 		// if we matched, add the tag to that section
 		if (matchingSection) {
-			matchingSection.addTag(thisTag);
+			matchingSection.addTag(tag);
 		}
 		else {
 			// remove any tags not falling into our sections
 			// should happen only if no section defined with empty prefix
-			thisTag.parentNode.parentNode.removeChild(thisTag.parentNode);
+			tag.parentNode.parentNode.removeChild(tag.parentNode);
 		}
 	}
 }
@@ -978,6 +968,49 @@ function sortSection(a, b) {
 	if (a.displayOrder > b.displayOrder)
 		return -1;
 	return 0;
+}
+
+// function to check for tag renaming:
+// - check for [[...]] rename block in tag name, remove if present
+// - match remaining tag name to global rename list
+//
+// effects:
+// - stores tag name in 'tagname' attribute in a element
+// - stores rename text in 'rename_text' attribute
+
+function addRenameInfoToTag(tag) {
+	var tagname = tag.getAttribute('orig_tagname');
+	var rename_text = null;
+	
+	// check for a [[...]] rename block at end of tag name
+	var result = tagname.match(/\[\[.*\]\]\s*$/);
+	
+	if (result) {
+		// isolate the text in the block
+		rename_text = result[0].trim();
+		rename_text = rename_text.substring(2, rename_text.length - 2);
+		
+		// remove from tag name
+		tagname = tagname.substring(0, tagname.length - result[0].length);
+		tagname = tagname.trim();
+	}
+	else {
+		// no [[...]] block, so clear off spaces, check in global rename list
+		tagname = tagname.trim();
+		
+		if (globalprefs.renameTags[tagname]) {
+			rename_text = globalprefs.renameTags[tagname];
+		}
+		
+	}
+	
+	tag.setAttribute('tagname', tagname);
+	
+	if (rename_text != null) {
+		tag.setAttribute('rename_text', rename_text);
+	}
+	
+	return (rename_text == null);
 }
 
 // process tag cloud given list of section specifications

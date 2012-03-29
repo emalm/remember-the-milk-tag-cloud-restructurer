@@ -15,10 +15,21 @@ TODO:
  - true: HEADER: tag tag tag with hanging indent (as in end stages of hierarchy)
  - false (default): HEADER\n block of tags
 
+* idea: specify a list of tags corresponding to smart searches?
+ - tag name, smart search string
+ - script would create the tag, insert into list to process
+ (way to specify smart lists in tag cloud)
+
+* any way to specify two scripts that interact?
+ - split config settings into one file, rewriting code in another
+ - have code script load config script? or JSON file?
+ - hard to host on userscripts.org?
+
 * cleanup:
  - access HTML attributes with properties, not get/setAttribute
  - look for missing vars - esp in loops
  - spacing around operators
+ - tabs vs spaces - clean up
 
 * testing:
  - add more comprehensive testing of options to unittest
