@@ -1,0 +1,31 @@
+TODO:
+* at some point, process renameTags dict to make keys lowercase (so they match RTM tags)
+ - check that it correctly lower-cases unicode chars (could be in list names)
+
+* move [[...]] processing to initial tag processing
+ - move into rename_text block
+ - should override renameTags dict
+
+* refactor code in big routines
+
+* verify leaf processing in hierarchy
+ - not packed into div correctly? div discarded?
+
+* runin display option for flat sections:
+ - true: HEADER: tag tag tag with hanging indent (as in end stages of hierarchy)
+ - false (default): HEADER\n block of tags
+
+* cleanup:
+ - access HTML attributes with properties, not get/setAttribute
+ - look for missing vars - esp in loops
+ - spacing around operators
+
+* testing:
+ - add more comprehensive testing of options to unittest
+
+Documentation:
+- create specific example sections
+ - enough to illustrate key features
+- documents about allowed special characters, unicode, how to put into script
+ - suggestions for good characters (esp for Mac/iPhone)
+- extensive documentation on personal website (once revised)

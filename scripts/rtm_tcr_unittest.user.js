@@ -461,12 +461,11 @@ sectionHierarchy.prototype.includeTag = function(tag) {
 sectionHierarchy.prototype.addTag = function(tag) {
 	var tagname = tag.getAttribute('origTagName')
 
-	// strip prefix off of tagname
-	tagname = tagname.substring(this.prefix.length);
+	// strip prefix off of tagname to get tagpath
+	var tagpath = tagname.substring(this.prefix.length);
 	
 	// find, store display name if present
 	var displayname = null;
-	var tagpath = tagname;
 	
 	// check for a rename_text attribute
 	if (tag.getAttribute('rename_text')) {
@@ -474,16 +473,16 @@ sectionHierarchy.prototype.addTag = function(tag) {
 	}
 	
 	// check for a [[...]] rename block at end of name
-	var result = tagname.match(/\[\[.*\]\]\s*$/);
+	var result = tagpath.match(/\[\[.*\]\]\s*$/);
 	
 	if (result) {
 		displayname = result[0].trim();
 		displayname = displayname.substring(2, displayname.length - 2);
 		
-		tagpath = tagpath.substring(0, tagname.length - result[0].length);
+		tagpath = tagpath.substring(0, tagpath.length - result[0].length);
 	}
 	
-	tagpath = tagname.trim();
+	tagpath = tagpath.trim();
 	
 	// split tagpath into tokens
 	
