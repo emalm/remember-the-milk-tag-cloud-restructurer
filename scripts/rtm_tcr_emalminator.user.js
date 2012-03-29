@@ -47,6 +47,8 @@ var globalprefs = {
 	borderColor: 'lightGrey',
 	hiddenTags: ['system', 'sent'],
 	renameTags: {
+		'+goal': 'Goals',
+		'+project': 'Projects'
 	}
 };
 
@@ -121,9 +123,16 @@ var emalminator_sections = [
 	                    color: 'red' 
 	},
 
-	{ prefix: 'goal',   type: sectionRename, 
-	                    displayname: 'Goals', 
-	                    color: 'black' 
+	// { prefix: 'goal',   type: sectionRename, 
+	//                     displayname: 'Goals', 
+	//                     color: 'black' 
+	// },
+
+	{ prefix: '+',      type: sectionHierarchy, 
+						depth: 2,
+						sizes: ['6', '4'],
+				      	separators: '+', 
+	                    colors: ['FireBrick', 'black', 'navy'] 
 	},
 
 	{ prefix: '_',      type: sectionFlat, 
@@ -142,6 +151,7 @@ var emalminator_sections = [
 	},
 
 	{ prefix: '-',      type: sectionHierarchy, 
+  	                    separators: '/', 
 	                    colors: ['green', 'purple', 'brown'] 
 	},
 
