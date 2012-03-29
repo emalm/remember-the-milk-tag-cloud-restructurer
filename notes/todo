@@ -2,10 +2,6 @@ TODO:
 * at some point, process renameTags dict to make keys lowercase (so they match RTM tags)
  - check that it correctly lower-cases unicode chars (could be in list names)
 
-* move [[...]] processing to initial tag processing
- - move into rename_text block
- - should override renameTags dict
-
 * refactor code in big routines
 
 * verify leaf processing in hierarchy
