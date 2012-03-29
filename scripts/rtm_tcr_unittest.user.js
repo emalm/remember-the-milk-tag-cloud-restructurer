@@ -300,6 +300,11 @@ sectionFlat.prototype.setupDiv = function() {
 	
 	this.headerTag.appendChild(document.createTextNode(headertagname));
 	
+	// on hover, tell user what the section prefix is
+	var titlestring = "Prefix: '" + this.prefix + "'";
+	
+	this.headerTag.setAttribute("title", titlestring);
+	
 	// div to contain tags
 	this.tagDiv = document.createElement('div');
 	this.div.appendChild(this.tagDiv);
@@ -346,6 +351,7 @@ sectionFlat.prototype.addTag = function(tag) {
 	this.tagDiv.appendChild(tag.parentNode);
 	
 	// insert thin space (\u2009) so that tag spans break across lines
+	// zero-width space (\u200B) also present so Chrome breaks correctly
 	// thin space may not work with Firefox 2
 	this.tagDiv.appendChild(document.createTextNode('\u200B\u2009'));
 
