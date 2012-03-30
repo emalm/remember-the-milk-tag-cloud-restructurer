@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           RTM: Tag Cloud Restructurer (emalminator)
+// @version        1.1
 // @namespace      http://www.rememberthemilk.com/home/emalminator/*
 // @include        http://www.rememberthemilk.com/home/emalminator/*
 // @include        https://www.rememberthemilk.com/home/emalminator/*

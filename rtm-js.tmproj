@@ -3,12 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>notes/workflow</string>
+	<string>notes/todo</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>children</key>
 			<array>
+				<dict>
+					<key>filename</key>
+					<string>docs/change-log</string>
+					<key>lastUsed</key>
+					<date>2012-03-30T13:46:46Z</date>
+				</dict>
 				<dict>
 					<key>filename</key>
 					<string>docs/rtm_tcr_description</string>
@@ -58,15 +64,15 @@
 					<key>filename</key>
 					<string>notes/todo</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T05:29:50Z</date>
+					<date>2012-03-30T13:54:07Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T05:37:31Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2012-03-30T13:54:07Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -131,25 +137,25 @@
 					<key>filename</key>
 					<string>scripts/rtm_tcr.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T03:47:04Z</date>
+					<date>2012-03-30T13:48:10Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_emalminator.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T05:19:11Z</date>
+					<date>2012-03-30T13:48:15Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_example.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T05:19:27Z</date>
+					<date>2012-03-30T13:49:01Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_unittest.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T05:37:31Z</date>
+					<date>2012-03-30T13:48:00Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -162,6 +168,20 @@
 	<integer>253</integer>
 	<key>metaData</key>
 	<dict>
+		<key>docs/change-log</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>18</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>notes/char-notes</key>
 		<dict>
 			<key>caret</key>
@@ -227,7 +247,7 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>11</integer>
+				<integer>29</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -241,56 +261,12 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>63</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-		</dict>
-		<key>scripts/rtm_tcr_emalminator.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>45</integer>
-				<key>line</key>
-				<integer>622</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>611</integer>
-		</dict>
-		<key>scripts/rtm_tcr_example.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>9</integer>
-				<key>line</key>
-				<integer>626</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>598</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
-				<integer>626</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>9</integer>
-				<key>line</key>
-				<integer>626</integer>
-			</dict>
 		</dict>
 		<key>scripts/rtm_tcr_general_to_em.diff</key>
 		<dict>
@@ -339,6 +315,7 @@
 	<array>
 		<string>notes/todo</string>
 		<string>notes/workflow</string>
+		<string>docs/change-log</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>

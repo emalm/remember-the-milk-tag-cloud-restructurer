@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
+// @version        1.1
 // @namespace      http://www.rememberthemilk.com/home/rtm.tcr.unittest/*
 // @include        http://www.rememberthemilk.com/home/rtm.tcr.unittest/*
 // @include        https://www.rememberthemilk.com/home/rtm.tcr.unittest/*

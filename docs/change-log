@@ -1,0 +1,8 @@
+Changes in version 1.1:
+
+fixed: indentation on depth-2 hierarchies
+
+% - renaming dictionary/options
+% - fixes to display order of sections
+% - run-in option for flat section
+% - fixed constructed search string for lists with spaces

@@ -2,6 +2,14 @@ TODO:
 
 * refactor code in big routines
 
+* add advanced prefs dictionary
+ - move verbatim preference to that
+ - change name to ...MatchCase
+ - have matching routine lowercase the tag text, too??
+
+* config section:
+ - reorder preferences: global prefs (for rename list), then user sections, then section defaults
+
 * hierarchy: indentation width option?
 
 * flat: normalize subtag size?
@@ -9,12 +17,11 @@ TODO:
 
 * flat: dot-separator option?
 
-
-
 * idea: specify a list of tags corresponding to smart searches?
  - tag name, smart search string
  - script would create the tag, insert into list to process
  (way to specify smart lists in tag cloud)
+
 
 * any way to specify two scripts that interact?
  - split config settings into one file, rewriting code in another

@@ -5,7 +5,7 @@ Workflow:
 
 Chrome:
 
-cp rtm_tcr_unittest.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/leaegfagppffnlnfjambidbohijokkbe/1.0_0/script.js
+cp rtm_tcr_unittest.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/leaegfagppffnlnfjambidbohijokkbe/1.1_0/script.js
 
 * disable, reenable extension; reload RTM page
 
@@ -36,7 +36,7 @@ patch -u -i rtm_tcr_general_to_em.diff rtm_tcr.user.js -o rtm_tcr_emalminator.us
 
 Chrome:
 
-cp rtm_tcr_emalminator.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/njklpkmfebgooabmbjdhpadmohnbeomc/1.0_0/script.js
+cp rtm_tcr_emalminator.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/njklpkmfebgooabmbjdhpadmohnbeomc/1.1_0/script.js
 
 
 Firefox:
@@ -56,7 +56,7 @@ patch -u -i rtm_tcr_general_to_example.diff rtm_tcr.user.js -o rtm_tcr_example.u
 
 Chrome:
 
-cp rtm_tcr_example.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/flblipakiocabbhjadegchbollinjjmk/1.0_0/script.js
+cp rtm_tcr_example.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/flblipakiocabbhjadegchbollinjjmk/1.1_0/script.js
 
 
 Firefox:
