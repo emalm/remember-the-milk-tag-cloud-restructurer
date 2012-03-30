@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-03-30 09:36:10.000000000 -0400
-+++ rtm_tcr.user.js	2012-03-30 09:48:09.000000000 -0400
+--- rtm_tcr_unittest.user.js	2012-03-30 15:54:57.000000000 -0400
++++ rtm_tcr.user.js	2012-03-30 15:55:16.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -28,23 +28,21 @@
 -		'NeXT': '&#x41;',
 -		'ŒÁØÅÍÎÏÓÔÒÚÆÇÂ': 'test',
 -		'-H33&#x41;': 'Rename with entity',
--		'-h33A': 'Rename with mixed case'
+-		'-H33A': 'Rename with mixed case'
  	},
- 	renameTagsVerbatim: false
+ 	renameTagsMatchCase: false
  };
-@@ -128,9 +121,8 @@
+@@ -131,8 +124,7 @@
  	},
  
  	{ prefix: 'next',   type: sectionRename, 
+-	                    displayOrder: 1,
 -	                    displayname: 'Next Actions (at top)', 
--	                    color: 'red',
--	                    displayOrder: 1
 +	                    displayname: 'Next Actions', 
-+	                    color: 'red' 
+ 	                    color: 'red'
  	},
  
- 	{ prefix: 'goal',   type: sectionRename, 
-@@ -138,46 +130,20 @@
+@@ -141,46 +133,20 @@
  	                    color: 'black' 
  	},
  

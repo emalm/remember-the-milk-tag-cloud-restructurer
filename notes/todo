@@ -2,20 +2,14 @@ TODO:
 
 * refactor code in big routines
 
-* add advanced prefs dictionary
- - move verbatim preference to that
- - change name to ...MatchCase
- - have matching routine lowercase the tag text, too??
-
 * config section:
  - reorder preferences: global prefs (for rename list), then user sections, then section defaults
 
 * hierarchy: indentation width option?
 
-* flat: normalize subtag size?
- - or add min size; set equal to max size to force
-
 * flat: dot-separator option?
+
+
 
 * idea: specify a list of tags corresponding to smart searches?
  - tag name, smart search string

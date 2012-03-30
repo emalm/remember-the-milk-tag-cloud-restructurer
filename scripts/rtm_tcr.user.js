@@ -49,7 +49,7 @@ var globalprefs = {
 	hiddenTags: ['system', 'sent'],
 	renameTags: {
 	},
-	renameTagsVerbatim: false
+	renameTagsMatchCase: false
 };
 
 // default preferences for each type of section
@@ -79,6 +79,8 @@ var sectionprefs = {
 	// sectionFlat preferences:
 	// - headerSize: RTM size for header tag (1-9)
 	// - maxChildSize, maximum RTM size for child tags
+	// - minChildSize, minimum RTM size for child tags
+	//  - set these equal to make all tags a particular size 
 	// - displayPrefixInHeader: show '(prefix)' after header
 	// - displayPrefixInTags: keep prefix on tags
 	// - renameTags: convert underscores to spaces, capitalize words
@@ -87,6 +89,7 @@ var sectionprefs = {
 	sectionFlat: {
 		headerSize: 6,
 		maxChildSize: 4,
+		minChildSize: 1,
 		displayPrefixInHeader: false,
 		displayPrefixInTags: false,
 		renameTags: false,
@@ -122,7 +125,7 @@ var my_sections = [
 
 	{ prefix: 'next',   type: sectionRename, 
 	                    displayname: 'Next Actions', 
-	                    color: 'red' 
+	                    color: 'red'
 	},
 
 	{ prefix: 'goal',   type: sectionRename, 

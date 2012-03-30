@@ -54,9 +54,9 @@ var globalprefs = {
 		'NeXT': '&#x41;',
 		'ŒÁØÅÍÎÏÓÔÒÚÆÇÂ': 'test',
 		'-H33&#x41;': 'Rename with entity',
-		'-h33A': 'Rename with mixed case'
+		'-H33A': 'Rename with mixed case'
 	},
-	renameTagsVerbatim: false
+	renameTagsMatchCase: false
 };
 
 // default preferences for each type of section
@@ -86,6 +86,8 @@ var sectionprefs = {
 	// sectionFlat preferences:
 	// - headerSize: RTM size for header tag (1-9)
 	// - maxChildSize, maximum RTM size for child tags
+	// - minChildSize, minimum RTM size for child tags
+	//  - set these equal to make all tags a particular size 
 	// - displayPrefixInHeader: show '(prefix)' after header
 	// - displayPrefixInTags: keep prefix on tags
 	// - renameTags: convert underscores to spaces, capitalize words
@@ -94,6 +96,7 @@ var sectionprefs = {
 	sectionFlat: {
 		headerSize: 6,
 		maxChildSize: 4,
+		minChildSize: 1,
 		displayPrefixInHeader: false,
 		displayPrefixInTags: false,
 		renameTags: false,
@@ -128,9 +131,9 @@ var my_sections = [
 	},
 
 	{ prefix: 'next',   type: sectionRename, 
+	                    displayOrder: 1,
 	                    displayname: 'Next Actions (at top)', 
-	                    color: 'red',
-	                    displayOrder: 1
+	                    color: 'red'
 	},
 
 	{ prefix: 'goal',   type: sectionRename, 
@@ -151,11 +154,11 @@ var my_sections = [
 	{ prefix: '+_',      type: sectionFlat, 
 	                    displayname: 'Bottom List', 
 	                    color: '#444444',
-						displayOrder: -1
+	                    displayOrder: -1
 	},
 
 	{ prefix: '@',      type: sectionFlat, 
-                    	runinText: true,
+                        runinText: true,
 	                    displayname: 'Contexts', 
 	                    color: 'blue'
 	},
@@ -437,9 +440,13 @@ sectionFlat.prototype.addTag = function(tag) {
 	// deal with sizing (level##) in tag span, maybe
 	// unsafeWindow.console.log("Tag '%s' is level '%d'", tagname, getTagSize(tag));
 	
-	// reduce child tag size if needed
+	// increase/decrease child tag size if needed
 	if (getTagSize(tag) > this.maxChildSize) {
 		setTagSize(tag, this.maxChildSize);
+	}
+	
+	if (getTagSize(tag) < this.minChildSize) {
+		setTagSize(tag, this.minChildSize);
 	}
 }
 
@@ -905,7 +912,13 @@ function setTagSize(tag, newsize) {
 	var classname = tag.parentNode.className;
 	var newlevelclass = "level" + newsize;
 	if (classname.match(/level\d+/)) {
+		// DEBUG
+		// var oldclass = classname;
+
 		tag.parentNode.className = classname.replace(/level\d+/, newlevelclass);
+		
+		// DEBUG
+		// unsafeWindow.console.log(oldclass + ' ' + newsize.toString() + ' -> ' + tag.parentNode.className);
 	}
 	else { 
 		tag.parentNode.className = classname + " " + newlevelclass;
@@ -1035,6 +1048,10 @@ function addRenameInfoToTag(tag) {
 		// no [[...]] block, so clear off spaces, check in global rename list
 		tagname = tagname.trim();
 		
+		if (globalprefs.renameTagsMatchCase == false) {
+			tagname = tagname.toLowerCase();
+		}
+		
 		if (globalprefs.renameTagsNormalized[tagname]) {
 			rename_text = globalprefs.renameTagsNormalized[tagname];
 		}
@@ -1149,7 +1166,7 @@ function normalizeRenameTags() {
 	for (var key in globalprefs.renameTags) {
 		var newkey = key;
 		
-		if (globalprefs.renameTagsVerbatim == false) {
+		if (globalprefs.renameTagsMatchCase == false) {
 			newkey = key.toLowerCase();
 		}
 		
@@ -1157,7 +1174,7 @@ function normalizeRenameTags() {
 		globalprefs.renameTagsNormalized[newkey] = value;
 
 		// DEBUG
-		unsafeWindow.console.log( key + " -> " + newkey );
+		// unsafeWindow.console.log( key + " -> " + newkey );
 	}
 	
 	return;
