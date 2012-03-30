@@ -55,7 +55,7 @@ var globalprefs = {
 		'-H33&#x41;': 'Rename with entity',
 		'-h33A': 'Rename with mixed case'
 	},
-	renameTagsVerbatim: true
+	renameTagsVerbatim: false
 };
 
 // default preferences for each type of section
@@ -96,7 +96,7 @@ var sectionprefs = {
 		displayPrefixInHeader: false,
 		displayPrefixInTags: false,
 		renameTags: false,
-		runinText: false
+		runinText: true
 	},
 	
 	// sectionHierarchy preferences:
@@ -154,8 +154,9 @@ var my_sections = [
 	},
 
 	{ prefix: '@',      type: sectionFlat, 
+                    	runinText: true,
 	                    displayname: 'Contexts', 
-	                    color: 'blue' 
+	                    color: 'blue'
 	},
 
 	// 2-level hierarchy
@@ -305,12 +306,23 @@ function sectionRename(arguments) {
 // create div, boilerplate for this section
 
 sectionFlat.prototype.setupDiv = function() {
-	// containing div
+	// node structure:
+	// main div: has border, 2px left pad
+	// |-div: 10px left pad, -10 px text-indent
+	//   |-span/a: for header; add ':' if run-in
+	//   |-div: 2px text-indent; inline if run-in, block otherwise
+	//     |-span/a's for tags - add in addTag
+	
+	// main div
 	this.div = document.createElement('div');
+	
+	// div below that
+	this.subdiv = document.createElement('div');
+	this.div.appendChild(this.subdiv);
 
 	// span for header tag
 	var headerSpan = document.createElement('span');
-	this.div.appendChild(headerSpan);
+	this.subdiv.appendChild(headerSpan);
 
 	// header tag itself
 	this.headerTag = document.createElement('a');
@@ -322,6 +334,10 @@ sectionFlat.prototype.setupDiv = function() {
 		headertagname += " (" + this.prefix + ")";
 	}
 	
+	if (this.runinText) {
+		headertagname += ":";
+	}
+	
 	this.headerTag.appendChild(document.createTextNode(headertagname));
 	
 	// on hover, tell user what the section prefix is
@@ -331,9 +347,11 @@ sectionFlat.prototype.setupDiv = function() {
 	
 	// div to contain tags
 	this.tagDiv = document.createElement('div');
-	this.div.appendChild(this.tagDiv);
+	this.subdiv.appendChild(this.tagDiv);
 
-	// borders
+	// styling:
+
+	// main div box model settings, colors
 	if (globalprefs.drawSectionBorders) {
 		this.div.style.borderTop = '1px solid';
 		this.div.style.borderLeft = '1px solid';
@@ -343,12 +361,23 @@ sectionFlat.prototype.setupDiv = function() {
 	}
 
 	this.div.style.bottomMargin = '2px';
+	
+	// sub div padding, text indent
+	this.subdiv.style.paddingLeft = '10px';
+	this.subdiv.style.textIndent = '-10px';
 
-	// display style for new html elements
+	// header span/tag
 	headerSpan.className = 'tasktag level' + this.headerSize;
-	headerSpan.style.display = 'block';
 	this.headerTag.style.color = this.color;
-	this.tagDiv.style.paddingLeft = '10px';
+	
+	// tag div: inline if runin, block + reset text-indent if not
+	if (this.runinText) {
+		this.tagDiv.style.display = 'inline';
+	}
+	else {
+		this.tagDiv.style.display = 'block';
+		this.tagDiv.style.textIndent = '2px';
+	}
 
 	// list of search strings for child tags
 	this.searchlist = [];

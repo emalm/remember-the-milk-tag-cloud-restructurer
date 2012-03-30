@@ -1,5 +1,5 @@
---- rtm_tcr.user.js	2012-03-29 15:50:54.000000000 -0400
-+++ rtm_tcr_emalminator.user.js	2012-03-29 15:53:39.000000000 -0400
+--- rtm_tcr.user.js	2012-03-29 23:43:57.000000000 -0400
++++ rtm_tcr_emalminator.user.js	2012-03-29 23:39:59.000000000 -0400
 @@ -1,10 +1,10 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer
@@ -17,16 +17,19 @@
  // ==/UserScript==
  
  /*
-@@ -47,6 +47,8 @@
+@@ -47,6 +47,11 @@
  	borderColor: 'lightGrey',
  	hiddenTags: ['system', 'sent'],
  	renameTags: {
++		'-a': 'Academic',
++		'-p': 'Personal',
++		'-pr': 'Professional',
 +		'+goal': 'Goals',
 +		'+project': 'Projects'
- 	}
+ 	},
+ 	renameTagsVerbatim: false
  };
- 
-@@ -110,7 +112,7 @@
+@@ -113,7 +118,7 @@
  // - ex: if '@' before '@_', '@' will grab all tags starting with '@'
  // overwrite per-section preferences here, too;
  
@@ -35,7 +38,7 @@
  	{ prefix: 'inbox',  type: sectionRename, 
  	                    displayname: 'Unsorted', 
  	                    color: 'orange' 
-@@ -121,9 +123,11 @@
+@@ -124,9 +129,11 @@
  	                    color: 'red' 
  	},
  
@@ -50,7 +53,7 @@
  	},
  
  	{ prefix: '_',      type: sectionFlat, 
-@@ -131,12 +135,18 @@
+@@ -134,12 +141,18 @@
  	                    color: '#444444' 
  	},
  
@@ -61,7 +64,7 @@
 +
  	{ prefix: '@',      type: sectionFlat, 
  	                    displayname: 'Contexts', 
- 	                    color: 'blue' 
+ 	                    color: 'blue'
  	},
  
  	{ prefix: '-',      type: sectionHierarchy, 
@@ -69,7 +72,7 @@
  	                    colors: ['green', 'purple', 'brown'] 
  	},
  
-@@ -153,7 +163,7 @@
+@@ -156,7 +169,7 @@
  ];
  
  // pick the above section list as sections to process
