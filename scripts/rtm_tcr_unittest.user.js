@@ -509,6 +509,7 @@ sectionHierarchy.prototype.addTag = function(tag) {
 	}
 	
 	// split tagpath into tokens
+	// TODO: make its own subroutine
 	
 	var re = new RegExp("[" + this.separators + "]+");
 	var pathtokens = tagpath.split(re);
@@ -642,23 +643,16 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 	// set padding around each tag to 0
 	// RTM sets right padding on each tag anchor to 5px as a separator
 	node.tag.style.paddingRight = "0px";
-	node.tag.parentNode.style.paddingRight = "2px";
 	setTagSize(node.tag, this.sizes[depth - 1]);
 
-	// TODO: adjust style for divs of leaf nodes?
-	// TODO: this might not be doing anything
 	if (depth == this.depth) {
 		// at the lowest depth in hierarchy
-		// so display tags inline
-		node.div.style.display = "inline";
-		
 		// no children to process
 	}
 	else if (depth == this.depth - 1) {
-		// in end stages of hierarchy
+		// in second-lowest stage of hierarchy
 		// assemble children as (this tag): (child tag) (child tag) ...
 		//   so that (this tag) has a hanging indent
-		// TODO: causes indentation problems if depth = 2
 		if (node.children.length > 0) {
 			node.tag.appendChild(document.createTextNode(":"));
 			node.tag.parentNode.style.paddingRight = "5px";
@@ -666,25 +660,31 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 			node.div.style.textIndent = "-10px";
 			node.div.style.color = color;
 			
+			// inline div to store the leaf tags
+			var subdiv = document.createElement('div');
+			subdiv.style.display = 'inline';
+			node.div.appendChild(subdiv);
+			
+			// string for middle-dot separator
+			var sepdot = "\u200B\u2009\u00b7\u200B\u2009";
+			
 			for (var i = 0; i < node.children.length; i++) {
+				//
 				this.assembleNodeDiv(node.children[i], depth + 1, color);
-				var childtag = node.children[i].tag;
-				childtag.parentNode.style.paddingRight = "0px";
 				
 				if (i > 0) {
 					// add central dot to separate leaf nodes
-					var sepnode = document.createTextNode("\u200B\u2009\xb7\u200B\u2009");
-					node.div.appendChild(sepnode);
+					subdiv.appendChild(document.createTextNode(sepdot));
 				}
 				
-				node.div.appendChild(childtag.parentNode);
+				// add the tag span of the leaf
+				subdiv.appendChild(node.children[i].tag.parentNode);
 			}
 		}		
 	}
 	else {
-		// above 
-		// container for children's divs
-		// TODO: set indent in hierarchy?
+		// in at least third level up
+		// TODO: set indent width as hierarchy option?
 		// create divs for children
 		for (var i = 0; i < node.children.length; i++) {
 			this.assembleNodeDiv(node.children[i], depth + 1, color);
