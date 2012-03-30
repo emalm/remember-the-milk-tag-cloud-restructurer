@@ -212,7 +212,7 @@ var sections = my_sections;
 
 function sectionBase(arguments) {
 	// copy or overwrite default preferences
-	for (key in sectionprefs.sectionBase) {
+	for (var key in sectionprefs.sectionBase) {
 		if (key in arguments) {
 			this[key] = arguments[key];
 		}
@@ -240,7 +240,7 @@ function sectionFlat(arguments) {
 	this.super_constructor(arguments);
 	
 	// copy or overwrite default preferences
-	for (key in sectionprefs.sectionFlat) {
+	for (var key in sectionprefs.sectionFlat) {
 		if (key in arguments) {
 			this[key] = arguments[key];
 		}
@@ -263,7 +263,7 @@ function sectionHierarchy(arguments) {
 	this.super_constructor(arguments);
 	
 	// copy or overwrite default preferences
-	for (key in sectionprefs.sectionHierarchy) {
+	for (var key in sectionprefs.sectionHierarchy) {
 		if (key in arguments) {
 			this[key] = arguments[key];
 		}
@@ -285,7 +285,7 @@ function sectionRename(arguments) {
 	this.super_constructor(arguments);
 
 	// copy or overwrite default preferences
-	for (key in sectionprefs.sectionRename) {
+	for (var key in sectionprefs.sectionRename) {
 		if (key in arguments) {
 			this[key] = arguments[key];
 		}
@@ -533,7 +533,7 @@ sectionHierarchy.prototype.addTag = function(tag) {
 		var lasttoken = tagpath;
 		
 		// chop off first (depth - 1) tokens
-		for( var i = 0; i < this.depth - 1; i++ ) {
+		for (var i = 0; i < this.depth - 1; i++) {
 			// chop
 			lasttoken = lasttoken.substring(pathtokens[i].length);
 			
@@ -598,7 +598,7 @@ sectionHierarchy.prototype.assembleDiv = function() {
 		
 		// process nodes recursively
 		this.assembleNodeDiv(topChildren[i], 1, topNodeColor);
-		var childDiv = topChildren[i].div
+		var childDiv = topChildren[i].div;
 		
 		// draw borders around each top-level section
 		if (globalprefs.drawSectionBorders) {
@@ -804,10 +804,10 @@ sectionRename.prototype.styleFinalBlock = function() {
 
 function constructSections(sectionargumentslist) {
 	
-	sectionobjlist = [];
+	var sectionobjlist = [];
 	
-	for (var i = 0; i < sectionargumentslist.length; i++ ) {
-		secargs = sectionargumentslist[i];
+	for (var i = 0; i < sectionargumentslist.length; i++) {
+		var secargs = sectionargumentslist[i];
 		var newsection = new secargs.type(secargs);
 		sectionobjlist.push(newsection);
 	}
@@ -833,13 +833,13 @@ Array.prototype.contains = function (element)  {
 // convert _ to spaces, capitalize remaining words
 
 function capitalizeAndSpace(str) {
-	str = str.replace(/_+/g, ' ');
+	var newstr = str.replace(/_+/g, ' ');
 	
-    str = str.replace(/\w+/g, function(a){
+    newstr = newstr.replace(/\w+/g, function(a){
         return a.charAt(0).toUpperCase() + a.substr(1).toLowerCase();
     });
 
-    return str;
+    return newstr;
 }
 
 var waitingTask;
@@ -912,13 +912,7 @@ function setTagSize(tag, newsize) {
 	var classname = tag.parentNode.className;
 	var newlevelclass = "level" + newsize;
 	if (classname.match(/level\d+/)) {
-		// DEBUG
-		// var oldclass = classname;
-
 		tag.parentNode.className = classname.replace(/level\d+/, newlevelclass);
-		
-		// DEBUG
-		// unsafeWindow.console.log(oldclass + ' ' + newsize.toString() + ' -> ' + tag.parentNode.className);
 	}
 	else { 
 		tag.parentNode.className = classname + " " + newlevelclass;
@@ -1076,10 +1070,11 @@ function processCloud(sectionlistconfig) {
 	// stop listening for tag cloud changes
 	listenForTagChanges(false);
 	
-	//unsafeWindow.console.log("Config");	
-	//unsafeWindow.console.log(sectionlistconfig);
-	//unsafeWindow.console.log("Global");	
-	//unsafeWindow.console.log(sections);
+	// DEBUG
+	// unsafeWindow.console.log("Config");	
+	// unsafeWindow.console.log(sectionlistconfig);
+	// unsafeWindow.console.log("Global");	
+	// unsafeWindow.console.log(sections);
 	
 	// build section objects
 	var sectionlist = constructSections(sections);
@@ -1097,7 +1092,7 @@ function processCloud(sectionlistconfig) {
 
 
 		// build each section, push those to be displayed onto list
-		for ( var i = 0; i < sectionlist.length; i++) {
+		for (var i = 0; i < sectionlist.length; i++) {
 			
 			// build the section
 			sectionlist[i].assembleDiv();
@@ -1107,12 +1102,9 @@ function processCloud(sectionlistconfig) {
 				displayedSections.push(sectionlist[i]);
 			}
 		}
-		
-		// DEBUG
-		// unsafeWindow.console.log('Before section sort:');
-		
+				
 		// sort sections by decreasing displayorder
-		for ( var i = 0; i < displayedSections.length; i++) {
+		for (var i = 0; i < displayedSections.length; i++) {
 			
 			// tweak display order values 
 			// since sort apparently does not always preserve ordering
@@ -1120,31 +1112,18 @@ function processCloud(sectionlistconfig) {
 			// - subtract position in list (sections sorted high to low values)
 			displayedSections[i].displayOrder *= displayedSections.length;
 			displayedSections[i].displayOrder -= i;
-
-			// DEBUG
-			// unsafeWindow.console.log(
-			// 	displayedSections[i].prefix + 
-			// 	': ' + displayedSections[i].displayOrder.toString());
 		}
 		
 		displayedSections.sort(sortSection);
 		
-		// DEBUG
-		// unsafeWindow.console.log('After section sort:');
-		
 		// add the sections to be displayed to the cloud
-		for (var i = 0; i < displayedSections.length; i++ ) {
+		for (var i = 0; i < displayedSections.length; i++) {
 			cloud.appendChild(displayedSections[i].div);
 
 			// do extra style processing if this is the last section
 			if (i == displayedSections.length - 1) {
 				displayedSections[i].styleFinalBlock();
 			}
-			
-			// DEBUG
-			// unsafeWindow.console.log(
-			// 	displayedSections[i].prefix + 
-			// 	': ' + displayedSections[i].displayOrder.toString());
 		}
 
 		// copy #taskcloudcontent html, handlers to #taskcloudcontent_copy
@@ -1161,20 +1140,21 @@ function processCloud(sectionlistconfig) {
 }
 
 function normalizeRenameTags() {
+	// new dictionary for normalized tags
 	globalprefs.renameTagsNormalized = {};
 	
+	// iterate through the tags to rename
 	for (var key in globalprefs.renameTags) {
 		var newkey = key;
 		
+		// if matching not case sensitive, convert to lower case
 		if (globalprefs.renameTagsMatchCase == false) {
 			newkey = key.toLowerCase();
 		}
 		
+		// store key-value pair in normalized dictionary
 		var value = globalprefs.renameTags[key];
 		globalprefs.renameTagsNormalized[newkey] = value;
-
-		// DEBUG
-		// unsafeWindow.console.log( key + " -> " + newkey );
 	}
 	
 	return;
@@ -1248,17 +1228,17 @@ FixSidebar()
 
 // TODO: reimplement using XPath?
 
-var doNotRemoveLists = new Array("Inbox","Sent");
+var doNotRemoveLists = ["Inbox", "Sent"];
 
 RemoveListHandler = function() {
 	var listtabs = document.getElementById("listtabs");
 	var ul = listtabs.childNodes[0];
 
-	for( var i = 0; i < ul.childNodes.length; i++ ) {
+	for (var i = 0; i < ul.childNodes.length; i++) {
 		var tab = ul.childNodes[i];
 		var txt = tab.childNodes[0].innerHTML;
 		if (tab.className.indexOf("xtab_smartlist") == -1 &&
-			!doNotRemoveLists.contains(txt))
+			doNotRemoveLists.contains(txt) == false)
 		{
 			//tab.setAttribute('class','xtab_smartlist');
 			tab.style.display = "none";

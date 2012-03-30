@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-03-30 15:54:57.000000000 -0400
-+++ rtm_tcr.user.js	2012-03-30 15:55:16.000000000 -0400
+--- rtm_tcr_unittest.user.js	2012-03-30 16:22:47.000000000 -0400
++++ rtm_tcr.user.js	2012-03-30 16:33:18.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -59,11 +59,11 @@
 -	{ prefix: '+_',      type: sectionFlat, 
 -	                    displayname: 'Bottom List', 
 -	                    color: '#444444',
--						displayOrder: -1
+-	                    displayOrder: -1
 -	},
 -
  	{ prefix: '@',      type: sectionFlat, 
--                    	runinText: true,
+-                        runinText: true,
  	                    displayname: 'Contexts', 
  	                    color: 'blue'
  	},

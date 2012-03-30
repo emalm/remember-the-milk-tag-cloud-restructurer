@@ -9,6 +9,8 @@ TODO:
 
 * flat: dot-separator option?
 
+* get event-handling code right
+ - especially for list tab hiding
 
 
 * idea: specify a list of tags corresponding to smart searches?
@@ -37,5 +39,6 @@ Documentation:
  - suggestions for good characters (esp for Mac/iPhone)
 - extensive documentation on personal website (once revised)
 
-Testing:
+Workflow:
 - make a makefile with the diff/patch/copy operations?
+- can git help with that?
