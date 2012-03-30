@@ -49,8 +49,13 @@ var globalprefs = {
 	renameTags: {
 		'_rename-flat': 'Renamed flat tag',
 		'+h44/a1/b3': 'Renamed hierarchy tag',
-		'rename-rename': 'Renamed rename tag'
-	}
+		'rename-rename': 'Renamed rename tag',
+		'NeXT': '&#x41;',
+		'ŒÁØÅÍÎÏÓÔÒÚÆÇÂ': 'test',
+		'-H33&#x41;': 'Rename with entity',
+		'-h33A': 'Rename with mixed case'
+	},
+	renameTagsVerbatim: true
 };
 
 // default preferences for each type of section
@@ -83,13 +88,15 @@ var sectionprefs = {
 	// - displayPrefixInHeader: show '(prefix)' after header
 	// - displayPrefixInTags: keep prefix on tags
 	// - renameTags: convert underscores to spaces, capitalize words
+	// - runinText: TODO describe
 	
 	sectionFlat: {
 		headerSize: 6,
 		maxChildSize: 4,
 		displayPrefixInHeader: false,
 		displayPrefixInTags: false,
-		renameTags: false
+		renameTags: false,
+		runinText: false
 	},
 	
 	// sectionHierarchy preferences:
@@ -998,8 +1005,8 @@ function addRenameInfoToTag(tag) {
 		// no [[...]] block, so clear off spaces, check in global rename list
 		tagname = tagname.trim();
 		
-		if (globalprefs.renameTags[tagname]) {
-			rename_text = globalprefs.renameTags[tagname];
+		if (globalprefs.renameTagsNormalized[tagname]) {
+			rename_text = globalprefs.renameTagsNormalized[tagname];
 		}
 		
 	}
@@ -1106,7 +1113,31 @@ function processCloud(sectionlistconfig) {
 	listenForTagChanges(true);
 }
 
-// start by processing the cloud with our section list
+function normalizeRenameTags() {
+	globalprefs.renameTagsNormalized = {};
+	
+	for (var key in globalprefs.renameTags) {
+		var newkey = key;
+		
+		if (globalprefs.renameTagsVerbatim == false) {
+			newkey = key.toLowerCase();
+		}
+		
+		var value = globalprefs.renameTags[key];
+		globalprefs.renameTagsNormalized[newkey] = value;
+
+		// DEBUG
+		unsafeWindow.console.log( key + " -> " + newkey );
+	}
+	
+	return;
+}
+
+// start by processing global preference settings
+// - make new rename list with tags converted to lower case
+normalizeRenameTags();
+
+// then process the cloud with our section list
 processCloud(sections);
 
 // de-hook handler when we unload the page
