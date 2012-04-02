@@ -46,7 +46,7 @@
 var globalprefs = {
 	drawSectionBorders: true,
 	borderColor: 'lightGrey',
-	hiddenTags: ['system', 'sent'],
+	hiddenTags: ['sent'],
 	renameTags: {
 		'-a': 'Academic',
 		'-p': 'Personal',
@@ -131,6 +131,12 @@ var emalminator_sections = [
 	{ prefix: 'next',   type: sectionRename, 
 	                    displayname: 'Next Actions', 
 	                    color: 'red'
+	},
+
+	{ prefix: 'system', type: sectionRename, 
+	                    displayOrder: -1,
+	                    displayname: 'System Notes', 
+	                    color: '#444444'
 	},
 
 	{ prefix: '+',      type: sectionHierarchy, 

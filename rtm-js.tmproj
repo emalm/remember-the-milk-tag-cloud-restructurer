@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>notes/todo</string>
+	<string>docs/change-log</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,7 +13,9 @@
 					<key>filename</key>
 					<string>docs/change-log</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T20:06:21Z</date>
+					<date>2012-04-02T14:01:19Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -64,15 +66,13 @@
 					<key>filename</key>
 					<string>notes/todo</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T20:39:48Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2012-04-02T13:35:06Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T20:39:48Z</date>
+					<date>2012-04-02T14:01:18Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -113,7 +113,7 @@
 							<key>filename</key>
 							<string>scripts/rtm_tcr_general_to_em.diff</string>
 							<key>lastUsed</key>
-							<date>2012-03-30T20:34:27Z</date>
+							<date>2012-04-02T14:00:24Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
@@ -143,7 +143,7 @@
 					<key>filename</key>
 					<string>scripts/rtm_tcr_emalminator.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T20:02:30Z</date>
+					<date>2012-04-02T14:00:19Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -155,7 +155,7 @@
 					<key>filename</key>
 					<string>scripts/rtm_tcr_unittest.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-03-30T20:31:13Z</date>
+					<date>2012-04-02T14:01:19Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -259,14 +259,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>57</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>32</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>32</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>57</integer>
+				<key>line</key>
+				<integer>32</integer>
+			</dict>
 		</dict>
 		<key>scripts/rtm_tcr.user.js</key>
 		<dict>
@@ -298,20 +314,6 @@
 				<integer>97</integer>
 			</dict>
 		</dict>
-		<key>scripts/rtm_tcr_emalminator.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>102</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>68</integer>
-		</dict>
 		<key>scripts/rtm_tcr_example.user.js</key>
 		<dict>
 			<key>caret</key>
@@ -326,20 +328,6 @@
 			<key>firstVisibleLine</key>
 			<integer>114</integer>
 		</dict>
-		<key>scripts/rtm_tcr_general_to_em.diff</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
 		<key>scripts/rtm_tcr_general_to_example.diff</key>
 		<dict>
 			<key>caret</key>
@@ -353,20 +341,6 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-		</dict>
-		<key>scripts/rtm_tcr_unittest.user.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>139</integer>
 		</dict>
 		<key>scripts/rtm_tcr_unittest_to_general.diff</key>
 		<dict>
@@ -385,12 +359,9 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>notes/todo</string>
 		<string>notes/workflow</string>
-		<string>scripts/rtm_tcr_general_to_em.diff</string>
-		<string>scripts/rtm_tcr_unittest_to_general.diff</string>
+		<string>notes/todo</string>
 		<string>docs/change-log</string>
-		<string>scripts/rtm_tcr_unittest.user.js</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
