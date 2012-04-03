@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>docs/change-log</string>
+	<string>docs/example-tag-list</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,9 +13,7 @@
 					<key>filename</key>
 					<string>docs/change-log</string>
 					<key>lastUsed</key>
-					<date>2012-04-02T14:01:19Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2012-04-03T14:01:44Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -25,9 +23,17 @@
 				</dict>
 				<dict>
 					<key>filename</key>
+					<string>docs/example-tag-list</string>
+					<key>lastUsed</key>
+					<date>2012-04-03T14:02:54Z</date>
+					<key>selected</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>filename</key>
 					<string>docs/rtm_tcr_list_loc_tag_list</string>
 					<key>lastUsed</key>
-					<date>2012-03-29T04:08:55Z</date>
+					<date>2012-04-03T14:02:54Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -176,6 +182,20 @@
 				<integer>49</integer>
 				<key>line</key>
 				<integer>8</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>docs/example-tag-list</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>20</integer>
+				<key>line</key>
+				<integer>23</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -362,6 +382,7 @@
 		<string>notes/workflow</string>
 		<string>notes/todo</string>
 		<string>docs/change-log</string>
+		<string>docs/example-tag-list</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
