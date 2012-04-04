@@ -13,7 +13,7 @@
 					<key>filename</key>
 					<string>docs/change-log</string>
 					<key>lastUsed</key>
-					<date>2012-04-03T14:01:44Z</date>
+					<date>2012-04-04T21:13:01Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -76,7 +76,7 @@
 					<key>filename</key>
 					<string>notes/todo</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T14:36:59Z</date>
+					<date>2012-04-04T21:13:01Z</date>
 					<key>selected</key>
 					<true/>
 				</dict>
@@ -84,7 +84,7 @@
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T14:36:59Z</date>
+					<date>2012-04-04T20:45:48Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -149,25 +149,25 @@
 					<key>filename</key>
 					<string>scripts/rtm_tcr.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T14:31:59Z</date>
+					<date>2012-04-04T20:45:24Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_emalminator.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T14:36:56Z</date>
+					<date>2012-04-04T20:45:34Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_example.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T14:00:05Z</date>
+					<date>2012-04-04T20:37:43Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_unittest.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T14:36:59Z</date>
+					<date>2012-04-04T21:13:00Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -185,7 +185,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>49</integer>
+				<integer>0</integer>
 				<key>line</key>
 				<integer>8</integer>
 			</dict>
@@ -257,9 +257,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>42</integer>
+				<integer>13</integer>
 				<key>line</key>
-				<integer>6</integer>
+				<integer>17</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -275,26 +275,10 @@
 				<key>line</key>
 				<integer>52</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>52</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>86</integer>
-				<key>line</key>
-				<integer>52</integer>
-			</dict>
+			<integer>27</integer>
 		</dict>
 		<key>scripts/rtm_tcr_general_to_example.diff</key>
 		<dict>
@@ -315,6 +299,7 @@
 	<array>
 		<string>notes/workflow</string>
 		<string>notes/todo</string>
+		<string>docs/change-log</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>

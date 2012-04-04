@@ -1,9 +1,15 @@
 Changes in version 1.1:
 
-fixed: indentation on depth-2 hierarchies
+Fixed:	Depth-2 hierarchy section now displays correctly
+Fixed:	displayOrder preference now orders sections correctly
+Fixed:	sectionFlat header search now searches for lists with spaces correctly
+Change:	Renamed sectionRename section type to sectionSingle
+New: 	Global dictionary (renameTags) of tags to rename
+New: 	Global preference (renameTagsMatchCase) for case sensitivity when 
+    	matching tags to rename
+New: 	sectionFlat preference (minChildSize) to set lower limit for tag size
+New: 	sectionFlat preference (runinText) to display flat section 
+   		as HEADER: tag tag ...
+New: 	Default color preferences for all sections
+New: 	Hovering over flat section header displays section prefix 
 
-% - renaming dictionary/options
-% - fixes to display order of sections
-% - run-in option for flat section
-% - fixed constructed search string for lists with spaces
-% - added minimum size preference to flat section

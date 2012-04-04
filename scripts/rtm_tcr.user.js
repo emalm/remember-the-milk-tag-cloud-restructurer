@@ -27,7 +27,7 @@
   Overview:
 
   Three types of sections:
-  - sectionRename takes a single tag and renames it
+  - sectionSingle takes a single tag and renames it
   - sectionFlat groups all tags with a given prefix
    - click on header to search for all tags in that group
   - sectionHierarchy creates a hierarchy from tags with a given prefix
@@ -70,12 +70,12 @@ var sectionprefs = {
 		hide: false
 	},
 	
-	// sectionRename preferences:
+	// sectionSingle preferences:
 	// - headerSize: RTM size for header tag (1-9)
 	// - color: color of section
 	// - bool displayOriginalName: display '(original tag)' after new name
 	
-	sectionRename: {
+	sectionSingle: {
 		headerSize: 6,
 		color: 'black',
 		displayOriginalName: false
@@ -130,17 +130,17 @@ var sectionprefs = {
 // overwrite per-section preferences here, too
 
 var my_sections = [
-	{ prefix: 'inbox',  type: sectionRename, 
+	{ prefix: 'inbox',  type: sectionSingle, 
 	                    displayname: 'Unsorted', 
 	                    color: 'orange' 
 	},
 
-	{ prefix: 'next',   type: sectionRename, 
+	{ prefix: 'next',   type: sectionSingle, 
 	                    displayname: 'Next Actions', 
 	                    color: 'red'
 	},
 
-	{ prefix: 'goal',   type: sectionRename, 
+	{ prefix: 'goal',   type: sectionSingle, 
 	                    displayname: 'Goals', 
 	                    color: 'black' 
 	},
@@ -159,7 +159,7 @@ var my_sections = [
 	                    colors: ['green', 'purple', 'brown'] 
 	},
 
-	{ prefix: 'maybe',  type: sectionRename, 
+	{ prefix: 'maybe',  type: sectionSingle, 
 	                    displayname: 'Someday/Maybe', 
 	                    color: 'CornflowerBlue' 
 	},
@@ -257,18 +257,18 @@ function sectionHierarchy(arguments) {
 	this.setupDiv();
 }
 
-function sectionRename(arguments) {
+function sectionSingle(arguments) {
 	// call sectionBase base class constructor
 	this.super_constructor = sectionBase;
 	this.super_constructor(arguments);
 
 	// copy or overwrite default preferences
-	for (var key in sectionprefs.sectionRename) {
+	for (var key in sectionprefs.sectionSingle) {
 		if (key in arguments) {
 			this[key] = arguments[key];
 		}
 		else {
-			this[key] = sectionprefs.sectionRename[key];
+			this[key] = sectionprefs.sectionSingle[key];
 		}
 	}
 	
@@ -699,13 +699,13 @@ sectionHierarchy.prototype.styleFinalBlock = function() {
 }
 
 /*
- * Routines for sectionRename class
+ * Routines for sectionSingle class
  */
 
 // setupDiv()
 // create div, boilerplate for this section
 
-sectionRename.prototype.setupDiv = function() {
+sectionSingle.prototype.setupDiv = function() {
 	// create containing div
 	this.div = document.createElement('div');
 
@@ -724,7 +724,7 @@ sectionRename.prototype.setupDiv = function() {
 // includeTag(tag)
 // returns true if section should contain tag
 
-sectionRename.prototype.includeTag = function(tag) {
+sectionSingle.prototype.includeTag = function(tag) {
 	// check that tag is exactly the prefix
 	return (tag.getAttribute('tagname') == this.prefix);
 }
@@ -732,7 +732,7 @@ sectionRename.prototype.includeTag = function(tag) {
 // addTag(tag)
 // add given tag to this section
 
-sectionRename.prototype.addTag = function(tag) {
+sectionSingle.prototype.addTag = function(tag) {
 	// take tag, replace name
 	this.tag = tag;
 	this.tag.innerHTML = this.displayname;
@@ -758,14 +758,14 @@ sectionRename.prototype.addTag = function(tag) {
 // assembleDiv()
 // setup for div after tag processing
 
-sectionRename.prototype.assembleDiv = function() {
+sectionSingle.prototype.assembleDiv = function() {
 	// nothing to do
 }
 
 // styleFinalBlock()
 // style processing for section if last block in section list
 
-sectionRename.prototype.styleFinalBlock = function() {
+sectionSingle.prototype.styleFinalBlock = function() {
 	// draw border line at bottom
 	if (globalprefs.drawSectionBorders) {
 		this.div.style.borderBottom = '1px solid';

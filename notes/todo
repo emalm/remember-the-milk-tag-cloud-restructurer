@@ -2,9 +2,7 @@ TODO:
 
 * refactor code in big routines
 
-* rename sectionRename to sectionSingle
-
-* hide tag list should be case-insensitive
+* hide-tag list should be case-insensitive
 
 * config section:
  - reorder preferences: global prefs (for rename list), then user sections, then section defaults
@@ -29,7 +27,6 @@ TODO:
  - hard to host on userscripts.org?
 
 * cleanup:
- - look for missing vars - esp in loops
  - spacing around operators
  - clean up indentation, continuations: tabs vs spaces
 
