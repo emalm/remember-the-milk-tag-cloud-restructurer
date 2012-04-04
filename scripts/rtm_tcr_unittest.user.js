@@ -216,6 +216,7 @@ var my_sections = [
 	// catch-all section for unprocessed lists and tags
 	{ prefix: '',       type: sectionFlat, 
 	                    displayname: 'Miscellaneous', 
+	                    runinText: false,
 	                    color: 'gray' 
 	}
 ];

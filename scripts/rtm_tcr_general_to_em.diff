@@ -1,5 +1,5 @@
---- rtm_tcr.user.js	2012-04-04 10:20:36.000000000 -0400
-+++ rtm_tcr_emalminator.user.js	2012-04-04 10:34:23.000000000 -0400
+--- rtm_tcr.user.js	2012-04-04 17:28:58.000000000 -0400
++++ rtm_tcr_emalminator.user.js	2012-04-04 16:45:32.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer
@@ -18,10 +18,13 @@
  // ==/UserScript==
  
  /*
-@@ -51,6 +51,13 @@
+@@ -51,9 +51,13 @@
  	borderColor: 'lightGrey',
  	hiddenTags: ['sent'],
  	renameTags: {
+-		'-P': 'Personal',
+-		'-W': 'Work',
+-		'-P/Computer/TeX': 'TeX'
 +		// *** emalminator START
 +		'-a': 'Academic',
 +		'-p': 'Personal',
@@ -32,7 +35,7 @@
  	},
  	renameTagsMatchCase: false
  };
-@@ -129,7 +128,9 @@
+@@ -132,7 +136,9 @@
  // - type: class name of section
  // overwrite per-section preferences here, too
  
@@ -40,32 +43,32 @@
 +// *** emalminator START
 +var emalminator_sections = [
 +// *** emalminator END
- 	{ prefix: 'inbox',  type: sectionRename, 
+ 	{ prefix: 'inbox',  type: sectionSingle, 
  	                    displayname: 'Unsorted', 
  	                    color: 'orange' 
-@@ -140,22 +141,44 @@
+@@ -143,22 +149,44 @@
  	                    color: 'red'
  	},
  
--	{ prefix: 'goal',   type: sectionRename, 
+-	{ prefix: 'goal',   type: sectionSingle, 
 -	                    displayname: 'Goals', 
 -	                    color: 'black' 
 +	// *** emalminator START
-+	{ prefix: 'system', type: sectionRename, 
++	{ prefix: 'system', type: sectionSingle, 
 +	                    displayOrder: -1,
 +	                    displayname: 'System Notes', 
 +	                    color: '#444444'
 +	// *** emalminator END
-+	},
-+
+ 	},
+ 
 +	// *** emalminator START
 +	{ prefix: '+',      type: sectionHierarchy, 
 +	                    depth: 2,
 +	                    sizes: ['6', '4'],
 +	                    separators: '+', 
 +	                    colors: ['FireBrick', 'black', 'navy'] 
- 	},
- 
++	},
++
 +	// *** emalminator END
  	{ prefix: '_',      type: sectionFlat, 
  	                    displayname: 'Responsibilities', 
@@ -91,7 +94,13 @@
  	                    colors: ['green', 'purple', 'brown'] 
  	},
  
-@@ -172,7 +195,9 @@
+@@ -170,13 +198,14 @@
+ 	// catch-all section for unprocessed lists and tags
+ 	{ prefix: '',       type: sectionFlat, 
+ 	                    displayname: 'Miscellaneous', 
+-	                    runinText: false,
+ 	                    color: 'gray' 
+ 	}
  ];
  
  // pick the above section list as sections to process

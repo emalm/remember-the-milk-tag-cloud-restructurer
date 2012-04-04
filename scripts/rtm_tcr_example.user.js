@@ -51,6 +51,9 @@ var globalprefs = {
 	borderColor: 'lightGrey',
 	hiddenTags: ['sent'],
 	renameTags: {
+		'-P': 'Personal',
+		'-W': 'Work',
+		'-P/Computer/TeX': 'TeX'
 	},
 	renameTagsMatchCase: false
 };
@@ -167,6 +170,7 @@ var my_sections = [
 	// catch-all section for unprocessed lists and tags
 	{ prefix: '',       type: sectionFlat, 
 	                    displayname: 'Miscellaneous', 
+	                    runinText: false,
 	                    color: 'gray' 
 	}
 ];

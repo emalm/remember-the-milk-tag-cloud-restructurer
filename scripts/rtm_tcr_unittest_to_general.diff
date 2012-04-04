@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-04-04 10:19:28.000000000 -0400
-+++ rtm_tcr.user.js	2012-04-04 10:03:33.000000000 -0400
+--- rtm_tcr_unittest.user.js	2012-04-04 17:31:08.000000000 -0400
++++ rtm_tcr.user.js	2012-04-04 17:28:58.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -18,7 +18,7 @@
  // ==/UserScript==
  
  /*
-@@ -51,14 +51,6 @@
+@@ -51,14 +51,9 @@
  	borderColor: 'lightGrey',
  	hiddenTags: ['sent'],
  	renameTags: {
@@ -30,13 +30,16 @@
 -		'-h3A': 'Rename with exact case',
 -		'-H3A': 'Rename with mixed case'
 -		// *** UNIT TEST END
++		'-P': 'Personal',
++		'-W': 'Work',
++		'-P/Computer/TeX': 'TeX'
  	},
  	renameTagsMatchCase: false
  };
-@@ -144,10 +127,7 @@
+@@ -144,10 +139,7 @@
  	},
  
- 	{ prefix: 'next',   type: sectionRename, 
+ 	{ prefix: 'next',   type: sectionSingle, 
 -	                    // *** UNIT TEST START
 -	                    displayOrder: 1,
 -	                    displayname: 'Next Actions (at top)', 
@@ -45,12 +48,12 @@
  	                    color: 'red'
  	},
  
-@@ -156,58 +136,20 @@
+@@ -156,58 +148,20 @@
  	                    color: 'black' 
  	},
  
 -	// *** UNIT TEST START
--	{ prefix: 'single-rename',   type: sectionRename, 
+-	{ prefix: 'single-rename',   type: sectionSingle, 
 -	                    displayname: 'Should get overridden', 
 -	                    color: 'black'
 -	},
@@ -101,6 +104,6 @@
 -	                    colors: ['green', 'purple', 'brown'] },
 -
 -	// *** UNIT TEST END
- 	{ prefix: 'maybe',  type: sectionRename, 
+ 	{ prefix: 'maybe',  type: sectionSingle, 
  	                    displayname: 'Someday/Maybe', 
  	                    color: 'CornflowerBlue' 
