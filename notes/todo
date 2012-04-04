@@ -2,6 +2,10 @@ TODO:
 
 * refactor code in big routines
 
+* rename sectionRename to sectionSingle
+
+* add color(s) pref to sections
+
 * config section:
  - reorder preferences: global prefs (for rename list), then user sections, then section defaults
 

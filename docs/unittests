@@ -1,0 +1,54 @@
+Desired unit tests:
+
+Global prefs:
+T draw section borders (true/false)
+- hidden tags
+- tag rename list:
+ - flat section
+ - hierarchy section
+ - single section
+ - bracket notation
+ - HTML entity in rename string
+T match case
+ O cascade: wrong case, right case
+ C deterministic?
+
+Base prefs:
+- display order: +, 0, -
+O hide section
+
+Single prefs:
+- header size
+O display orig name
+
+Flat prefs:
+- header size
+- max size adjust
+- min size adjust
+- show prefix in head
+ O true
+ - false
+- show prefix in tag
+ O true
+ - false
+- rename: _ -> space, capitalize
+ O true
+ - false
+- runin
+ O true
+ - false
+
+Hier prefs:
+- depth
+ - 2
+ - 3
+ - 4
+- sizes - variety
+- separators
+ - '|/+'
+ O '/'
+ O '.'
+O hide children list
+
+Hier features:
+- auto-generate missing tags
