@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>notes/todo</string>
+	<string>docs/example-tag-list</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,37 +13,33 @@
 					<key>filename</key>
 					<string>docs/change-log</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T21:13:01Z</date>
+					<date>2012-04-04T21:33:42Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>docs/example-tag-list</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T14:15:33Z</date>
+					<date>2012-04-04T21:39:39Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
-					<string>docs/rtm_tcr_description</string>
-					<key>lastUsed</key>
-					<date>2012-03-29T04:08:54Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>docs/rtm_tcr_list_loc_tag_list</string>
-					<key>lastUsed</key>
-					<date>2012-04-03T14:02:54Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>docs/rtm_tcr_rtm_forum_post</string>
-					<key>lastUsed</key>
-					<date>2012-03-29T04:08:55Z</date>
+					<string>docs/rtm-forum-2943-post</string>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>docs/unittests</string>
 					<key>lastUsed</key>
 					<date>2012-04-03T21:07:11Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>docs/userscripts-description</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>docs/userscripts-tag-list</string>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -76,15 +72,13 @@
 					<key>filename</key>
 					<string>notes/todo</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T21:13:01Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2012-04-04T21:17:38Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T20:45:48Z</date>
+					<date>2012-04-04T21:33:37Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -149,25 +143,25 @@
 					<key>filename</key>
 					<string>scripts/rtm_tcr.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T20:45:24Z</date>
+					<date>2012-04-04T21:31:02Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_emalminator.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T20:45:34Z</date>
+					<date>2012-04-04T21:32:44Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_example.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T20:37:43Z</date>
+					<date>2012-04-04T21:33:40Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm_tcr_unittest.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-04T21:13:00Z</date>
+					<date>2012-04-04T21:31:39Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -180,14 +174,14 @@
 	<integer>253</integer>
 	<key>metaData</key>
 	<dict>
-		<key>docs/change-log</key>
+		<key>docs/example-tag-list</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>11</integer>
 				<key>line</key>
-				<integer>8</integer>
+				<integer>7</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -271,9 +265,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>86</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>52</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -299,7 +293,7 @@
 	<array>
 		<string>notes/workflow</string>
 		<string>notes/todo</string>
-		<string>docs/change-log</string>
+		<string>docs/example-tag-list</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<false/>
