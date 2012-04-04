@@ -1,5 +1,5 @@
---- rtm_tcr.user.js	2012-03-30 16:34:15.000000000 -0400
-+++ rtm_tcr_emalminator.user.js	2012-04-02 09:38:27.000000000 -0400
+--- rtm_tcr.user.js	2012-04-04 10:20:36.000000000 -0400
++++ rtm_tcr_emalminator.user.js	2012-04-04 10:34:23.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer
@@ -18,43 +18,47 @@
  // ==/UserScript==
  
  /*
-@@ -46,8 +46,13 @@
- var globalprefs = {
- 	drawSectionBorders: true,
+@@ -51,6 +51,13 @@
  	borderColor: 'lightGrey',
--	hiddenTags: ['system', 'sent'],
-+	hiddenTags: ['sent'],
+ 	hiddenTags: ['sent'],
  	renameTags: {
++		// *** emalminator START
 +		'-a': 'Academic',
 +		'-p': 'Personal',
 +		'-pr': 'Professional',
 +		'+goal': 'Goals',
 +		'+project': 'Projects'
++		// *** emalminator END
  	},
  	renameTagsMatchCase: false
  };
-@@ -117,7 +122,7 @@
- // - ex: if '@' before '@_', '@' will grab all tags starting with '@'
- // overwrite per-section preferences here, too;
+@@ -129,7 +128,9 @@
+ // - type: class name of section
+ // overwrite per-section preferences here, too
  
 -var my_sections = [
++// *** emalminator START
 +var emalminator_sections = [
++// *** emalminator END
  	{ prefix: 'inbox',  type: sectionRename, 
  	                    displayname: 'Unsorted', 
  	                    color: 'orange' 
-@@ -128,9 +133,17 @@
+@@ -140,22 +141,44 @@
  	                    color: 'red'
  	},
  
 -	{ prefix: 'goal',   type: sectionRename, 
 -	                    displayname: 'Goals', 
 -	                    color: 'black' 
++	// *** emalminator START
 +	{ prefix: 'system', type: sectionRename, 
 +	                    displayOrder: -1,
 +	                    displayname: 'System Notes', 
 +	                    color: '#444444'
++	// *** emalminator END
 +	},
 +
++	// *** emalminator START
 +	{ prefix: '+',      type: sectionHierarchy, 
 +	                    depth: 2,
 +	                    sizes: ['6', '4'],
@@ -62,32 +66,39 @@
 +	                    colors: ['FireBrick', 'black', 'navy'] 
  	},
  
++	// *** emalminator END
  	{ prefix: '_',      type: sectionFlat, 
-@@ -138,12 +151,18 @@
+ 	                    displayname: 'Responsibilities', 
  	                    color: '#444444' 
  	},
  
++	// *** emalminator START
 +	{ prefix: '¡',      type: sectionFlat, 
 +	                    displayname: 'Warnings', 
 +	                    color: 'fuchsia' 
 +	},
 +
++	// *** emalminator END
  	{ prefix: '@',      type: sectionFlat, 
  	                    displayname: 'Contexts', 
  	                    color: 'blue'
  	},
  
  	{ prefix: '-',      type: sectionHierarchy, 
++	                    // *** emalminator START
 +  	                    separators: '/', 
++	                    // *** emalminator END
  	                    colors: ['green', 'purple', 'brown'] 
  	},
  
-@@ -160,7 +179,7 @@
+@@ -172,7 +195,9 @@
  ];
  
  // pick the above section list as sections to process
 -var sections = my_sections;
++// *** emalminator START
 +var sections = emalminator_sections;
++// *** emalminator END
  
  /*
   * End of configuration section

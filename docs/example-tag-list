@@ -1,29 +1,13 @@
 Ordinary Lists:
 
 Inbox
--A [[&#x41;cademic]]
--A/CS
--A/CS/CS106B
--A/CS/CS107
--A/Math
--A/Math/Alg Top
--A/Math/NW-TFT
--A/Math/Old
--A/Math/Seminars
--A/Math/SRC
--A/Research
--A/Research/Editing
--A/Research/Reading
--A/Research/Talks
--A/Research/Writing
--A/Teaching
--A/Teaching/[redacted]
 -P
 -P/Apartment
 -P/Apartment/Cleaning
 -P/Apartment/Repairs
 -P/Computer
--P/Computer/[redacted]
+-P/Computer/iPad
+-P/Computer/iPhone
 -P/Computer/OSX
 -P/Computer/RTM Tag Cloud
 -P/Computer/TeX
@@ -34,9 +18,9 @@ Inbox
 -P/Recreation/Games
 -P/Recreation/Music
 -P/Recreation/Reading
--PR
--PR/[redacted]
--PR/Tutoring
+-W
+-W/
+-W/
 Lent/Borrowed
 Sent
 
@@ -57,3 +41,9 @@ goal
 maybe	 
 next	 
 
+Rename dict:
+{
+	'-P': 'Personal',
+	'-W': 'Work',
+	'-P/Computer/TeX': 'TeX'
+}

@@ -9,9 +9,8 @@ T draw section borders (true/false)
  - single section
  - bracket notation
  - HTML entity in rename string
-T match case
- O cascade: wrong case, right case
- C deterministic?
+T match case (true/false)
+ - cascade: right case, then wrong case
 
 Base prefs:
 - display order: +, 0, -
@@ -35,8 +34,8 @@ Flat prefs:
  O true
  - false
 - runin
- O true
- - false
+ - true
+ O false
 
 Hier prefs:
 - depth

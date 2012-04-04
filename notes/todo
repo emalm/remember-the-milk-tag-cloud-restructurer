@@ -4,14 +4,14 @@ TODO:
 
 * rename sectionRename to sectionSingle
 
-* add color(s) pref to sections
+* hide tag list should be case-insensitive
 
 * config section:
  - reorder preferences: global prefs (for rename list), then user sections, then section defaults
 
 * hierarchy: indentation width option?
 
-* flat: dot-separator option?
+* flat: middot-separator option?
 
 * get event-handling code right
  - especially for list tab hiding
@@ -37,6 +37,10 @@ TODO:
  - add more comprehensive testing of options to unittest
 
 Documentation:
+- necessary settings
+ - turn on task cloud
+- recommended settings
+ - tags to right
 - create specific example sections
  - enough to illustrate key features
 - documents about allowed special characters, unicode, how to put into script
