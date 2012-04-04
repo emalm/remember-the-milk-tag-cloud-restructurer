@@ -49,14 +49,16 @@
 var globalprefs = {
 	drawSectionBorders: true,
 	borderColor: 'lightGrey',
-	hiddenTags: ['system', 'sent'],
+	hiddenTags: ['sent'],
 	renameTags: {
+		// *** UNIT TEST START
 		'_rename-flat': 'Renamed flat tag',
 		'+h44/a1/b3': 'Renamed hierarchy tag',
-		'rename-rename': 'Renamed rename tag',
-		'NeXT': 'Next r&eacute;n&#x61;med',
+		'single-rename': 'Renamed single tag',
+		'NeXT': 'Next r&eacute;n&#x61;m&egrave;d',
 		'-h3A': 'Rename with exact case',
 		'-H3A': 'Rename with mixed case'
+		// *** UNIT TEST END
 	},
 	renameTagsMatchCase: false
 };
@@ -113,7 +115,7 @@ var sectionprefs = {
 	
 	// sectionHierarchy preferences:
 	// - depth: max depth of hierarchy (should be at least 3)
-	// - colors: colors of top-level sections (assigned cyclically)
+	// - colors: list of colors of top-level sections (assigned cyclically)
 	// - sizes: RTM sizes of each level in hierarchy (1 to 9)
 	// - separators: string of path separators:
 	//  - '/' most convenient for lists, '+' allowed in tags
@@ -142,8 +144,10 @@ var my_sections = [
 	},
 
 	{ prefix: 'next',   type: sectionRename, 
+	                    // *** UNIT TEST START
 	                    displayOrder: 1,
 	                    displayname: 'Next Actions (at top)', 
+	                    // *** UNIT TEST END
 	                    color: 'red'
 	},
 
@@ -152,46 +156,58 @@ var my_sections = [
 	                    color: 'black' 
 	},
 
-	{ prefix: 'rename-rename',   type: sectionRename, 
+	// *** UNIT TEST START
+	{ prefix: 'single-rename',   type: sectionRename, 
 	                    displayname: 'Should get overridden', 
 	                    color: 'black'
 	},
+	// *** UNIT TEST END
 
 	{ prefix: '_',      type: sectionFlat, 
 	                    displayname: 'Responsibilities', 
 	                    color: '#444444' 
 	},
 
-	{ prefix: '+_',      type: sectionFlat, 
+	// *** UNIT TEST START
+	{ prefix: '+_',     type: sectionFlat, 
 	                    displayname: 'Bottom List', 
 	                    color: '#444444',
 	                    displayOrder: -1
 	},
+	// *** UNIT TEST END
 
 	{ prefix: '@',      type: sectionFlat, 
+	                    // *** UNIT TEST START
                         runinText: true,
+	                    // *** UNIT TEST END
 	                    displayname: 'Contexts', 
 	                    color: 'blue'
 	},
 
+	// *** UNIT TEST START
 	// 2-level hierarchy
 	{ prefix: '--',     type: sectionHierarchy, 
 	                    depth: 2,
 	                    sizes: ['6', '4'],
 	                    colors: ['green', 'purple', 'brown'] 
 	},
+	// *** UNIT TEST END
 
+	// *** UNIT TEST START
 	// 3-level hierarchy
+	// *** UNIT TEST END
 	{ prefix: '-',      type: sectionHierarchy, 
 	                    colors: ['green', 'purple', 'brown'] 
 	},
 
+	// *** UNIT TEST START
 	// 4-level hierarchy
 	{ prefix: '+',      type: sectionHierarchy, 
 	                    depth: 4,
 	                    sizes: ['6', '4', '3', '1'],
 	                    colors: ['green', 'purple', 'brown'] },
 
+	// *** UNIT TEST END
 	{ prefix: 'maybe',  type: sectionRename, 
 	                    displayname: 'Someday/Maybe', 
 	                    color: 'CornflowerBlue' 
@@ -1156,7 +1172,6 @@ function normalizeRenameTags() {
 	
 	// iterate through the tags to rename
 	for (var key in globalprefs.renameTags) {
-		unsafeWindow.console.log(key);
 		var newkey = key;
 		
 		// if matching not case sensitive, convert to lower case

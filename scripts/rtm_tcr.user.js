@@ -42,11 +42,14 @@
 // - bool drawSectionBorders: draw borders around sections
 // - string borderColor: color spec for border
 // - hiddenTags: list of tags not to display
+// - renameTags: dictionary of tags to rename
+// - renameTagsMatchCase: match case of tag when checking for rename
+//  - remember that RTM converts tag names to lowercase in tag cloud
 
 var globalprefs = {
 	drawSectionBorders: true,
 	borderColor: 'lightGrey',
-	hiddenTags: ['system', 'sent'],
+	hiddenTags: ['sent'],
 	renameTags: {
 	},
 	renameTagsMatchCase: false
@@ -69,25 +72,31 @@ var sectionprefs = {
 	
 	// sectionRename preferences:
 	// - headerSize: RTM size for header tag (1-9)
+	// - color: color of section
 	// - bool displayOriginalName: display '(original tag)' after new name
 	
 	sectionRename: {
 		headerSize: 6,
+		color: 'black',
 		displayOriginalName: false
 	},
 	
 	// sectionFlat preferences:
 	// - headerSize: RTM size for header tag (1-9)
+	// - color: color of section
 	// - maxChildSize, maximum RTM size for child tags
 	// - minChildSize, minimum RTM size for child tags
 	//  - set these equal to make all tags a particular size 
 	// - displayPrefixInHeader: show '(prefix)' after header
 	// - displayPrefixInTags: keep prefix on tags
 	// - renameTags: convert underscores to spaces, capitalize words
-	// - runinText: TODO describe
-	
+	// - runinText:
+	//  - if true: HEADER: tag tag tag ...
+	//  - if false: HEADER, new line, tag tag tag ...
+		
 	sectionFlat: {
 		headerSize: 6,
+		color: 'black',
 		maxChildSize: 4,
 		minChildSize: 1,
 		displayPrefixInHeader: false,
@@ -98,24 +107,27 @@ var sectionprefs = {
 	
 	// sectionHierarchy preferences:
 	// - depth: max depth of hierarchy (should be at least 3)
+	// - colors: list of colors of top-level sections (assigned cyclically)
 	// - sizes: RTM sizes of each level in hierarchy (1 to 9)
 	// - separators: string of path separators:
-	// -- '/' most convenient for lists, '+' allowed in tags
+	//  - '/' most convenient for lists, '+' allowed in tags
 	// - hideChildren: child tags to hide
 	
 	sectionHierarchy: {
 		depth: 3,
+		colors: ['black', 'green', 'brown'],
 		sizes: ['6', '4', '1'],
-      	separators: '|/+', 
+      	separators: '|/+',
 		hidechildren: []
 		// indentChildTags: true
 	}
 };
 
 // section definitions
-// specify in order of tag processing (more specific prefixes first)
-// - ex: if '@' before '@_', '@' will grab all tags starting with '@'
-// overwrite per-section preferences here, too;
+// - prefix: matched to tags in the order specified
+//  - ex: if '@' before '@_', '@' will grab all tags starting with '@'
+// - type: class name of section
+// overwrite per-section preferences here, too
 
 var my_sections = [
 	{ prefix: 'inbox',  type: sectionRename, 

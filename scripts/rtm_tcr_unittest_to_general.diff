@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-03-30 16:22:47.000000000 -0400
-+++ rtm_tcr.user.js	2012-03-30 16:33:18.000000000 -0400
+--- rtm_tcr_unittest.user.js	2012-04-04 10:19:28.000000000 -0400
++++ rtm_tcr.user.js	2012-04-04 10:03:33.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -18,74 +18,89 @@
  // ==/UserScript==
  
  /*
-@@ -48,13 +48,6 @@
+@@ -51,14 +51,6 @@
  	borderColor: 'lightGrey',
- 	hiddenTags: ['system', 'sent'],
+ 	hiddenTags: ['sent'],
  	renameTags: {
+-		// *** UNIT TEST START
 -		'_rename-flat': 'Renamed flat tag',
 -		'+h44/a1/b3': 'Renamed hierarchy tag',
--		'rename-rename': 'Renamed rename tag',
--		'NeXT': '&#x41;',
--		'ŒÁØÅÍÎÏÓÔÒÚÆÇÂ': 'test',
--		'-H33&#x41;': 'Rename with entity',
--		'-H33A': 'Rename with mixed case'
+-		'single-rename': 'Renamed single tag',
+-		'NeXT': 'Next r&eacute;n&#x61;m&egrave;d',
+-		'-h3A': 'Rename with exact case',
+-		'-H3A': 'Rename with mixed case'
+-		// *** UNIT TEST END
  	},
  	renameTagsMatchCase: false
  };
-@@ -131,8 +124,7 @@
+@@ -144,10 +127,7 @@
  	},
  
  	{ prefix: 'next',   type: sectionRename, 
+-	                    // *** UNIT TEST START
 -	                    displayOrder: 1,
 -	                    displayname: 'Next Actions (at top)', 
+-	                    // *** UNIT TEST END
 +	                    displayname: 'Next Actions', 
  	                    color: 'red'
  	},
  
-@@ -141,46 +133,20 @@
+@@ -156,58 +136,20 @@
  	                    color: 'black' 
  	},
  
--	{ prefix: 'rename-rename',   type: sectionRename, 
+-	// *** UNIT TEST START
+-	{ prefix: 'single-rename',   type: sectionRename, 
 -	                    displayname: 'Should get overridden', 
 -	                    color: 'black'
 -	},
+-	// *** UNIT TEST END
 -
  	{ prefix: '_',      type: sectionFlat, 
  	                    displayname: 'Responsibilities', 
  	                    color: '#444444' 
  	},
  
--	{ prefix: '+_',      type: sectionFlat, 
+-	// *** UNIT TEST START
+-	{ prefix: '+_',     type: sectionFlat, 
 -	                    displayname: 'Bottom List', 
 -	                    color: '#444444',
 -	                    displayOrder: -1
 -	},
+-	// *** UNIT TEST END
 -
  	{ prefix: '@',      type: sectionFlat, 
+-	                    // *** UNIT TEST START
 -                        runinText: true,
+-	                    // *** UNIT TEST END
  	                    displayname: 'Contexts', 
  	                    color: 'blue'
  	},
  
+-	// *** UNIT TEST START
 -	// 2-level hierarchy
 -	{ prefix: '--',     type: sectionHierarchy, 
 -	                    depth: 2,
 -	                    sizes: ['6', '4'],
 -	                    colors: ['green', 'purple', 'brown'] 
 -	},
+-	// *** UNIT TEST END
 -
+-	// *** UNIT TEST START
 -	// 3-level hierarchy
+-	// *** UNIT TEST END
  	{ prefix: '-',      type: sectionHierarchy, 
  	                    colors: ['green', 'purple', 'brown'] 
  	},
  
+-	// *** UNIT TEST START
 -	// 4-level hierarchy
 -	{ prefix: '+',      type: sectionHierarchy, 
 -	                    depth: 4,
 -	                    sizes: ['6', '4', '3', '1'],
 -	                    colors: ['green', 'purple', 'brown'] },
 -
+-	// *** UNIT TEST END
  	{ prefix: 'maybe',  type: sectionRename, 
  	                    displayname: 'Someday/Maybe', 
  	                    color: 'CornflowerBlue' 
