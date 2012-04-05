@@ -65,73 +65,6 @@ var globalprefs = {
 	matchTagCase: false
 };
 
-// default preferences for each type of section
-// can overwrite each of these in the section defintions below
-// some section preferences must be specified for given section
-
-var sectionprefs = {
-	// sectionBase preferences:
-	// - displayOrder: governs final order of sections, with higher nums at top
-	//  - ex: to move a section to top/bottom, give it a displayOrder of 1/-1
-	// - bool hide: hide section
-
-	sectionBase: {
-		displayOrder: 0,
-		hide: false
-	},
-	
-	// sectionSingle preferences:
-	// - headerSize: RTM size for header tag (1-9)
-	// - color: color of section
-	// - bool displayOriginalName: display '(original tag)' after new name
-	
-	sectionSingle: {
-		headerSize: 6,
-		color: 'black',
-		displayOriginalName: false
-	},
-	
-	// sectionFlat preferences:
-	// - headerSize: RTM size for header tag (1-9)
-	// - color: color of section
-	// - maxChildSize, maximum RTM size for child tags
-	// - minChildSize, minimum RTM size for child tags
-	//  - set these equal to make all tags a particular size 
-	// - displayPrefixInHeader: show '(prefix)' after header
-	// - displayPrefixInTags: keep prefix on tags
-	// - renameTags: convert underscores to spaces, capitalize words
-	// - runinText:
-	//  - if true: HEADER: tag tag tag ...
-	//  - if false: HEADER, new line, tag tag tag ...
-		
-	sectionFlat: {
-		headerSize: 6,
-		color: 'black',
-		maxChildSize: 4,
-		minChildSize: 1,
-		displayPrefixInHeader: false,
-		displayPrefixInTags: false,
-		renameTags: false,
-		runinText: true
-	},
-	
-	// sectionHierarchy preferences:
-	// - depth: max depth of hierarchy (should be at least 3)
-	// - colors: list of colors of top-level sections (assigned cyclically)
-	// - sizes: RTM sizes of each level in hierarchy (1 to 9)
-	// - separators: string of path separators:
-	//  - '/' most convenient for lists, '+' allowed in tags
-	// - hideChildren: child tags to hide
-	
-	sectionHierarchy: {
-		depth: 3,
-		colors: ['black', 'green', 'brown'],
-		sizes: ['6', '4', '1'],
-      	separators: '|/+',
-		hidechildren: []
-		// indentChildTags: true
-	}
-};
 
 // section definitions
 // - prefix: matched to tags in the order specified
@@ -225,6 +158,76 @@ var my_sections = [
 
 // pick the above section list as sections to process
 var sections = my_sections;
+
+
+// default preferences for each type of section
+// can overwrite each of these in the section defintions below
+// some section preferences must be specified for given section
+
+var sectionprefs = {
+	// sectionBase preferences:
+	// - displayOrder: governs final order of sections, with higher nums at top
+	//  - ex: to move a section to top/bottom, give it a displayOrder of 1/-1
+	// - bool hide: hide section
+
+	sectionBase: {
+		displayOrder: 0,
+		hide: false
+	},
+	
+	// sectionSingle preferences:
+	// - headerSize: RTM size for header tag (1-9)
+	// - color: color of section
+	// - bool displayOriginalName: display '(original tag)' after new name
+	
+	sectionSingle: {
+		headerSize: 6,
+		color: 'black',
+		displayOriginalName: false
+	},
+	
+	// sectionFlat preferences:
+	// - headerSize: RTM size for header tag (1-9)
+	// - color: color of section
+	// - maxChildSize, maximum RTM size for child tags
+	// - minChildSize, minimum RTM size for child tags
+	//  - set these equal to make all tags a particular size 
+	// - displayPrefixInHeader: show '(prefix)' after header
+	// - displayPrefixInTags: keep prefix on tags
+	// - renameTags: convert underscores to spaces, capitalize words
+	// - runinText:
+	//  - if true: HEADER: tag tag tag ...
+	//  - if false: HEADER, new line, tag tag tag ...
+		
+	sectionFlat: {
+		headerSize: 6,
+		color: 'black',
+		maxChildSize: 4,
+		minChildSize: 1,
+		displayPrefixInHeader: false,
+		displayPrefixInTags: false,
+		renameTags: false,
+		runinText: true
+	},
+	
+	// sectionHierarchy preferences:
+	// - depth: max depth of hierarchy (should be at least 3)
+	// - colors: list of colors of top-level sections (assigned cyclically)
+	// - sizes: RTM sizes of each level in hierarchy (1 to 9)
+	// - separators: string of path separators:
+	//  - '/' most convenient for lists, '+' allowed in tags
+	// - hideChildren: child tags to hide
+	
+	sectionHierarchy: {
+		depth: 3,
+		colors: ['black', 'green', 'brown'],
+		sizes: ['6', '4', '1'],
+      	separators: '|/+',
+		hidechildren: []
+		// indentChildTags: true
+	}
+};
+
 
 /*
  * End of configuration section

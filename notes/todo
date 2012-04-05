@@ -2,11 +2,6 @@ TODO:
 
 * refactor code in big routines
 
-* hide-tag list should be case-insensitive
-
-* config section:
- - reorder preferences: global prefs (for rename list), then user sections, then section defaults
-
 * hierarchy: indentation width option?
 
 * flat: middot-separator option?

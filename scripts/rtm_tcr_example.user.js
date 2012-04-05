@@ -58,6 +58,60 @@ var globalprefs = {
 	matchTagCase: false
 };
 
+
+// section definitions
+// - prefix: matched to tags in the order specified
+//  - ex: if '@' before '@_', '@' will grab all tags starting with '@'
+// - type: class name of section
+// overwrite per-section preferences here, too
+
+var my_sections = [
+	{ prefix: 'inbox',  type: sectionSingle, 
+	                    displayname: 'Unsorted', 
+	                    color: 'orange' 
+	},
+
+	{ prefix: 'next',   type: sectionSingle, 
+	                    displayname: 'Next Actions', 
+	                    color: 'red'
+	},
+
+	{ prefix: 'goal',   type: sectionSingle, 
+	                    displayname: 'Goals', 
+	                    color: 'black' 
+	},
+
+	{ prefix: '_',      type: sectionFlat, 
+	                    displayname: 'Responsibilities', 
+	                    color: '#444444' 
+	},
+
+	{ prefix: '@',      type: sectionFlat, 
+	                    displayname: 'Contexts', 
+	                    color: 'blue'
+	},
+
+	{ prefix: '-',      type: sectionHierarchy, 
+	                    colors: ['green', 'purple', 'brown'] 
+	},
+
+	{ prefix: 'maybe',  type: sectionSingle, 
+	                    displayname: 'Someday/Maybe', 
+	                    color: 'CornflowerBlue' 
+	},
+
+	// catch-all section for unprocessed lists and tags
+	{ prefix: '',       type: sectionFlat, 
+	                    displayname: 'Miscellaneous', 
+	                    runinText: false,
+	                    color: 'gray' 
+	}
+];
+
+// pick the above section list as sections to process
+var sections = my_sections;
+
+
 // default preferences for each type of section
 // can overwrite each of these in the section defintions below
 // some section preferences must be specified for given section
@@ -126,57 +180,6 @@ var sectionprefs = {
 	}
 };
 
-// section definitions
-// - prefix: matched to tags in the order specified
-//  - ex: if '@' before '@_', '@' will grab all tags starting with '@'
-// - type: class name of section
-// overwrite per-section preferences here, too
-
-var my_sections = [
-	{ prefix: 'inbox',  type: sectionSingle, 
-	                    displayname: 'Unsorted', 
-	                    color: 'orange' 
-	},
-
-	{ prefix: 'next',   type: sectionSingle, 
-	                    displayname: 'Next Actions', 
-	                    color: 'red'
-	},
-
-	{ prefix: 'goal',   type: sectionSingle, 
-	                    displayname: 'Goals', 
-	                    color: 'black' 
-	},
-
-	{ prefix: '_',      type: sectionFlat, 
-	                    displayname: 'Responsibilities', 
-	                    color: '#444444' 
-	},
-
-	{ prefix: '@',      type: sectionFlat, 
-	                    displayname: 'Contexts', 
-	                    color: 'blue'
-	},
-
-	{ prefix: '-',      type: sectionHierarchy, 
-	                    colors: ['green', 'purple', 'brown'] 
-	},
-
-	{ prefix: 'maybe',  type: sectionSingle, 
-	                    displayname: 'Someday/Maybe', 
-	                    color: 'CornflowerBlue' 
-	},
-
-	// catch-all section for unprocessed lists and tags
-	{ prefix: '',       type: sectionFlat, 
-	                    displayname: 'Miscellaneous', 
-	                    runinText: false,
-	                    color: 'gray' 
-	}
-];
-
-// pick the above section list as sections to process
-var sections = my_sections;
 
 /*
  * End of configuration section
