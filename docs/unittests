@@ -14,28 +14,28 @@ T match case (true/false)
 
 Base prefs:
 - display order: +, 0, -
-O hide section
+- hide section
 
 Single prefs:
 - header size
-O display orig name
+- display orig name
 
 Flat prefs:
 - header size
 - max size adjust
 - min size adjust
 - show prefix in head
- O true
+ - true
  - false
 - show prefix in tag
- O true
+ - true
  - false
 - rename: _ -> space, capitalize
- O true
+ - true
  - false
 - runin
  - true
- O false
+ - false
 
 Hier prefs:
 - depth

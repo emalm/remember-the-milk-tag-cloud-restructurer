@@ -57,7 +57,7 @@ var globalprefs = {
 		'_rename-flat': 'Renamed flat tag',
 		'+h44/a1/b3': 'Renamed hierarchy tag',
 		'single-rename': 'Renamed single tag',
-		'NeXT': 'Next r&eacute;n&#x61;m&egrave;d',
+		'InbOx': 'Unsorted r&eacute;n&#x61;m&egrave;d',
 		'-h3A': 'Rename with exact case',
 		'-H3A': 'Rename with mixed case'
 		// *** UNIT TEST END
@@ -82,6 +82,7 @@ var my_sections = [
 	                    // *** UNIT TEST START
 	                    displayOrder: 1,
 	                    displayname: 'Next Actions (at top)', 
+						displayOriginalName: true,
 	                    // *** UNIT TEST END
 	                    color: 'red'
 	},
@@ -96,6 +97,12 @@ var my_sections = [
 	                    displayname: 'Should get overridden', 
 	                    color: 'black'
 	},
+
+	{ prefix: 'hidesec',   type: sectionSingle, 
+	                    displayname: 'Should get hidden',
+	                    hide: true, 
+	                    color: 'black'
+	},
 	// *** UNIT TEST END
 
 	{ prefix: '_',      type: sectionFlat, 
@@ -104,9 +111,12 @@ var my_sections = [
 	},
 
 	// *** UNIT TEST START
-	{ prefix: '+_',     type: sectionFlat, 
+	{ prefix: '++',     type: sectionFlat, 
 	                    displayname: 'Bottom List', 
 	                    color: '#444444',
+						displayPrefixInHeader: true,
+						displayPrefixInTags: true,
+						capAndSpaceTags: true,
 	                    displayOrder: -1
 	},
 	// *** UNIT TEST END
@@ -206,7 +216,7 @@ var sectionprefs = {
 		minChildSize: 1,
 		displayPrefixInHeader: false,
 		displayPrefixInTags: false,
-		renameTags: false,
+		capAndSpaceTags: false,
 		runinText: true
 	},
 	
@@ -454,7 +464,7 @@ sectionFlat.prototype.addTag = function(tag) {
 	}
 	
 	// if specified, convert _ to space, capitalize
-	if (this.renameTags) {
+	if (this.capAndSpaceTags) {
 		tag.innerHTML = capitalizeAndSpace(tag.innerHTML);
 	}
 	

@@ -158,7 +158,7 @@ var sectionprefs = {
 		minChildSize: 1,
 		displayPrefixInHeader: false,
 		displayPrefixInTags: false,
-		renameTags: false,
+		capAndSpaceTags: false,
 		runinText: true
 	},
 	
@@ -406,7 +406,7 @@ sectionFlat.prototype.addTag = function(tag) {
 	}
 	
 	// if specified, convert _ to space, capitalize
-	if (this.renameTags) {
+	if (this.capAndSpaceTags) {
 		tag.innerHTML = capitalizeAndSpace(tag.innerHTML);
 	}
 	

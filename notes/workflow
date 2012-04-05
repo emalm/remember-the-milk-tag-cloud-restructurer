@@ -18,7 +18,7 @@ cp rtm-tcr-unittest.user.js ~/Library/Application\ Support/Firefox/Profiles/gh6u
 
 diff -u rtm-tcr-unittest.user.js rtm-tcr.user.js > rtm-tcr-unittest-to-general.diff
 
-* modify diff so changes only Greasemonkey context, section dictionary
+* delete diff hunks so changes only Greasemonkey context, section dictionary
 
 patch -u -i rtm-tcr-unittest-to-general.diff rtm-tcr-unittest.user.js -o rtm-tcr.user.js
 

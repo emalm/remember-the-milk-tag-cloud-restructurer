@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-04-04 22:37:00.000000000 -0400
-+++ rtm_tcr.user.js	2012-04-04 22:38:06.000000000 -0400
+--- rtm-tcr-unittest.user.js	2012-04-05 16:43:18.000000000 -0400
++++ rtm-tcr.user.js	2012-04-04 22:46:08.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -31,7 +31,7 @@
 -		'_rename-flat': 'Renamed flat tag',
 -		'+h44/a1/b3': 'Renamed hierarchy tag',
 -		'single-rename': 'Renamed single tag',
--		'NeXT': 'Next r&eacute;n&#x61;m&egrave;d',
+-		'InbOx': 'Unsorted r&eacute;n&#x61;m&egrave;d',
 -		'-h3A': 'Rename with exact case',
 -		'-H3A': 'Rename with mixed case'
 -		// *** UNIT TEST END
@@ -41,25 +41,32 @@
  	},
  	matchTagCase: false
  };
-@@ -79,10 +72,7 @@
+@@ -79,11 +72,7 @@
  	},
  
  	{ prefix: 'next',   type: sectionSingle, 
 -	                    // *** UNIT TEST START
 -	                    displayOrder: 1,
 -	                    displayname: 'Next Actions (at top)', 
+-						displayOriginalName: true,
 -	                    // *** UNIT TEST END
 +	                    displayname: 'Next Actions', 
  	                    color: 'red'
  	},
  
-@@ -91,58 +81,20 @@
+@@ -92,67 +81,20 @@
  	                    color: 'black' 
  	},
  
 -	// *** UNIT TEST START
 -	{ prefix: 'single-rename',   type: sectionSingle, 
 -	                    displayname: 'Should get overridden', 
+-	                    color: 'black'
+-	},
+-
+-	{ prefix: 'hidesec',   type: sectionSingle, 
+-	                    displayname: 'Should get hidden',
+-	                    hide: true, 
 -	                    color: 'black'
 -	},
 -	// *** UNIT TEST END
@@ -70,9 +77,12 @@
  	},
  
 -	// *** UNIT TEST START
--	{ prefix: '+_',     type: sectionFlat, 
+-	{ prefix: '++',     type: sectionFlat, 
 -	                    displayname: 'Bottom List', 
 -	                    color: '#444444',
+-						displayPrefixInHeader: true,
+-						displayPrefixInTags: true,
+-						capAndSpaceTags: true,
 -	                    displayOrder: -1
 -	},
 -	// *** UNIT TEST END

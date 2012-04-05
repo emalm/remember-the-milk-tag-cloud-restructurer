@@ -5,6 +5,7 @@ Fixed:	displayOrder preference now orders sections correctly
 Fixed:	sectionFlat header search now searches for lists with spaces correctly
 Change:	Renamed sectionRename section type to sectionSingle
 Change:	Moved section definitions to right after global preferences
+Change:	Renamed sectionFlat preference renameTags to capAndSpaceTags
 New: 	Global dictionary (renameTags) of tags to rename
 New: 	Global preference (matchTagCase) for case sensitivity when 
     	matching tags to rename or hide
