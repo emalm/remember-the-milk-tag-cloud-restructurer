@@ -43,13 +43,15 @@
 // - string borderColor: color spec for border
 // - hiddenTags: list of tags not to display
 // - renameTags: dictionary of tags to rename
-// - renameTagsMatchCase: match case of tag when checking for rename
+// - matchTagCase: match case of tag when checking for rename
 //  - remember that RTM converts tag names to lowercase in tag cloud
 
 var globalprefs = {
 	drawSectionBorders: true,
 	borderColor: 'lightGrey',
-	hiddenTags: ['sent'],
+	// *** UNIT TEST START
+	hiddenTags: ['sent', 'ShouldHide'],
+	// *** UNIT TEST END
 	renameTags: {
 		// *** UNIT TEST START
 		'_rename-flat': 'Renamed flat tag',
@@ -60,7 +62,7 @@ var globalprefs = {
 		'-H3A': 'Rename with mixed case'
 		// *** UNIT TEST END
 	},
-	renameTagsMatchCase: false
+	matchTagCase: false
 };
 
 // default preferences for each type of section
@@ -465,6 +467,7 @@ sectionFlat.prototype.addTag = function(tag) {
 		this.searchlist.push(searchstring);
 	}
 	
+	// DEBUG
 	// deal with sizing (level##) in tag span, maybe
 	// unsafeWindow.console.log("Tag '%s' is level '%d'", tagname, getTagSize(tag));
 	
@@ -843,14 +846,11 @@ function constructSections(sectionargumentslist) {
 	return sectionobjlist;
 }
 
-// chop off leading, trailing spaces
-
-String.prototype.trim = function() { return this.replace(/^\s+|\s+$/, ''); };
-
 // determine if an array contains an element
 
 Array.prototype.contains = function (element)  {
-	for (var i = 0; i < this.length; i++) {
+	var len = this.length;
+	for (var i = 0; i < len; i++) {
     	if (this[i] == element)  {
 			return true;
         }
@@ -996,7 +996,13 @@ function collectAndMatchTags(cloud, sectionlist) {
 		}
 		
 		// remove any tags we decided to hide
-		if (globalprefs.hiddenTags.contains(orig_tagname)) {
+		var tagname = orig_tagname;
+		
+		if (globalprefs.matchTagCase == false) {
+			tagname = tagname.toLowerCase();
+		}
+		
+		if (globalprefs.hiddenTagsNormalized.contains(tagname)) {
 			tag.parentNode.parentNode.removeChild(tag.parentNode);
 			continue;
 		}
@@ -1070,7 +1076,7 @@ function addRenameInfoToTag(tag) {
 		// no [[...]] block, so clear off spaces, check in global rename list
 		tagname = tagname.trim();
 		
-		if (globalprefs.renameTagsMatchCase == false) {
+		if (globalprefs.matchTagCase == false) {
 			tagname = tagname.toLowerCase();
 		}
 		
@@ -1167,6 +1173,27 @@ function processCloud(sectionlistconfig) {
 	listenForTagChanges(true);
 }
 
+function normalizeHiddenTags() {
+	// new array for normalized tags
+	globalprefs.hiddenTagsNormalized = [];
+	
+	// iterate through the tags to hide
+	var len = globalprefs.hiddenTags.length;
+	for (var i = 0; i < len; i++) {
+		var newkey = globalprefs.hiddenTags[i];
+		
+		// if matching not case sensitive, convert to lower case
+		if (globalprefs.matchTagCase == false) {
+			newkey = newkey.toLowerCase();
+		}
+		
+		// store key in normalized array
+		globalprefs.hiddenTagsNormalized.push(newkey);
+	}
+	
+	return;
+}
+
 function normalizeRenameTags() {
 	// new dictionary for normalized tags
 	globalprefs.renameTagsNormalized = {};
@@ -1176,7 +1203,7 @@ function normalizeRenameTags() {
 		var newkey = key;
 		
 		// if matching not case sensitive, convert to lower case
-		if (globalprefs.renameTagsMatchCase == false) {
+		if (globalprefs.matchTagCase == false) {
 			newkey = key.toLowerCase();
 		}
 		
@@ -1189,7 +1216,8 @@ function normalizeRenameTags() {
 }
 
 // start by processing global preference settings
-// - make new rename list with tags converted to lower case
+// - make new rename and hidden lists with tags converted to lower case
+normalizeHiddenTags();
 normalizeRenameTags();
 
 // then process the cloud with our section list

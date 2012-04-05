@@ -1,5 +1,5 @@
---- rtm_tcr_unittest.user.js	2012-04-04 17:31:08.000000000 -0400
-+++ rtm_tcr.user.js	2012-04-04 17:28:58.000000000 -0400
+--- rtm_tcr_unittest.user.js	2012-04-04 21:06:56.000000000 -0400
++++ rtm_tcr.user.js	2012-04-04 21:06:16.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -18,9 +18,14 @@
  // ==/UserScript==
  
  /*
-@@ -51,14 +51,9 @@
+@@ -49,18 +49,11 @@
+ var globalprefs = {
+ 	drawSectionBorders: true,
  	borderColor: 'lightGrey',
- 	hiddenTags: ['sent'],
+-	// *** UNIT TEST START
+-	hiddenTags: ['sent', 'ShouldHide'],
+-	// *** UNIT TEST END
++	hiddenTags: ['sent'],
  	renameTags: {
 -		// *** UNIT TEST START
 -		'_rename-flat': 'Renamed flat tag',
@@ -34,9 +39,9 @@
 +		'-W': 'Work',
 +		'-P/Computer/TeX': 'TeX'
  	},
- 	renameTagsMatchCase: false
+ 	matchTagCase: false
  };
-@@ -144,10 +139,7 @@
+@@ -146,10 +139,7 @@
  	},
  
  	{ prefix: 'next',   type: sectionSingle, 
@@ -48,7 +53,7 @@
  	                    color: 'red'
  	},
  
-@@ -156,58 +148,20 @@
+@@ -158,58 +148,20 @@
  	                    color: 'black' 
  	},
  

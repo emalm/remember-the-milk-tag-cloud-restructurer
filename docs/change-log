@@ -5,8 +5,8 @@ Fixed:	displayOrder preference now orders sections correctly
 Fixed:	sectionFlat header search now searches for lists with spaces correctly
 Change:	Renamed sectionRename section type to sectionSingle
 New: 	Global dictionary (renameTags) of tags to rename
-New: 	Global preference (renameTagsMatchCase) for case sensitivity when 
-    	matching tags to rename
+New: 	Global preference (matchTagCase) for case sensitivity when 
+    	matching tags to rename or hide
 New: 	sectionFlat preference (minChildSize) to set lower limit for tag size
 New: 	sectionFlat preference (runinText) to display flat section 
    		as HEADER: tag tag ...
