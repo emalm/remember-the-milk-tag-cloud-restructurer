@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>notes/workflow</string>
+	<string>docs/userscripts-description</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,7 +13,7 @@
 					<key>filename</key>
 					<string>docs/change-log</string>
 					<key>lastUsed</key>
-					<date>2012-04-05T02:43:32Z</date>
+					<date>2012-04-05T04:40:55Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -34,6 +34,10 @@
 				<dict>
 					<key>filename</key>
 					<string>docs/userscripts-description</string>
+					<key>lastUsed</key>
+					<date>2012-04-05T04:40:55Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -76,7 +80,7 @@
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-04-05T02:48:53Z</date>
+					<date>2012-04-05T03:02:34Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -146,8 +150,8 @@
 				<dict>
 					<key>filename</key>
 					<string>scripts/rtm-tcr.user.js</string>
-					<key>selected</key>
-					<true/>
+					<key>lastUsed</key>
+					<date>2012-04-05T04:28:45Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -165,14 +169,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>67</integer>
-				<key>line</key>
 				<integer>6</integer>
+				<key>line</key>
+				<integer>3</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>3</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>6</integer>
+				<key>line</key>
+				<integer>3</integer>
+			</dict>
 		</dict>
 		<key>docs/example-tag-list</key>
 		<dict>
@@ -187,6 +207,20 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+		</dict>
+		<key>docs/userscripts-description</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>114</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>81</integer>
 		</dict>
 		<key>notes/char-notes</key>
 		<dict>
@@ -274,12 +308,28 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>scripts/rtm-tcr.user.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>12</integer>
+				<key>line</key>
+				<integer>172</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>133</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>notes/workflow</string>
-		<string>notes/todo</string>
+		<string>docs/userscripts-description</string>
 		<string>docs/change-log</string>
+		<string>scripts/rtm-tcr.user.js</string>
+		<string>notes/todo</string>
 		<string>docs/example-tag-list</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
