@@ -1,67 +1,67 @@
 Workflow:
 
-**** make changes in rtm_tcr_unittest.user.js
+**** make changes in rtm-tcr-unittest.user.js
  - test in rtm.tcr.unittest account; mainly in Chrome, then in Firefox, Safari
 
 Chrome:
 
-cp rtm_tcr_unittest.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/leaegfagppffnlnfjambidbohijokkbe/1.1_0/script.js
+cp rtm-tcr-unittest.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/leaegfagppffnlnfjambidbohijokkbe/1.1_0/script.js
 
 * disable, reenable extension; reload RTM page
 
 Firefox:
 
-cp rtm_tcr_unittest.user.js ~/Library/Application\ Support/Firefox/Profiles/gh6uxe30.default/gm_scripts/RTM_Tag_Cloud_Restructurer_\(rtm.tcr.unittest\)/rtm_tcr_unittest.user.js
+cp rtm-tcr-unittest.user.js ~/Library/Application\ Support/Firefox/Profiles/gh6uxe30.default/gm_scripts/RTM_Tag_Cloud_Restructurer_\(rtm.tcr.unittest\)/rtm-tcr-unittest.user.js
 
 
-**** diff/patch rtm_tcr_unittest.user.js to rtm_tcr.user.js
+**** diff/patch rtm-tcr-unittest.user.js to rtm-tcr.user.js
 
-diff -u rtm_tcr_unittest.user.js rtm_tcr.user.js > rtm_tcr_unittest_to_general.diff
+diff -u rtm-tcr-unittest.user.js rtm-tcr.user.js > rtm-tcr-unittest-to-general.diff
 
 * modify diff so changes only Greasemonkey context, section dictionary
 
-patch -u -i rtm_tcr_unittest_to_general.diff rtm_tcr_unittest.user.js -o rtm_tcr.user.js
+patch -u -i rtm-tcr-unittest-to-general.diff rtm-tcr-unittest.user.js -o rtm-tcr.user.js
 
 
-**** diff/patch rtm_tcr.user.js to rtm_tcr_emalminator.user.js
+**** diff/patch rtm-tcr.user.js to rtm-tcr-emalminator.user.js
 
-diff -u rtm_tcr.user.js rtm_tcr_emalminator.user.js > rtm_tcr_general_to_em.diff
+diff -u rtm-tcr.user.js rtm-tcr-emalminator.user.js > rtm-tcr-general-to-em.diff
 
 * maintain diff so changes only Greasemonkey context, section dictionary (if necessary)
 
 
-patch -u -i rtm_tcr_general_to_em.diff rtm_tcr.user.js -o rtm_tcr_emalminator.user.js
+patch -u -i rtm-tcr-general-to-em.diff rtm-tcr.user.js -o rtm-tcr-emalminator.user.js
 
 * once emalminator script patched, test on personal account
 
 Chrome:
 
-cp rtm_tcr_emalminator.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/njklpkmfebgooabmbjdhpadmohnbeomc/1.1_0/script.js
+cp rtm-tcr-emalminator.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/njklpkmfebgooabmbjdhpadmohnbeomc/1.1_0/script.js
 
 
 Firefox:
 
-cp rtm_tcr_emalminator.user.js ~/Library/Application\ Support/Firefox/Profiles/gh6uxe30.default/gm_scripts/RTM_Tag_Cloud_Restructurer_\(emalminator\)/rtm_tcr_emalminator.user.js
+cp rtm-tcr-emalminator.user.js ~/Library/Application\ Support/Firefox/Profiles/gh6uxe30.default/gm_scripts/RTM_Tag_Cloud_Restructurer_\(emalminator\)/rtm-tcr-emalminator.user.js
 
 
-**** diff/patch rtm_tcr.user.js to rtm_tcr_example.user.js
+**** diff/patch rtm-tcr.user.js to rtm-tcr-example.user.js
 
-diff -u rtm_tcr.user.js rtm_tcr_example.user.js > rtm_tcr_general_to_example.diff
+diff -u rtm-tcr.user.js rtm-tcr-example.user.js > rtm-tcr-general-to-example.diff
 
 * maintain diff so changes only Greasemonkey context, section dictionary
 
-patch -u -i rtm_tcr_general_to_example.diff rtm_tcr.user.js -o rtm_tcr_example.user.js
+patch -u -i rtm-tcr-general-to-example.diff rtm-tcr.user.js -o rtm-tcr-example.user.js
 
 * once example script patched, test on example account, generate documentation
 
 Chrome:
 
-cp rtm_tcr_example.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/flblipakiocabbhjadegchbollinjjmk/1.1_0/script.js
+cp rtm-tcr-example.user.js ~/Library/Application\ Support/Google/Chrome/Default/Extensions/flblipakiocabbhjadegchbollinjjmk/1.1_0/script.js
 
 
 Firefox:
 
-cp rtm_tcr_example.user.js ~/Library/Application\ Support/Firefox/Profiles/gh6uxe30.default/gm_scripts/RTM_Tag_Cloud_Restructurer_\(rtm.tcr.example\)/rtm_tcr_example.user.js
+cp rtm-tcr-example.user.js ~/Library/Application\ Support/Firefox/Profiles/gh6uxe30.default/gm_scripts/RTM_Tag_Cloud_Restructurer_\(rtm.tcr.example\)/rtm-tcr-example.user.js
 
 
 
