@@ -177,7 +177,7 @@ var sectionprefs = {
 		depth: 3,
 		colors: ['black', 'green', 'brown'],
 		sizes: ['6', '4', '1'],
-      	separators: '|/+'
+		separators: '|/+'
 		// hidechildren: []
 		// indentChildTags: true
 	}
