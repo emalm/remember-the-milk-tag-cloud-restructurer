@@ -47,7 +47,7 @@ Hier prefs:
  - '|/+'
  O '/'
  O '.'
-O hide children list
+O hide children list - not yet implemented
 
 Hier features:
 - auto-generate missing tags

@@ -3,6 +3,11 @@
 <head></head>
 <body>
 	
+Images:
+
+<a href="http://tinypic.com?ref=2m7b2q1" target="_blank"><img src="http://i39.tinypic.com/2m7b2q1.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
+<a href="http://tinypic.com?ref=4kybv8" target="_blank"><img src="http://i41.tinypic.com/4kybv8.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
+	
 	
 Summary:
 A script to restructure the tag cloud in Remember the Milk. Based off of masnare's Tag Cloud Colorizer script, jgallen23's RememberTheMilkEnhanced script, and ideas in the Tag Cloud post in the RTM forums.
@@ -14,24 +19,28 @@ Description:
 
 Based on masnare's Tag Cloud Colorizer script  (<a href = "http://userscripts.org/scripts/show/25046">http://userscripts.org/scripts/show/25046</a>) and jgallen23's RememberTheMilkEnhanced (<a href="http://userscripts.org/scripts/show/26057">http://userscripts.org/scripts/show/26057</a>), as well as ideas from the Tag Cloud post in the Remember the Milk forums (<a href="http://www.rememberthemilk.com/forums/tips/2943/">http://www.rememberthemilk.com/forums/tips/2943/</a>).
 
-This script provides a fairly general framework for restructuring the tag cloud in Remember the Milk. Specifically, one can:
+This script provides a fairly general framework for restructuring the items in the tag cloud in Remember the Milk. Specifically, one can:
 <ul>
   <li>Group related lists, locations, and tags by prefix</li>
   <li>Generate a hierarchy of tags dynamically, to arbitrary depth</li>
-  <li>Highlight a single tag in its own section</li>
-  <li>Rename individual tags anywhere in the tag cloud (ex: P to Personal)</li>
+  <li>G a single tag in its own section</li>
+  <li>Rename individual tags anywhere in the tag cloud (ex: 'P' to 'Personal')</li>
   <li>Recolor tag sections</li>
   <li>Reorder sections arbitrarily</li>
   <li>Hide ordinary list tabs</li>
 </ul>
 
-Full details of the section types are given below, in 'Section Types and Preferences'.
+Here's an example of what the script can produce (the full list of tags, lists, and locations to generate it is below):
 
-The script also includes some stylistic tweaks, such as removing the cow graphic from the RTM page and fixing the sidebar at the top of the page (which becomes crucial if the tag cloud is long). These can easily be commented out if they are not desired.
+<a href="http://tinypic.com?ref=1zyggg7" target="_blank"><img src="http://i39.tinypic.com/1zyggg7.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
+
+(To turn on the cloud, go to Settings, then General, and check the Task Cloud box.)
+
+The script also includes some stylistic tweaks, such as removing the cow graphic from the RTM page and fixing the sidebar at the top of the page (which becomes crucial if the tag cloud is long enough to scroll past the bottom of the page). These can easily be commented out if they are not desired.
 
 The hierarchy-style section in particular makes it easy to have projects with subprojects, as these can be stored in their own individual lists. This also reduces the tagging and list redundancy, as long as the user is willing to partition their tasks between project lists.
 
-The default configuration is based on one for my personal use, and it is likely that other users will need to adjust the configuration for their own needs. Changes should be made to the Configuration section in the script, at the top of the Tag Cloud Restructurer section.
+It is likely that other users will need to adjust the default configuration to their own needs. Changes should be made to the Configuration section of the script, at the top of the Tag Cloud Restructurer section. In that part of the script, users can change the global preferences for the script and define their tag sections with their per-section preferences. Full details of the section types are given below, in 'Section Types and Preferences'.
 
 If users are familiar with masnare's script, this script differs from it in several ways:
 <ul>
@@ -41,13 +50,9 @@ If users are familiar with masnare's script, this script differs from it in seve
 </ul>
 So far, as of April 2012, this script has been tested under Firefox 11 + Greasemonkey and under Google Chrome 18 with the built-in userscript support. I would appreciate feedback and testing on other browsers. Also, any feature requests or suggestions more generally are appreciated, although I am by no means an experienced JavaScript programmer.
 
-<h1>Example Tag Cloud with Tags, Lists, and Locations</h1>
+<h1>Tags, Lists, and Locations for Example Tag Cloud</h1>
 
-Here is an example tag cloud, corresponding to the default settings in the script: 
-
-<a href="http://tinypic.com?ref=2m7b2q1" target="_blank"><img src="http://i39.tinypic.com/2m7b2q1.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
-
-And here are the active lists, locations, and tags that generate it:
+Here are the active lists, locations, and tags that generate the example tag cloud above:
 
 Ordinary Lists:
 <ul>
@@ -100,34 +105,37 @@ Locations (as with tags, associated to at least one active task):
 
 <h2><code>sectionSingle</code></h2>
 
-The <code>sectionSingle</code> section matches a single tag in the cloud and renames it.
+The <code>sectionSingle</code> section matches a single tag in the cloud and renames it. The original tag can also be displayed in the header if desired.
 
 <h2><code>sectionFlat</code></h2>
 
-The <code>sectionSingle</code> section groups all tags starting with the specified prefix together in a single section, prefaced by the specified header text. The tags can be displayed run-in, as in the Contexts section, or as a block, as in the Miscellaneous section.
+The <code>sectionSingle</code> section groups all tags starting with the specified prefix together in a single section, prefaced by the specified header text. The tags can be displayed run-in, as in the Contexts section, or as a block, as in the Miscellaneous section. Other options control how to resize tags, whether to keep the prefix in the tags or to display it in the header, and whether to convert underscores to spaces and to capitalize the words in the tags.
 
 <h2><code>sectionHierarchy</code></h2>
 
-
+The <code>sectionSingle</code> section groups all tags starting with the specified prefix together in a tree-like hierarchy, as in a file system. In the example above, the <code>-</code> prefix acts like the root of the file system (e.g., C:\ on Windows or / on Linux or Mac OS X), and the words between the separators act like the folder names. The character <code>/</code> is a good choice for a separator in list names, but is not allowed in tags, for which <code>+</code> or <code>-</code> are better options.
 
 <h2>General Preferences</h2>
 
+Use the <code>globalprefs</code> dictionary to set global preferences for the scripts, including whether to show borders around sections, which tags to hide or rename, and whether to match case when identifying tags to hide or rename.
 
+In addition to the <code>renameTags</code> dictionary, you can rename a list 'on the fly' by appending the desired name to the list name in double square brackets. For example, changing 'Lent/Borrowed' to 'Lent/Borrowed [[Library]]' causes the item to 'library' (lowercased because of RTM's tag processing). To circumvent the lowercasing, use an HTML entity (e.g., '[[&amp;#x4c;ibrary]]' gives '&#x4c;ibrary').
 
 <h1>Changes in Version 1.1</h1>
 
 <ul>
-	<li><strong>Fixed:</strong> Depth-2 hierarchy section now displays correctly</li>
-	<li><strong>Fixed:</strong> </li>
-	<li><strong>Fixed:</strong> </li>
-	<li><strong>Changed:</strong> </li>
-	<li><strong>Changed:</strong> </li>
-	<li><strong>New:</strong> </li>
-	<li><strong>New:</strong> </li>
-	<li><strong>New:</strong> </li>
-	<li><strong>New:</strong> </li>
-	<li><strong>New:</strong> </li>
-	<li><strong>New:</strong> </li>
+	<li><strong>Fixed:</strong> Hierarchy section with <code>depth: 2</code> now displays correctly</li>
+	<li><strong>Fixed:</strong> <code>displayOrder</code> preference now orders sections correctly</li>
+	<li><strong>Fixed:</strong> <code>sectionFlat</code> header search now searches for lists with spaces correctly</li>
+	<li><strong>Changed:</strong> Renamed <code>sectionRename</code> section type to <code>sectionSingle</code></li>
+	<li><strong>Changed:</strong> Moved section definitions to right after global preferences</li>
+	<li><strong>Changed:</strong> Renamed <code>sectionFlat</code> preference <code>renameTags</code> to <code>capAndSpaceTags</code></li>
+	<li><strong>New:</strong> Global dictionary (<code>renameTags</code>) of tags to rename</li>
+	<li><strong>New:</strong> Global preference (<code>matchTagCase</code>) for case sensitivity when matching tags to rename or hide</li>
+	<li><strong>New:</strong> <code>sectionFlat</code> preference (<code>minChildSize</code>) to set lower limit for tag size</li>
+	<li><strong>New:</strong> <code>sectionFlat</code> preference (<code>runinText</code>) to display flat section as HEADER: tag tag ...</li>
+	<li><strong>New:</strong> Default color preferences for all sections</li>
+	<li><strong>New:</strong> Hovering over flat section header displays section prefix</li>
 </ul>
 
 </body>

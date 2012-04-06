@@ -1,6 +1,6 @@
 Changes in version 1.1:
 
-Fixed:	Depth-2 hierarchy section now displays correctly
+Fixed:	Hierarchy section with depth: 2 now displays correctly
 Fixed:	displayOrder preference now orders sections correctly
 Fixed:	sectionFlat header search now searches for lists with spaces correctly
 Change:	Renamed sectionRename section type to sectionSingle
