@@ -562,9 +562,11 @@ sectionHierarchy.prototype.addTag = function(tag) {
 		pathtokens = newtokens;
 	}
 	
+	var pathlength = pathtokens.length;
+	
 	// set display name to last token in list
 	if (displayname == null) {
-		displayname = pathtokens[pathtokens.length - 1];
+		displayname = pathtokens[pathlength - 1];
 	}
 	
 	tag.innerHTML = displayname;
@@ -572,12 +574,13 @@ sectionHierarchy.prototype.addTag = function(tag) {
 	// package tokens into tree structure in section
 	var currentChildren = this.children;
 	
-	for ( var i = 0; i < pathtokens.length; i++ ) {
+	for ( var i = 0; i < pathlength; i++ ) {
 		
 		// find child node, if present
 		var childIndex = null;
+		var childrenlength = currentChildren.length;
 		
-		for (var j = 0; j < currentChildren.length; j++) {
+		for (var j = 0; j < childrenlength; j++) {
 			if (currentChildren[j].name == pathtokens[i]) {
 				childIndex = j;
 				break;
@@ -594,7 +597,7 @@ sectionHierarchy.prototype.addTag = function(tag) {
 			currentChildren = newchild.children;
 			
 			// add tag to new child node's tag if last in token list
-			if (i == pathtokens.length - 1) {
+			if (i == pathlength - 1) {
 				newchild.tag = tag;
 			}
 		}
@@ -607,8 +610,9 @@ sectionHierarchy.prototype.addTag = function(tag) {
 sectionHierarchy.prototype.assembleDiv = function() {
 	var topDiv = this.div;
 	var topChildren = this.children;
+	var childrenlength = topChildren.length;
 	
-	for (var i = 0; i < topChildren.length; i++) {
+	for (var i = 0; i < childrenlength; i++) {
 		// pick color for top-level node and its children
 		var topNodeColor = this.colors[i % this.colors.length];
 		
@@ -692,7 +696,9 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 			// string for middle-dot separator
 			var sepdot = "\u200B\u2009\u00b7\u200B\u2009";
 			
-			for (var i = 0; i < node.children.length; i++) {
+			var childrenlength = node.children.length;
+			
+			for (var i = 0; i < childrenlength; i++) {
 				//
 				this.assembleNodeDiv(node.children[i], depth + 1, color);
 				
@@ -710,7 +716,9 @@ sectionHierarchy.prototype.assembleNodeDiv = function(node, depth, color) {
 		// in at least third level up
 		// TODO: set indent width as hierarchy option?
 		// create divs for children
-		for (var i = 0; i < node.children.length; i++) {
+		var childrenlength = node.children.length;
+		
+		for (var i = 0; i < childrenlength; i++) {
 			this.assembleNodeDiv(node.children[i], depth + 1, color);
 			node.children[i].div.style.marginLeft = "10px";
 			node.div.appendChild(node.children[i].div)
@@ -821,8 +829,9 @@ sectionSingle.prototype.styleFinalBlock = function() {
 function constructSections(sectionargumentslist) {
 	
 	var sectionobjlist = [];
+	var sectionlength = sectionargumentslist.length;
 	
-	for (var i = 0; i < sectionargumentslist.length; i++) {
+	for (var i = 0; i < sectionlength; i++) {
 		var secargs = sectionargumentslist[i];
 		var newsection = new secargs.type(secargs);
 		sectionobjlist.push(newsection);
@@ -1014,7 +1023,10 @@ function collectAndMatchTags(cloud, sectionlist) {
 // returns first section that matches, so order matters in section list
 
 function matchTagToSection(sectionlist, tag) {
-	for (var i = 0; i < sectionlist.length; i++) {
+	
+	var sectionlength = sectionlist.length;
+	
+	for (var i = 0; i < sectionlength; i++) {
 		if (sectionlist[i].includeTag(tag)) {
 			return sectionlist[i];
 		}
@@ -1109,9 +1121,10 @@ function processCloud(sectionlistconfig) {
 		// assemble section divs into #taskcloudcontent	
 		var displayedSections = [];
 
+		var sectionlength = sectionlist.length;
 
 		// build each section, push those to be displayed onto list
-		for (var i = 0; i < sectionlist.length; i++) {
+		for (var i = 0; i < sectionlength; i++) {
 			
 			// build the section
 			sectionlist[i].assembleDiv();
@@ -1121,26 +1134,28 @@ function processCloud(sectionlistconfig) {
 				displayedSections.push(sectionlist[i]);
 			}
 		}
+
+		var displayedsectionlength = displayedSections.length;
 				
 		// sort sections by decreasing displayorder
-		for (var i = 0; i < displayedSections.length; i++) {
+		for (var i = 0; i < displayedsectionlength; i++) {
 			
 			// tweak display order values 
 			// since sort apparently does not always preserve ordering
 			// - expand out by length of list
 			// - subtract position in list (sections sorted high to low values)
-			displayedSections[i].displayOrder *= displayedSections.length;
+			displayedSections[i].displayOrder *= displayedsectionlength;
 			displayedSections[i].displayOrder -= i;
 		}
 		
 		displayedSections.sort(sortSection);
 		
 		// add the sections to be displayed to the cloud
-		for (var i = 0; i < displayedSections.length; i++) {
+		for (var i = 0; i < displayedsectionlength; i++) {
 			cloud.appendChild(displayedSections[i].div);
 
 			// do extra style processing if this is the last section
-			if (i == displayedSections.length - 1) {
+			if (i == displayedsectionlength - 1) {
 				displayedSections[i].styleFinalBlock();
 			}
 		}
@@ -1157,6 +1172,8 @@ function processCloud(sectionlistconfig) {
 	// re-hook listenForTagChanges
 	listenForTagChanges(true);
 }
+
+// Convert hiddenTags entries to lower case if case sensitivity is off
 
 function normalizeHiddenTags() {
 	// new array for normalized tags
@@ -1178,6 +1195,8 @@ function normalizeHiddenTags() {
 	
 	return;
 }
+
+// Convert renameTags keys to lower case if case sensitivity is off
 
 function normalizeRenameTags() {
 	// new dictionary for normalized tags
@@ -1274,8 +1293,9 @@ var doNotRemoveLists = ["Inbox", "Sent"];
 RemoveListHandler = function() {
 	var listtabs = document.getElementById("listtabs");
 	var ul = listtabs.childNodes[0];
+	var listtabslength = ul.childNodes.length;
 
-	for (var i = 0; i < ul.childNodes.length; i++) {
+	for (var i = 0; i < listtabslength; i++) {
 		var tab = ul.childNodes[i];
 		var txt = tab.childNodes[0].innerHTML;
 		if (tab.className.indexOf("xtab_smartlist") == -1 &&
