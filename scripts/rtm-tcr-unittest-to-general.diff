@@ -1,5 +1,5 @@
---- rtm-tcr-unittest.user.js	2012-04-05 16:43:18.000000000 -0400
-+++ rtm-tcr.user.js	2012-04-04 22:46:08.000000000 -0400
+--- rtm-tcr-unittest.user.js	2012-04-05 20:03:51.000000000 -0400
++++ rtm-tcr.user.js	2012-04-05 20:02:14.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer (rtm.tcr.unittest)
@@ -41,84 +41,87 @@
  	},
  	matchTagCase: false
  };
-@@ -79,11 +72,7 @@
+@@ -82,11 +75,7 @@
  	},
  
- 	{ prefix: 'next',   type: sectionSingle, 
+ 	{ prefix: 'next',   type: sectionSingle,
 -	                    // *** UNIT TEST START
 -	                    displayOrder: 1,
 -	                    displayname: 'Next Actions (at top)', 
 -						displayOriginalName: true,
 -	                    // *** UNIT TEST END
-+	                    displayname: 'Next Actions', 
++	                    displayname: 'Next Actions',
  	                    color: 'red'
  	},
  
-@@ -92,67 +81,20 @@
- 	                    color: 'black' 
+@@ -95,70 +84,20 @@
+ 	                    color: 'black'
  	},
  
 -	// *** UNIT TEST START
--	{ prefix: 'single-rename',   type: sectionSingle, 
--	                    displayname: 'Should get overridden', 
+-	{ prefix: 'single-rename',
+-	                    type: sectionSingle,
+-	                    displayname: 'Should get overridden',
 -	                    color: 'black'
 -	},
 -
--	{ prefix: 'hidesec',   type: sectionSingle, 
+-	{ prefix: 'hidesec',
+-	                    type: sectionSingle,
 -	                    displayname: 'Should get hidden',
--	                    hide: true, 
+-	                    hide: true,
 -	                    color: 'black'
 -	},
 -	// *** UNIT TEST END
 -
- 	{ prefix: '_',      type: sectionFlat, 
- 	                    displayname: 'Responsibilities', 
- 	                    color: '#444444' 
+ 	{ prefix: '_',      type: sectionFlat,
+ 	                    displayname: 'Responsibilities',
+ 	                    color: '#444444'
  	},
  
 -	// *** UNIT TEST START
--	{ prefix: '++',     type: sectionFlat, 
--	                    displayname: 'Bottom List', 
+-	{ prefix: '++',     type: sectionFlat,
+-	                    displayname: 'Bottom List',
 -	                    color: '#444444',
--						displayPrefixInHeader: true,
--						displayPrefixInTags: true,
--						capAndSpaceTags: true,
+-	                    displayPrefixInHeader: true,
+-	                    displayPrefixInTags: true,
+-	                    capAndSpaceTags: true,
 -	                    displayOrder: -1
 -	},
 -	// *** UNIT TEST END
 -
- 	{ prefix: '@',      type: sectionFlat, 
+ 	{ prefix: '@',      type: sectionFlat,
 -	                    // *** UNIT TEST START
 -                        runinText: true,
 -	                    // *** UNIT TEST END
- 	                    displayname: 'Contexts', 
+ 	                    displayname: 'Contexts',
  	                    color: 'blue'
  	},
  
 -	// *** UNIT TEST START
 -	// 2-level hierarchy
--	{ prefix: '--',     type: sectionHierarchy, 
+-	{ prefix: '--',     type: sectionHierarchy,
 -	                    depth: 2,
 -	                    sizes: ['6', '4'],
--	                    colors: ['green', 'purple', 'brown'] 
+-	                    colors: ['green', 'purple', 'brown']
 -	},
 -	// *** UNIT TEST END
 -
 -	// *** UNIT TEST START
 -	// 3-level hierarchy
 -	// *** UNIT TEST END
- 	{ prefix: '-',      type: sectionHierarchy, 
- 	                    colors: ['green', 'purple', 'brown'] 
+ 	{ prefix: '-',      type: sectionHierarchy,
+ 	                    colors: ['green', 'purple', 'brown']
  	},
  
 -	// *** UNIT TEST START
 -	// 4-level hierarchy
--	{ prefix: '+',      type: sectionHierarchy, 
+-	{ prefix: '+',      type: sectionHierarchy,
 -	                    depth: 4,
 -	                    sizes: ['6', '4', '3', '1'],
--	                    colors: ['green', 'purple', 'brown'] },
+-	                    colors: ['green', 'purple', 'brown']
+-	},
 -
 -	// *** UNIT TEST END
- 	{ prefix: 'maybe',  type: sectionSingle, 
- 	                    displayname: 'Someday/Maybe', 
- 	                    color: 'CornflowerBlue' 
+ 	{ prefix: 'maybe',  type: sectionSingle,
+ 	                    displayname: 'Someday/Maybe',
+ 	                    color: 'CornflowerBlue'

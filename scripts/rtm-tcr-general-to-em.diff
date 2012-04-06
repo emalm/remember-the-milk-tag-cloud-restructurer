@@ -1,5 +1,5 @@
---- rtm_tcr.user.js	2012-04-04 22:40:26.000000000 -0400
-+++ rtm_tcr_emalminator.user.js	2012-04-04 22:38:55.000000000 -0400
+--- rtm-tcr.user.js	2012-04-05 21:41:54.000000000 -0400
++++ rtm-tcr-emalminator.user.js	2012-04-05 21:49:25.000000000 -0400
 @@ -1,11 +1,11 @@
  // ==UserScript==
 -// @name           RTM: Tag Cloud Restructurer
@@ -35,71 +35,69 @@
  	},
  	matchTagCase: false
  };
-@@ -65,7 +69,9 @@
- // - type: class name of section
- // overwrite per-section preferences here, too
+@@ -68,7 +72,9 @@
+ //   type's default preference dictionary below
+ // - descriptions of preference keys are also given below with defaults
  
 -var my_sections = [
 +// *** emalminator START
 +var emalminator_sections = [
 +// *** emalminator END
- 	{ prefix: 'inbox',  type: sectionSingle, 
- 	                    displayname: 'Unsorted', 
- 	                    color: 'orange' 
-@@ -76,22 +82,44 @@
+ 	{ prefix: 'inbox',  type: sectionSingle,
+ 	                    displayname: 'Unsorted',
+ 	                    color: 'orange'
+@@ -79,9 +85,19 @@
  	                    color: 'red'
  	},
  
--	{ prefix: 'goal',   type: sectionSingle, 
--	                    displayname: 'Goals', 
--	                    color: 'black' 
+-	{ prefix: 'goal',   type: sectionSingle,
+-	                    displayname: 'Goals',
+-	                    color: 'black'
 +	// *** emalminator START
-+	{ prefix: 'system', type: sectionSingle, 
++	{ prefix: 'system', type: sectionSingle,
 +	                    displayOrder: -1,
-+	                    displayname: 'System Notes', 
++	                    displayname: 'System Notes',
 +	                    color: '#444444'
-+	// *** emalminator END
- 	},
- 
-+	// *** emalminator START
-+	{ prefix: '+',      type: sectionHierarchy, 
++	},
++
++	{ prefix: '+',      type: sectionHierarchy,
 +	                    depth: 2,
 +	                    sizes: ['6', '4'],
 +	                    separators: '+', 
-+	                    colors: ['FireBrick', 'black', 'navy'] 
-+	},
-+
++	                    colors: ['FireBrick', 'black', 'navy']
 +	// *** emalminator END
- 	{ prefix: '_',      type: sectionFlat, 
- 	                    displayname: 'Responsibilities', 
- 	                    color: '#444444' 
+ 	},
+ 
+ 	{ prefix: '_',      type: sectionFlat,
+@@ -89,12 +105,22 @@
+ 	                    color: '#444444'
  	},
  
 +	// *** emalminator START
-+	{ prefix: '¡',      type: sectionFlat, 
-+	                    displayname: 'Warnings', 
-+	                    color: 'fuchsia' 
++	{ prefix: '¡',      type: sectionFlat,
++	                    displayname: 'Warnings',
++	                    color: 'fuchsia'
 +	},
 +
 +	// *** emalminator END
- 	{ prefix: '@',      type: sectionFlat, 
- 	                    displayname: 'Contexts', 
+ 	{ prefix: '@',      type: sectionFlat,
+ 	                    displayname: 'Contexts',
  	                    color: 'blue'
  	},
  
- 	{ prefix: '-',      type: sectionHierarchy, 
+ 	{ prefix: '-',      type: sectionHierarchy,
 +	                    // *** emalminator START
-+  	                    separators: '/', 
++  	                    separators: '/',
 +	                    // *** emalminator END
- 	                    colors: ['green', 'purple', 'brown'] 
+ 	                    colors: ['green', 'purple', 'brown']
  	},
  
-@@ -103,13 +131,14 @@
+@@ -106,13 +132,14 @@
  	// catch-all section for unprocessed lists and tags
- 	{ prefix: '',       type: sectionFlat, 
- 	                    displayname: 'Miscellaneous', 
+ 	{ prefix: '',       type: sectionFlat,
+ 	                    displayname: 'Miscellaneous',
 -	                    runinText: false,
- 	                    color: 'gray' 
+ 	                    color: 'gray'
  	}
  ];
  

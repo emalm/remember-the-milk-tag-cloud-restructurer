@@ -70,15 +70,18 @@ var globalprefs = {
 // - prefix: matched to tags in the order specified
 //  - ex: if '@' before '@_', '@' will grab all tags starting with '@'
 // - type: class name of section
-// overwrite per-section preferences here, too
+// overwrite per-section preferences here:
+// - add key-value pairs to section dictionary, where key comes from the
+//   type's default preference dictionary below
+// - descriptions of preference keys are also given below with defaults
 
 var my_sections = [
-	{ prefix: 'inbox',  type: sectionSingle, 
-	                    displayname: 'Unsorted', 
-	                    color: 'orange' 
+	{ prefix: 'inbox',  type: sectionSingle,
+	                    displayname: 'Unsorted',
+	                    color: 'orange'
 	},
 
-	{ prefix: 'next',   type: sectionSingle, 
+	{ prefix: 'next',   type: sectionSingle,
 	                    // *** UNIT TEST START
 	                    displayOrder: 1,
 	                    displayname: 'Next Actions (at top)', 
@@ -87,82 +90,85 @@ var my_sections = [
 	                    color: 'red'
 	},
 
-	{ prefix: 'goal',   type: sectionSingle, 
-	                    displayname: 'Goals', 
-	                    color: 'black' 
-	},
-
-	// *** UNIT TEST START
-	{ prefix: 'single-rename',   type: sectionSingle, 
-	                    displayname: 'Should get overridden', 
+	{ prefix: 'goal',   type: sectionSingle,
+	                    displayname: 'Goals',
 	                    color: 'black'
 	},
 
-	{ prefix: 'hidesec',   type: sectionSingle, 
+	// *** UNIT TEST START
+	{ prefix: 'single-rename',
+	                    type: sectionSingle,
+	                    displayname: 'Should get overridden',
+	                    color: 'black'
+	},
+
+	{ prefix: 'hidesec',
+	                    type: sectionSingle,
 	                    displayname: 'Should get hidden',
-	                    hide: true, 
+	                    hide: true,
 	                    color: 'black'
 	},
 	// *** UNIT TEST END
 
-	{ prefix: '_',      type: sectionFlat, 
-	                    displayname: 'Responsibilities', 
-	                    color: '#444444' 
+	{ prefix: '_',      type: sectionFlat,
+	                    displayname: 'Responsibilities',
+	                    color: '#444444'
 	},
 
 	// *** UNIT TEST START
-	{ prefix: '++',     type: sectionFlat, 
-	                    displayname: 'Bottom List', 
+	{ prefix: '++',     type: sectionFlat,
+	                    displayname: 'Bottom List',
 	                    color: '#444444',
-						displayPrefixInHeader: true,
-						displayPrefixInTags: true,
-						capAndSpaceTags: true,
+	                    displayPrefixInHeader: true,
+	                    displayPrefixInTags: true,
+	                    capAndSpaceTags: true,
 	                    displayOrder: -1
 	},
 	// *** UNIT TEST END
 
-	{ prefix: '@',      type: sectionFlat, 
+	{ prefix: '@',      type: sectionFlat,
 	                    // *** UNIT TEST START
                         runinText: true,
 	                    // *** UNIT TEST END
-	                    displayname: 'Contexts', 
+	                    displayname: 'Contexts',
 	                    color: 'blue'
 	},
 
 	// *** UNIT TEST START
 	// 2-level hierarchy
-	{ prefix: '--',     type: sectionHierarchy, 
+	{ prefix: '--',     type: sectionHierarchy,
 	                    depth: 2,
 	                    sizes: ['6', '4'],
-	                    colors: ['green', 'purple', 'brown'] 
+	                    colors: ['green', 'purple', 'brown']
 	},
 	// *** UNIT TEST END
 
 	// *** UNIT TEST START
 	// 3-level hierarchy
 	// *** UNIT TEST END
-	{ prefix: '-',      type: sectionHierarchy, 
-	                    colors: ['green', 'purple', 'brown'] 
+	{ prefix: '-',      type: sectionHierarchy,
+	                    colors: ['green', 'purple', 'brown']
 	},
 
 	// *** UNIT TEST START
 	// 4-level hierarchy
-	{ prefix: '+',      type: sectionHierarchy, 
+	{ prefix: '+',      type: sectionHierarchy,
 	                    depth: 4,
 	                    sizes: ['6', '4', '3', '1'],
-	                    colors: ['green', 'purple', 'brown'] },
+	                    colors: ['green', 'purple', 'brown']
+	},
 
 	// *** UNIT TEST END
-	{ prefix: 'maybe',  type: sectionSingle, 
-	                    displayname: 'Someday/Maybe', 
-	                    color: 'CornflowerBlue' 
+	{ prefix: 'maybe',  type: sectionSingle,
+	                    displayname: 'Someday/Maybe',
+	                    color: 'CornflowerBlue'
 	},
 
 	// catch-all section for unprocessed lists and tags
-	{ prefix: '',       type: sectionFlat, 
-	                    displayname: 'Miscellaneous', 
+	{ prefix: '',       type: sectionFlat,
+	                    displayname: 'Miscellaneous',
 	                    runinText: false,
-	                    color: 'gray' 
+	                    color: 'gray'
 	}
 ];
 
@@ -226,14 +232,14 @@ var sectionprefs = {
 	// - sizes: RTM sizes of each level in hierarchy (1 to 9)
 	// - separators: string of path separators:
 	//  - '/' most convenient for lists, '+' allowed in tags
-	// - hideChildren: child tags to hide
+	// - hideChildren: child tags to hide (not currently implemented)
 	
 	sectionHierarchy: {
 		depth: 3,
 		colors: ['black', 'green', 'brown'],
 		sizes: ['6', '4', '1'],
-      	separators: '|/+',
-		hidechildren: []
+      	separators: '|/+'
+		// hidechildren: []
 		// indentChildTags: true
 	}
 };

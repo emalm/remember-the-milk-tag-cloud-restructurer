@@ -67,71 +67,72 @@ var globalprefs = {
 // - prefix: matched to tags in the order specified
 //  - ex: if '@' before '@_', '@' will grab all tags starting with '@'
 // - type: class name of section
-// overwrite per-section preferences here, too
+// overwrite per-section preferences here:
+// - add key-value pairs to section dictionary, where key comes from the
+//   type's default preference dictionary below
+// - descriptions of preference keys are also given below with defaults
 
 // *** emalminator START
 var emalminator_sections = [
 // *** emalminator END
-	{ prefix: 'inbox',  type: sectionSingle, 
-	                    displayname: 'Unsorted', 
-	                    color: 'orange' 
+	{ prefix: 'inbox',  type: sectionSingle,
+	                    displayname: 'Unsorted',
+	                    color: 'orange'
 	},
 
-	{ prefix: 'next',   type: sectionSingle, 
-	                    displayname: 'Next Actions', 
+	{ prefix: 'next',   type: sectionSingle,
+	                    displayname: 'Next Actions',
 	                    color: 'red'
 	},
 
 	// *** emalminator START
-	{ prefix: 'system', type: sectionSingle, 
+	{ prefix: 'system', type: sectionSingle,
 	                    displayOrder: -1,
-	                    displayname: 'System Notes', 
+	                    displayname: 'System Notes',
 	                    color: '#444444'
-	// *** emalminator END
 	},
 
-	// *** emalminator START
-	{ prefix: '+',      type: sectionHierarchy, 
+	{ prefix: '+',      type: sectionHierarchy,
 	                    depth: 2,
 	                    sizes: ['6', '4'],
 	                    separators: '+', 
-	                    colors: ['FireBrick', 'black', 'navy'] 
+	                    colors: ['FireBrick', 'black', 'navy']
+	// *** emalminator END
 	},
 
-	// *** emalminator END
-	{ prefix: '_',      type: sectionFlat, 
-	                    displayname: 'Responsibilities', 
-	                    color: '#444444' 
+	{ prefix: '_',      type: sectionFlat,
+	                    displayname: 'Responsibilities',
+	                    color: '#444444'
 	},
 
 	// *** emalminator START
-	{ prefix: '¡',      type: sectionFlat, 
-	                    displayname: 'Warnings', 
-	                    color: 'fuchsia' 
+	{ prefix: '¡',      type: sectionFlat,
+	                    displayname: 'Warnings',
+	                    color: 'fuchsia'
 	},
 
 	// *** emalminator END
-	{ prefix: '@',      type: sectionFlat, 
-	                    displayname: 'Contexts', 
+	{ prefix: '@',      type: sectionFlat,
+	                    displayname: 'Contexts',
 	                    color: 'blue'
 	},
 
-	{ prefix: '-',      type: sectionHierarchy, 
+	{ prefix: '-',      type: sectionHierarchy,
 	                    // *** emalminator START
-  	                    separators: '/', 
+  	                    separators: '/',
 	                    // *** emalminator END
-	                    colors: ['green', 'purple', 'brown'] 
+	                    colors: ['green', 'purple', 'brown']
 	},
 
-	{ prefix: 'maybe',  type: sectionSingle, 
-	                    displayname: 'Someday/Maybe', 
-	                    color: 'CornflowerBlue' 
+	{ prefix: 'maybe',  type: sectionSingle,
+	                    displayname: 'Someday/Maybe',
+	                    color: 'CornflowerBlue'
 	},
 
 	// catch-all section for unprocessed lists and tags
-	{ prefix: '',       type: sectionFlat, 
-	                    displayname: 'Miscellaneous', 
-	                    color: 'gray' 
+	{ prefix: '',       type: sectionFlat,
+	                    displayname: 'Miscellaneous',
+	                    color: 'gray'
 	}
 ];
 
@@ -197,14 +198,14 @@ var sectionprefs = {
 	// - sizes: RTM sizes of each level in hierarchy (1 to 9)
 	// - separators: string of path separators:
 	//  - '/' most convenient for lists, '+' allowed in tags
-	// - hideChildren: child tags to hide
+	// - hideChildren: child tags to hide (not currently implemented)
 	
 	sectionHierarchy: {
 		depth: 3,
 		colors: ['black', 'green', 'brown'],
 		sizes: ['6', '4', '1'],
-      	separators: '|/+',
-		hidechildren: []
+      	separators: '|/+'
+		// hidechildren: []
 		// indentChildTags: true
 	}
 };
