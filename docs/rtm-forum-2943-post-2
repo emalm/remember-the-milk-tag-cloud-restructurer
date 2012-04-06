@@ -1,8 +1,8 @@
 Hi, everyone,
 
-I've just updated the <a href="http://userscripts.org/scripts/show/57544"></a>Tag Cloud Restructurer script to version 1.1. 
+I've just updated the <a href="http://userscripts.org/scripts/show/57544">Tag Cloud Restructurer</a> script to version 1.1. 
 
-I've corrected a few bugs: hierarchies with depth 2 now display correctly, sections get ordered correctly (I noticed some problems in Chrome), and the search string for the flat section header now handles list names with spaces. Some of the names of the section types and preferences have changed slightly, and a few preferences have been added, such as run-in formatting and minimum tag size for flat sections. The full change log is in the updated description on the userscripts page.
+I've corrected a few bugs: hierarchies with depth 2 now display correctly, sections get ordered correctly (I noticed some problems in Chrome), and the search string for the flat section header now handles list names with spaces. Some of the names of the section types and preferences have changed slightly, and a few preferences have been added, such as run-in formatting and adjusting the minimum tag size for flat sections. The full change log is in the updated description on the userscripts page.
 
 There is also a new option for renaming tags: a dictionary in the global preferences that specifies which tags to match and the text that replaces them. The old double square bracket notation still works, too, and will override the dictionary rules. Once your tag system is established, though, the global dictionary is probably easier to use and to maintain.
 
@@ -10,5 +10,5 @@ I've tested the script under Firefox 11 + Greasemonkey and under Google Chrome 1
 
 I have a few ideas for the next version (e.g., hiding lists with 0 items, maybe only in single sections, and improving the event-handling code), so if you have other suggestions, I'd be happy to hear them!
 
-Thanks,
+Best,
 emalminator

@@ -2,6 +2,15 @@ TODO:
 
 * refactor code in big routines
 
+* refactor section styling:
+ - styleSection(bool final) 
+
+* single:
+ - correct display of borders if no match
+
+* hide list tag if no items?
+ - maybe just in single secs
+
 * hierarchy: indentation width option?
 
 * flat: middot-separator option?

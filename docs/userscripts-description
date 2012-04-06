@@ -23,14 +23,14 @@ This script provides a fairly general framework for restructuring the items in t
 <ul>
   <li>Group related lists, locations, and tags by prefix</li>
   <li>Generate a hierarchy of tags dynamically, to arbitrary depth</li>
-  <li>G a single tag in its own section</li>
+  <li>Give a single tag its own section</li>
   <li>Rename individual tags anywhere in the tag cloud (ex: 'P' to 'Personal')</li>
   <li>Recolor tag sections</li>
   <li>Reorder sections arbitrarily</li>
   <li>Hide ordinary list tabs</li>
 </ul>
 
-Here's an example of what the script can produce (the full list of tags, lists, and locations to generate it is below):
+Here's an example of what the script can produce (the full list of tags, lists, and locations generating it is below):
 
 <a href="http://tinypic.com?ref=1zyggg7" target="_blank"><img src="http://i39.tinypic.com/1zyggg7.jpg" border="0" alt="Image and video hosting by TinyPic"></a>
 
