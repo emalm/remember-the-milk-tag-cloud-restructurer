@@ -86,7 +86,7 @@
 					<key>filename</key>
 					<string>notes/workflow</string>
 					<key>lastUsed</key>
-					<date>2012-04-06T04:18:35Z</date>
+					<date>2012-04-08T20:35:26Z</date>
 					<key>selected</key>
 					<true/>
 				</dict>
@@ -169,7 +169,7 @@
 					<key>filename</key>
 					<string>scripts/rtm-tcr.user.js</string>
 					<key>lastUsed</key>
-					<date>2012-04-06T04:18:33Z</date>
+					<date>2012-04-08T20:35:26Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -301,19 +301,50 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>140</integer>
 				<key>line</key>
-				<integer>44</integer>
+				<integer>7</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>28</integer>
+				<key>line</key>
+				<integer>7</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>140</integer>
+				<key>line</key>
+				<integer>7</integer>
+			</dict>
+		</dict>
+		<key>scripts/rtm-tcr.user.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>12</integer>
+				<key>line</key>
+				<integer>1247</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>27</integer>
+			<integer>1229</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>notes/workflow</string>
+		<string>scripts/rtm-tcr.user.js</string>
 		<string>docs/change-log</string>
 		<string>notes/todo</string>
 	</array>
