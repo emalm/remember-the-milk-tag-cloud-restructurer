@@ -1,0 +1,21 @@
+Thanks for your reply!
+
+I just found the FixSidebar function and was coming back to this page to write "duh, I found it". :)
+
+I am having buggy behavior I'm trying to sort through which may have nothing to do with your script.
+
+I have "RTM keyconfig" and "RTM List Names and Links" Greasemonkey scripts running with the "A Bit Better RTM" extension. On the overview page, the tag cloud links are all clickable. When I have the FixSidebar enabled, the links in the cloud are not clickable in the list view.
+
+Right now, I have FixSidebar() uncommented (active). I hit refresh on Firefox and it reloads the RTM page and puts me at the Overview page. Cloud links are usable. I click "continue to tasks" and they are not. (Or pick one of the cloud links from the Overview) page.
+
+Some of the lists work. For instance, if I search for list:inbox, the links work. If I search for list:$ (my "work" list), it doesn't. If I search for a smart list ("@online") they work.
+
+$ is one of the lists I have renamed...
+
+I just tried disabling both of the other Greasemonkey extensions and I still get inconsistent activation of the tag cloud.
+
+What's odd, too, is I have no such problems on my home computer with the tag cloud functioning.
+
+Also, the list filter is doing something I don't understand. It filters out all of the lists that are in the heirarchy, which I don't mind as I can access from from the cloud. But if I click on one of the lists, it loads the list then the list title vanishes from the list of lists. Doesn't seem to matter what the list is called. e.g. "Else" which is a smart list.
+
+Again, probably an interaction.
