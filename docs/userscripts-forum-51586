@@ -19,3 +19,37 @@ What's odd, too, is I have no such problems on my home computer with the tag clo
 Also, the list filter is doing something I don't understand. It filters out all of the lists that are in the heirarchy, which I don't mind as I can access from from the cloud. But if I click on one of the lists, it loads the list then the list title vanishes from the list of lists. Doesn't seem to matter what the list is called. e.g. "Else" which is a smart list.
 
 Again, probably an interaction.
+
+
+
+****
+
+Hi, Matthew,
+
+Thanks for the information about the bugs you're seeing. I haven't personally encountered them, but I'm also not running any other scripts or extensions that affect RTM. Just to make sure we're on the same page, it's correct that you're running an up-to-date Firefox with Greasemonkey? And what OS are you on?
+
+The list-hiding behavior sounds similar to <a href="http://userscripts.org/topics/96546">what kidpixo reported</a> a few months ago. I think what's happening is that when you select that smart-list tab, the class of that element changes from xtab_smartlist to xtab_selected. Then at some point the list-hiding routine runs again (possibly triggered by one of the other scripts or extensions) and sees that that tab is neither a smart list nor one of the ordinary lists for which it has an exception, so it hides it.
+
+The script could instead show all the list tabs that have the class xtab_selected, but unfortunately that's also not a complete solution: when you select an ordinary list from the cloud, it'll then also show up in the tab list. One idea I'd like to explore would be to add an onclick handler to the smart-list tab that tells the list-hiding code not to hide that tab. That sounds a bit more complicated, though, so I might not be able to implement it quickly. :)
+
+That's also strange about the list tags in the cloud. Does that happen consistently for lists you've renamed? Also, if you inspect the 'a' element in that tag, does it still have an attribute like <code>onclick="taskCloud.showList('3326709'); return false;"</code>? That showList function is RTM's internal function to show that list by its own internal ID number.
+
+Finally, since I'm not seeing these bugs myself, I'd definitely appreciate some assistance in testing for them. If you'd be interested in coordinating about that, please let me know, either on this forum or via a message. Thanks again!
+
+Best,
+emalminator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
