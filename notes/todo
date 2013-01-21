@@ -3,7 +3,13 @@ TODO:
 * refactor code in big routines
 
 * refactor section styling:
- - styleSection(bool final) 
+ - styleSection(bool final)
+
+* use XPath query to get tabs in list-tab-hiding code?
+
+* compatibility issues with A Bit Better RTM?
+
+* issue with tag collisions?
 
 * single:
  - correct display of borders if no match
@@ -11,7 +17,10 @@ TODO:
 * hide list tag if no items?
  - maybe just in single secs
 
-* hierarchy: indentation width option?
+* hierarchy:
+    - indentation width option?
+    - prefix hiding option?
+    - sublist hiding option?
 
 * flat: middot-separator option?
 
